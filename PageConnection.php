@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <title>Association - Connection (Membres)</title>
 <?php
-	include 'Fonctions/includeStylesheet.php';
+	include 'Utilitaires/Affichage/includeStylesheet.php';
 ?>
   </head>
 
   <body>
 <?php
 
-	include 'Fonctions/AdresseServeur.php';
+	include 'Utilitaires/Navigation/AdresseServeur.php';
 
     if (isset($_POST['id'])){
 	echo "<p>Identifiant : ".$_POST['id']."<br>";

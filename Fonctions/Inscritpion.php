@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <title>Association - Inscription (nouveau membre)</title>
 <?php
-	include 'Fonctions/includeStylesheet.php';
+	include '../Utilitaires/Affichage/includeStylesheet.php';
+	include '../Utilitaires/Navigation/AdresseServeur.php';
 ?>
   </head>
   <body>
 <?php
 
-	if($_SERVER["HTTP_REFERER"] !== "http://localhost/Projet/NouveauMembre.php") {
+	if($_SERVER["HTTP_REFERER"] !== $serveur."Inscription_Desinscription/NouveauMembre3.php") {
 	    echo "	<h1>Attention !</h1>\n	<h4>Le formulaire a été soumis par une source externe.</h4>";
 	}
 	
