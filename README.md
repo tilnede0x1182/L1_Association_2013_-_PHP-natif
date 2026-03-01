@@ -48,7 +48,12 @@ Deux thèmes CSS offrent un choix de style, et le code intègre des fonctions ut
 7. **Utilitaires**
    - Fonctions partagées (`ConversionDate`, `detectlId`, `CalcAnciennete`)
    - Générateur de mot de passe aléatoire
-   - Inclusiones dynamiques de CSS et scripts de compatibilité HTML5
+   - Inclusions dynamiques de CSS et scripts de compatibilité HTML5
 
----
-Tous les scripts PHP utilisent l’ancienne extension `mysql_*`. Aucune librairie externe ni gestionnaire de dépendances (Composer) n’est employé.
+## Fonctionnalités administrateur
+Les administrateurs (membres avec compétence = 1) disposent de droits étendus :
+- **Gestion des articles** : visualisation de l'historique des modifications de tous les articles, accès à la liste complète des auteurs ayant modifié un article
+- **Gestion des projets** : visualisation des modifications de tous les projets (pas uniquement les siens), accès à la liste complète des auteurs via "Afficher la liste"
+- **Gestion des membres** : accès à la liste complète des membres avec informations détaillées
+- **Modération** : possibilité de voir les dates de dernière modification sur tous les contenus
+
