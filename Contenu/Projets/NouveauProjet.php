@@ -38,15 +38,16 @@
 				echo "Pas d'accès à la base" ;
 			}else {
 
+				$estAdmin = verifieConnectionMembre();
+
 				$requete = 'SELECT * FROM projets ORDER by date DESC, heure DESC';
 				$resultat = mysqli_query($connexion, $requete);
 
 				echo '    <table border="1">
 				<tr>
-					<th>Auteur</th>
+					<th>Auteurs et dates de modification</th>
 					<th>Derniers projets</th>
 					<th>Date de publication</th>
-				<th>Modification</th>
 				</tr>';
 
 				$tmp=0;
@@ -62,11 +63,27 @@
 					
 					echo "\n<tr>";
 					
-					echo "<td>".'<a href="'.$serveur.'Membres/InformationMembre.php?idmembre='.$ligne['id'].'">'.$ligne['id']."</a></td>\n";
+					$estProprietaire = ($idmembre == $_SESSION['id']);
+					echo "<td>".'<a href="'.$serveur.'Membres/InformationMembre.php?idmembre='.$ligne['id'].'">'.$ligne['id']."</a>";
+					// Afficher les modifications si admin ou proprietaire
+					if ($estAdmin || $estProprietaire) {
+						$reqModifs = 'SELECT idmembre, date FROM dataprojets WHERE idprojet="'.$idprojet.'" ORDER BY date DESC';
+						$resModifs = mysqli_query($connexion, $reqModifs);
+						echo '<br><br>';
+						$nbModifs = 0;
+						while ($modif = mysqli_fetch_array($resModifs)) {
+							$nbModifs++;
+							if ($nbModifs <= 3) {
+								echo '<a href="'.$serveur.'Membres/InformationMembre.php?idmembre='.$modif['idmembre'].'">'.$modif['idmembre'].'</a> ('.convertDate($modif['date']).')<br>';
+							}
+						}
+						if ($nbModifs == 0) echo 'Aucune modification';
+						elseif ($nbModifs > 5) echo '<a href="'.$serveur.'Contenu/Projets/ListeAuteursProjets.php?idprojet='.$idprojet.'">Afficher la liste</a>';
+						elseif ($nbModifs > 3) echo '... et '.($nbModifs - 3).' autres';
+					}
+					echo "</td>\n";
 					echo "<td><h4>".$ligne['Objet']." : <br></h4>".nl2br(detectlId ($ligne['Texte']), false)."</td>\n";
 					echo "<td>".substr($ligne["date"],0,2)."/".substr($ligne["date"],2,2)."/".substr($ligne["date"],4,4)."</td>\n";
-					if ($idmembre==$_SESSION['id']) echo '<td><div class="lien"><a href="'.$serveur.'Contenu/Projets/ModifierProjet.php?idprojet='.$idprojet.'">modifier</a></div><br><br><br>'."\n".'<div class="lien"><a href="'.$serveur.'Contenu/Projets/SupprimerProjet.php?idprojet='.$idprojet.'">supprimer</a></div></td>';
-					else echo "<td></td>";
 					
 					echo "      </tr>\n";
 				}

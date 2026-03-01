@@ -41,12 +41,16 @@
 
 					echo '<h1>Liste des projets du membre <a href="'.$serveur.'Membres/InformationMembre.php?idmembre='.$membre.'">'.$membre.'</a> : </h1>'."\n";
 
+					
+					$estAdmin = verifieConnectionMembre();
+					$estProprietaire = ($membre==$_SESSION['id']);
+
 					echo '<table border="1">
-	 <tr>
-	  <th>Contenu du projet</th>
-	  <th>Date de publication</th>';
-					if ($membre==$_SESSION['id']) echo '	  <th>Modification</th>';
-					echo '	 </tr>';
+	 <tr>';
+					if ($estProprietaire || $estAdmin) echo '	  <th>Auteurs et dates de modification</th>';
+					echo '	  <th>Contenu du projet</th>
+	  <th>Date de publication</th>
+	 </tr>';
 	
 					$requete = 'SELECT * FROM projets WHERE id="'.$membre.'" ORDER BY date DESC, heure DESC';
 					$resultat = mysqli_query($connexion, $requete);
@@ -72,10 +76,27 @@
 							$idprojet = $ligne['idprojet'];
 
 							echo '	 <tr>'."\n";
-	
+
+							// Afficher les modifications si proprietaire ou admin
+							if ($estProprietaire || $estAdmin) {
+								$reqModifs = 'SELECT idmembre, date FROM dataprojets WHERE idprojet="'.$idprojet.'" ORDER BY date DESC';
+								$resModifs = mysqli_query($connexion, $reqModifs);
+								echo '<td>';
+								$nbModifs = 0;
+								while ($modif = mysqli_fetch_array($resModifs)) {
+									$nbModifs++;
+									if ($nbModifs <= 3) {
+										echo '<a href="'.$serveur.'Membres/InformationMembre.php?idmembre='.$modif['idmembre'].'">'.$modif['idmembre'].'</a> ('.convertDate($modif['date']).')<br>';
+									}
+								}
+								if ($nbModifs == 0) echo 'Aucune modification';
+								elseif ($nbModifs > 5) echo '<a href="'.$serveur.'Contenu/Projets/ListeAuteursProjets.php?idprojet='.$idprojet.'">Afficher la liste</a>';
+								elseif ($nbModifs > 3) echo '... et '.($nbModifs - 3).' autres';
+								echo '</td>';
+							}
+
 							echo '	  <td><h4>'.$ligne['Objet'].' : </h4>'.nl2br(detectlId ($ligne['Texte']), false).'</td>'."\n";
 							echo '	  <td>'.convertDate($ligne['date']).'</td>'."\n";
-							if ($idmembre==$_SESSION['id']) echo '<td><div class="lien"><a href="'.$serveur.'Contenu/Projets/ModifierProjet.php?idprojet='.$idprojet.'">modifier</a></div><br><br><br>'."\n".'<div class="lien"><a href="'.$serveur.'Contenu/Projets/SupprimerProjet.php?idprojet='.$idprojet.'">supprimer</a></div></td>';
 
 							echo '	 </tr>'."\n";
 						}

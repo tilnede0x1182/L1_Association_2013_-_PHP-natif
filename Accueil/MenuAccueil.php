@@ -25,17 +25,18 @@
 	if ($b==0) {
 
 		echo '    <li><a href="'.$serveur.'Utilitaires/Navigation/PageRedirectionVerslInscription.php">Projets</a></li>'."\n";
+		echo '    </ul></nav>'."\n";
 
 		echo '	 <div class="accesMembre">
 	    <p>Accès membres : </p>
-	
+
 	    <form action="'.$serveur.'Inscription_Desinscription/Connection1.php" method="POST">
 		<label>Identifiant : <input type="text" name="id"></label><br>
 		<label>Mot de passe : <input type="password" name="motdepasse"></label><br>
 		<input type="submit" value="Se connecter"><br>
 		<a href="'.$serveur.'Inscription_Desinscription/NouveauMembre3.php">S'."'inscrire</a>
 	    </form>
-	    </nav></ul></div>";
+	    </div>";
 	}
 	else {
 		echo '    <li><a href="'.$serveur.'Inscription_Desinscription/Deconnection.php">Se déconnecter</a></li>'."\n";

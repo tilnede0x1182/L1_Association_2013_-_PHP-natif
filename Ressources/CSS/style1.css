@@ -62,10 +62,9 @@ nav#menuAcceuil{
 }
 
 div.accesMembre{
-  position: absolute;
-  top: 11em;
-  left: 1%;
-  width: 18%;
+  width: 250px;
+  margin: 2em 0 2em 1%;
+  text-align: left;
 }
 
 div.lien{

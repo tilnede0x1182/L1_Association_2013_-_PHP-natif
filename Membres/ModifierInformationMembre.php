@@ -112,7 +112,10 @@
 
 		}
 
-	}else include 'MenuAccueil.php';
+	}else {
+		header("Location: ".$serveur."Accueil/Accueil%20%281%29.php");
+		exit;
+	}
 
 	include '../Utilitaires/Affichage/footer.php';
 
