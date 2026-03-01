@@ -9,16 +9,16 @@
 
 		include 'Fonctions/ConnectionBaseDonnees.php';
 
-		$connexion = mysql_pconnect($server,$user,$motdepasse) ;
+		$connexion = mysqli_connect($server, $user, $motdepasse, $base);
 
 		if (!$connexion) {
 			echo "Pas de connexion au serveur" ;
 		}else {
-			if (!mysql_select_db($base, $connexion)) {
+			if (!$connexion) {
 				echo "Pas d'accès à la base" ;
 			}else {
 				$sql = 'UPDATE asso SET Connecte="0" WHERE id="'.$_SESSION['id'].'" AND motdepasse="'.$_SESSION['motdepasse'].'"';
-				mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
+				mysqli_query($connexion, $sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 			}
 		}	
 

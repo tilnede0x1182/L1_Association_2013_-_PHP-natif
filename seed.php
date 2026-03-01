@@ -1,0 +1,351 @@
+<?php
+/**
+	Script de seed pour la base de données association1.
+	Génère des utilisateurs, posts et projets réalistes.
+
+	Usage :
+		php seed.php
+*/
+
+// ==============================================================================
+// Données
+// ==============================================================================
+
+$PRENOMS = [
+	"Jean", "Pierre", "Marie", "Sophie", "Lucas", "Emma", "Louis", "Lea", "Hugo", "Chloe",
+	"Antoine", "Camille", "Maxime", "Julie", "Thomas", "Manon", "Nicolas", "Laura", "Alexandre", "Sarah",
+	"Romain", "Oceane", "Julien", "Mathilde", "Florian", "Pauline", "Quentin", "Marine", "Baptiste", "Anais",
+	"Victor", "Clemence", "Theo", "Margot", "Nathan", "Ines", "Gabriel", "Jade", "Raphael", "Lola",
+	"Adam", "Charlotte", "Leo", "Alice", "Arthur", "Juliette", "Ethan", "Louise", "Noah", "Anna",
+	"Liam", "Eva", "Jules", "Clara", "Enzo", "Celia", "Mael", "Zoe", "Aaron", "Elsa",
+	"Tom", "Rose", "Paul", "Victoire", "Axel", "Lucie", "Eden", "Agathe", "Nolan", "Ambre",
+	"Gabin", "Lena", "Mathis", "Noemie", "Simon", "Capucine", "Timothe", "Elise", "Oscar", "Gabrielle",
+	"Samuel", "Apolline", "Martin", "Adele", "Esteban", "Jeanne", "Ruben", "Helene", "Sacha", "Margaux",
+	"Louis", "Constance", "Thibault", "Diane", "Corentin", "Salome", "Dylan", "Anaelle", "Bastien", "Romane"
+];
+
+$NOMS = [
+	"Martin", "Bernard", "Dubois", "Thomas", "Robert", "Richard", "Petit", "Durand", "Leroy", "Moreau",
+	"Simon", "Laurent", "Lefebvre", "Michel", "Garcia", "David", "Bertrand", "Roux", "Vincent", "Fournier",
+	"Morel", "Girard", "Andre", "Lefevre", "Mercier", "Dupont", "Lambert", "Bonnet", "Francois", "Martinez",
+	"Legrand", "Garnier", "Faure", "Rousseau", "Blanc", "Guerin", "Muller", "Henry", "Roussel", "Nicolas",
+	"Perrin", "Robin", "Aubert", "Lemaire", "Renaud", "Dumas", "Lacroix", "Fontaine", "Chevalier", "Clement",
+	"Gauthier", "Boyer", "Gautier", "Roche", "Roy", "Noel", "Meyer", "Lucas", "Meunier", "Jean",
+	"Perez", "Marchand", "Dufour", "Blanchard", "Marie", "Barbier", "Brun", "Picard", "Caron", "Masson",
+	"Lemoine", "Giraud", "Sanchez", "Nguyen", "Ferrand", "Lopez", "Fabre", "Leroux", "Colin", "Arnaud",
+	"Vidal", "Renard", "Dupuis", "Brunet", "Schmitt", "Lecomte", "Fernandez", "Pierre", "Benoit", "Carpentier",
+	"Fleury", "Rodriguez", "Boucher", "Jacquet", "Adam", "Paris", "Poirier", "Marty", "Rolland", "Riviere"
+];
+
+$PAYS = ["France", "Belgique", "Suisse", "Canada", "Luxembourg"];
+
+$TITRES_POSTS = [
+	"Retour d'experience sur", "Comment j'ai appris", "Les bases de", "Tutoriel complet sur",
+	"Astuces pour maitriser", "Introduction a", "Guide pratique de", "Mon avis sur",
+	"Pourquoi j'utilise", "Decouverte de", "Mes conseils pour", "Analyse de",
+	"Reunion annuelle des anciens", "Nouveau partenariat", "Conference sur l'innovation",
+	"Atelier networking du mois", "Bilan de l'annee", "Invitation au gala annuel",
+	"Offre d'emploi partenaire", "Formation continue disponible"
+];
+
+$SUJETS_POSTS = [
+	"le framework Laravel", "React et ses hooks", "la gestion de bases de donnees", "le deploiement Docker",
+	"l'API REST", "la securite web", "le responsive design", "Git et GitHub", "les tests unitaires",
+	"l'architecture MVC", "les design patterns", "l'optimisation SQL", "le cloud AWS", "Kubernetes",
+	"l'integration continue", "le machine learning", "Python pour debutants", "JavaScript moderne"
+];
+
+$CONTENUS_POSTS = [
+	"Ceci est un excellent sujet qui merite d'etre approfondi.",
+	"J'ai beaucoup appris en travaillant sur ce projet.",
+	"Les retours de la communaute ont ete tres constructifs.",
+	"Cette approche m'a permis de gagner en productivite.",
+	"Je recommande vivement cette methode a tous les debutants.",
+	"L'implementation s'est revelee plus complexe que prevu.",
+	"Les resultats obtenus depassent mes attentes initiales.",
+	"Ce tutoriel m'a ete d'une grande aide pour comprendre les concepts.",
+	"La documentation officielle est tres bien faite.",
+	"N'hesitez pas a poser vos questions en commentaire.",
+	"Nous avons le plaisir de vous annoncer la tenue de notre prochaine reunion.",
+	"Suite aux echanges avec nos partenaires, nous sommes heureux de cette collaboration.",
+	"Une conference exceptionnelle aura lieu le mois prochain.",
+	"L'atelier du mois a rencontre un vif succes. Merci a tous les participants.",
+	"Voici le bilan de nos activites. Nous remercions tous ceux qui ont contribue."
+];
+
+$TITRES_PROJETS = [
+	"Site e-commerce", "Application mobile", "Plateforme collaborative", "Tableau de bord analytique",
+	"API de gestion", "Systeme de reservation", "Reseau social interne", "Outil de monitoring",
+	"Application de chat", "Gestionnaire de taches", "Organisation du forum annuel",
+	"Creation d'un annuaire en ligne", "Mise en place d'un mentorat", "Developpement application mobile",
+	"Partenariat avec universite", "Creation fonds de soutien", "Organisation hackathon", "Lancement newsletter"
+];
+
+$DESCRIPTIONS_PROJETS = [
+	"Projet innovant visant a ameliorer l'experience utilisateur.",
+	"Solution complete developpee en equipe avec methodologie agile.",
+	"Application repondant aux besoins identifies lors de l'analyse.",
+	"Systeme robuste et scalable pour une utilisation en production.",
+	"Prototype fonctionnel demontrant la faisabilite technique.",
+	"Ce projet vise a organiser un evenement majeur pour rassembler tous les anciens.",
+	"Nous souhaitons creer un outil permettant aux membres de se retrouver.",
+	"Un programme de mentorat pour accompagner les jeunes diplomes.",
+	"Developpement d'une application pour faciliter la communication.",
+	"Etablir un partenariat durable avec notre universite d'origine.",
+	"Creer un fonds pour aider les etudiants en difficulte financiere.",
+	"Organiser un hackathon ouvert aux etudiants et anciens."
+];
+
+// ==============================================================================
+// Fonctions utilitaires
+// ==============================================================================
+
+/**
+	Génère une date aléatoire au format ddmmyyyy.
+	@param jours_passes Nombre de jours dans le passé (max)
+	@return string Date au format ddmmyyyy
+*/
+function genererDate($jours_passes) {
+	$timestamp = time() - rand(0, $jours_passes * 24 * 3600);
+	return date('dmY', $timestamp);
+}
+
+/**
+	Génère une heure aléatoire au format HHmmss.
+	@return string Heure au format HHmmss
+*/
+function genererHeure() {
+	return sprintf('%02d%02d%02d', rand(8, 22), rand(0, 59), rand(0, 59));
+}
+
+/**
+	Choisit un élément aléatoire dans un tableau.
+	@param tableau Tableau source
+	@return mixed Élément choisi
+*/
+function choisirAleatoire($tableau) {
+	return $tableau[array_rand($tableau)];
+}
+
+// ==============================================================================
+// Fonctions principales
+// ==============================================================================
+
+/**
+	Crée les utilisateurs dans la base de données.
+	@param connexion Connexion mysqli
+	@return array Liste des identifiants créés et données pour users.txt
+*/
+function creerUtilisateurs($connexion) {
+	global $PRENOMS, $NOMS, $PAYS;
+	$identifiants = [];
+	$usersTxt = "=== ADMINS ===\n";
+
+	// 3 admins
+	for ($idx = 1; $idx <= 3; $idx++) {
+		$identifiant = 'admin' . sprintf('%02d', $idx);
+		$motdepasseClair = 'Admin' . $idx . '23';
+		$motdepasse = md5($motdepasseClair);
+		$dateInscription = genererDate(40);
+
+		$sql = "INSERT INTO asso (id, motdepasse, Nom, Prenom, mail, Pays, CodePostal, DateNaissance, competence, datedinscription)
+				VALUES ('$identifiant', '$motdepasse', 'Admin', 'Admin$idx', 'admin$idx@association.fr', 'France', '75000', '01011980', 'Admin', '$dateInscription')";
+		mysqli_query($connexion, $sql);
+
+		$identifiants[] = $identifiant;
+		$usersTxt .= "$identifiant $motdepasseClair\n";
+	}
+
+	$usersTxt .= "\n=== USERS ===\n";
+
+	// 97 membres (100 total avec 3 admins)
+	for ($idx = 0; $idx < 97; $idx++) {
+		$prenom = $PRENOMS[$idx % count($PRENOMS)];
+		$nom = $NOMS[$idx % count($NOMS)];
+		$identifiant = 'user_' . strtolower($prenom) . '_' . strtolower($nom) . ($idx + 1);
+		$motdepasseClair = 'Password' . ($idx + 1);
+		$motdepasse = md5($motdepasseClair);
+		$mail = strtolower($prenom) . '.' . strtolower($nom) . ($idx + 1) . '@email.fr';
+		$paysChoisi = choisirAleatoire($PAYS);
+		$codePostal = sprintf('%05d', rand(10000, 99999));
+		$dateNaissance = sprintf('%02d%02d%04d', rand(1, 28), rand(1, 12), rand(1970, 2000));
+		$dateInscription = genererDate(40);
+
+		$sql = "INSERT INTO asso (id, motdepasse, Nom, Prenom, mail, Pays, CodePostal, DateNaissance, competence, datedinscription)
+				VALUES ('$identifiant', '$motdepasse', '$nom', '$prenom', '$mail', '$paysChoisi', '$codePostal', '$dateNaissance', 'Membre', '$dateInscription')";
+		mysqli_query($connexion, $sql);
+
+		$identifiants[] = $identifiant;
+		$usersTxt .= "$identifiant $motdepasseClair\n";
+	}
+
+	return ['identifiants' => $identifiants, 'usersTxt' => $usersTxt];
+}
+
+/**
+	Crée les posts dans la base de données.
+	@param connexion Connexion mysqli
+	@param identifiants Liste des identifiants utilisateurs
+*/
+function creerPosts($connexion) {
+	global $TITRES_POSTS, $SUJETS_POSTS, $CONTENUS_POSTS;
+
+	$result = mysqli_query($connexion, "SELECT id FROM asso");
+	$identifiants = [];
+	while ($row = mysqli_fetch_assoc($result)) {
+		$identifiants[] = $row['id'];
+	}
+
+	$totalPosts = 0;
+
+	foreach ($identifiants as $identifiant) {
+		$nombrePosts = 50;
+
+		for ($idx = 0; $idx < $nombrePosts; $idx++) {
+			$objet = choisirAleatoire($TITRES_POSTS) . " " . choisirAleatoire($SUJETS_POSTS);
+			$post = choisirAleatoire($CONTENUS_POSTS);
+			$datePost = genererDate(40);
+			$heurePost = genererHeure();
+
+			$objet = mysqli_real_escape_string($connexion, $objet);
+			$post = mysqli_real_escape_string($connexion, $post);
+
+			$sql = "INSERT INTO posts (Post, Objet, date, heure, id) VALUES ('$post', '$objet', '$datePost', '$heurePost', '$identifiant')";
+			mysqli_query($connexion, $sql);
+			$totalPosts++;
+		}
+
+		mysqli_query($connexion, "UPDATE asso SET nombredeposts = $nombrePosts WHERE id = '$identifiant'");
+	}
+
+	echo "Posts crees: $totalPosts\n";
+}
+
+/**
+	Crée les projets dans la base de données.
+	@param connexion Connexion mysqli
+*/
+function creerProjets($connexion) {
+	global $TITRES_PROJETS, $DESCRIPTIONS_PROJETS;
+
+	$result = mysqli_query($connexion, "SELECT id FROM asso");
+	$identifiants = [];
+	while ($row = mysqli_fetch_assoc($result)) {
+		$identifiants[] = $row['id'];
+	}
+
+	$totalProjets = 0;
+
+	foreach ($identifiants as $identifiant) {
+		$nombreProjets = rand(3, 8);
+
+		for ($idx = 0; $idx < $nombreProjets; $idx++) {
+			$objet = choisirAleatoire($TITRES_PROJETS);
+			$texte = choisirAleatoire($DESCRIPTIONS_PROJETS);
+			$dateProjet = genererDate(40);
+			$heureProjet = genererHeure();
+
+			$objet = mysqli_real_escape_string($connexion, $objet);
+			$texte = mysqli_real_escape_string($connexion, $texte);
+
+			$sql = "INSERT INTO projets (Objet, Texte, date, heure, id) VALUES ('$objet', '$texte', '$dateProjet', '$heureProjet', '$identifiant')";
+			mysqli_query($connexion, $sql);
+			$idprojet = mysqli_insert_id($connexion);
+			$totalProjets++;
+
+			$nombreMessages = rand(30, 50);
+			for ($msgIdx = 0; $msgIdx < $nombreMessages; $msgIdx++) {
+				$auteurMessage = choisirAleatoire($identifiants);
+				$dateMsg = genererDate(40);
+				$heureMsg = genererHeure();
+
+				$sqlMsg = "INSERT INTO dataprojets (idprojet, idmembre, date, heure) VALUES ($idprojet, '$auteurMessage', '$dateMsg', '$heureMsg')";
+				mysqli_query($connexion, $sqlMsg);
+			}
+		}
+
+		mysqli_query($connexion, "UPDATE asso SET nombredeprojets = $nombreProjets WHERE id = '$identifiant'");
+	}
+
+	echo "Projets crees: $totalProjets\n";
+}
+
+/**
+	Crée les modifications de posts (dataposts).
+	@param connexion Connexion mysqli
+*/
+function creerDataposts($connexion) {
+	$resultUsers = mysqli_query($connexion, "SELECT id FROM asso");
+	$identifiants = [];
+	while ($row = mysqli_fetch_assoc($resultUsers)) {
+		$identifiants[] = $row['id'];
+	}
+
+	$result = mysqli_query($connexion, "SELECT idpost FROM posts");
+	$totalModifs = 0;
+
+	while ($row = mysqli_fetch_assoc($result)) {
+		$idpost = $row['idpost'];
+		$nombreModifs = rand(0, 5);
+
+		for ($idx = 0; $idx < $nombreModifs; $idx++) {
+			$auteur = choisirAleatoire($identifiants);
+			$dateModif = genererDate(30);
+			$heureModif = genererHeure();
+
+			$sql = "INSERT INTO dataposts (idpost, idmembre, date, heure) VALUES ($idpost, '$auteur', '$dateModif', '$heureModif')";
+			mysqli_query($connexion, $sql);
+			$totalModifs++;
+		}
+	}
+
+	echo "Modifications de posts creees: $totalModifs\n";
+}
+
+// ==============================================================================
+// Main
+// ==============================================================================
+
+function main() {
+	echo "=== Seed association1 ===\n\n";
+
+	$connexion = mysqli_connect('localhost', 'tilnede0x1182', 'tilnede0x1182', 'association1');
+	if (!$connexion) {
+		die("Erreur de connexion: " . mysqli_connect_error() . "\n");
+	}
+
+	mysqli_set_charset($connexion, 'utf8mb4');
+
+	// Nettoyage
+	mysqli_query($connexion, "SET FOREIGN_KEY_CHECKS = 0");
+	mysqli_query($connexion, "TRUNCATE TABLE dataprojets");
+	mysqli_query($connexion, "TRUNCATE TABLE dataposts");
+	mysqli_query($connexion, "TRUNCATE TABLE projets");
+	mysqli_query($connexion, "TRUNCATE TABLE posts");
+	mysqli_query($connexion, "TRUNCATE TABLE asso");
+	mysqli_query($connexion, "SET FOREIGN_KEY_CHECKS = 1");
+
+	echo "Tables nettoyees.\n";
+
+	// Création des données
+	$resultat = creerUtilisateurs($connexion);
+	echo "Utilisateurs crees: " . count($resultat['identifiants']) . "\n";
+
+	creerPosts($connexion);
+	creerProjets($connexion);
+	creerDataposts($connexion);
+
+	// Écriture du fichier users.txt
+	$cheminUsers = __DIR__ . '/users.txt';
+	file_put_contents($cheminUsers, $resultat['usersTxt']);
+	echo "\nFichier users.txt cree: $cheminUsers\n";
+
+	mysqli_close($connexion);
+	echo "\n=== Seed termine ===\n";
+}
+
+// ==============================================================================
+// Lancement du programme
+// ==============================================================================
+
+main();

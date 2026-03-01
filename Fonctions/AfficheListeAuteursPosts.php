@@ -1,7 +1,7 @@
 ﻿
 
 			$requete1 = 'SELECT Post, date, idpost, id FROM posts ORDER BY date DESC';
-			$resultat1 = mysql_query($requete1,$connexion);
+			$resultat1 = mysqli_query($connexion, $requete1);
 
 			echo '    <table border="1">
 			      <tr>
@@ -14,7 +14,7 @@
 
 			while (true) {
 				$tmp1=$tmp1+1;
-				$ligne = mysql_fetch_array($resultat1);
+				$ligne = mysqli_fetch_array($resultat1);
 
 				if (($ligne==false) || ($tmp1>5)) break;
 
@@ -23,7 +23,7 @@
 				$idpost=$ligne['idpost'];
 
 				$requete2 = 'SELECT idmembre, date FROM dataposts WHERE idpost="'.$idpost.'" ORDER BY date DESC';
-				$resultat2 = mysql_query($requete2,$connexion);
+				$resultat2 = mysqli_query($connexion, $requete2);
 
 				$rdataposts=0;
 
@@ -33,7 +33,7 @@
 
 				while ($rdataposts!=1){
 					$tmp2=$tmp2+1;
-					$dataposts = mysql_fetch_array($resultat2);
+					$dataposts = mysqli_fetch_array($resultat2);
 
 					if ($dataposts==false) $rdataposts=1;
 

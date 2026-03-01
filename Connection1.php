@@ -35,12 +35,12 @@
 
 				include 'Fonctions/ConnectionBaseDonnees.php';
 
-				$connexion = mysql_pconnect($server,$user,$motdepasse) ;
+				$connexion = mysqli_connect($server, $user, $motdepasse, $base);
 
 				if (!$connexion) {
 					echo "Pas de connexion au serveur" ;
 				}else {
-					if (!mysql_select_db($base, $connexion)) {
+					if (!$connexion) {
 						echo "Pas d'accès à la base" ;
 					}else {
 	
@@ -48,11 +48,11 @@
 						//echo $date;
 	
 						$sql = 'UPDATE asso SET datedederniereconnection="'.$date.'" WHERE id="'.$_SESSION['id'].'" AND motdepasse="'.$_SESSION['motdepasse'].'"';
-						mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
+						mysqli_query($connexion, $sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 	
 	
 						$sql = 'UPDATE asso SET Connecte="1" WHERE id="'.$_SESSION['id'].'" AND motdepasse="'.$_SESSION['motdepasse'].'"';
-						mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
+						mysqli_query($connexion, $sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 
 						if (!empty($_SESSION['pageCourante'])) header('Location: '.$_SESSION['pageCourante']);
 						else header('Location: '.$serveur.'Accueil%20%281%29.php');

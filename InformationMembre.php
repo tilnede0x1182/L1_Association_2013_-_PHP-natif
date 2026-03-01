@@ -33,20 +33,20 @@
 
 	include 'Fonctions/ConnectionBaseDonnees.php';
 
-	$connexion = mysql_pconnect($server,$user,$motdepasse) ;
+	$connexion = mysqli_connect($server, $user, $motdepasse, $base);
 	if (!$connexion) {
 		echo "Pas de connexion au serveur" ;
 	}else {
-		if (!mysql_select_db($base, $connexion)) {
+		if (!$connexion) {
 			echo "Pas d'accès à la base" ;
 		}else {
 			$competence=0; //les droit de modifier les articles initialisé à 0 par défaut.
 
 			if (!empty($_SESSION)){				
 				$requete3 = 'SELECT competence FROM asso WHERE id="'.$_SESSION['id'].'"';
-				$resultat3 = mysql_query($requete3,$connexion);
+				$resultat3 = mysqli_query($connexion, $requete3);
 
-				$ControleMembre = mysql_fetch_array($resultat3);
+				$ControleMembre = mysqli_fetch_array($resultat3);
 
 				if ($ControleMembre!=false) {
 					if (($ControleMembre['competence']=="President") || ($ControleMembre['competence']=="Secretaire") || ($ControleMembre['competence']=="Administrateur")) {
@@ -62,9 +62,9 @@
 
 			if (!empty($id)){				
 				$requete4 = 'SELECT competence FROM asso WHERE id="'.$id.'"';
-				$resultat4 = mysql_query($requete4,$connexion);
+				$resultat4 = mysqli_query($connexion, $requete4);
 
-				$ControleceMembre = mysql_fetch_array($resultat4);
+				$ControleceMembre = mysqli_fetch_array($resultat4);
 
 				if ($ControleceMembre!=false) {
 					if (($ControleceMembre['competence']=="President") || ($ControleceMembre['competence']=="Secretaire") || ($ControleceMembre['competence']=="Administrateur")) {
@@ -74,9 +74,9 @@
 			}
 
 			$requete = 'SELECT * FROM asso WHERE id="'.$id.'"';
-			$resultat = mysql_query($requete,$connexion) ;
+			$resultat = mysqli_query($connexion, $requete);
 
-			$ligne = mysql_fetch_array($resultat);
+			$ligne = mysqli_fetch_array($resultat);
 
 			$nom_du_membre=$ligne['id'];
 

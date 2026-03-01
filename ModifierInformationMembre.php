@@ -20,18 +20,18 @@
 
 			include 'Fonctions/ConnectionBaseDonnees.php';	
 			
-			$connexion = mysql_pconnect($server,$user,$motdepasse) ;
+			$connexion = mysqli_connect($server, $user, $motdepasse, $base);
 			if (!$connexion) {
 				echo "Pas de connexion au serveur" ;
 			}else {
-				if (!mysql_select_db($base, $connexion)) {
+				if (!$connexion) {
 					echo "Pas d'accès à la base" ;
 				}else {
 					
 					$requete = 'SELECT id,motdepasse FROM asso WHERE id="'.$_SESSION['id'].'"';
-					$resultat = mysql_query($requete,$connexion) ;
+					$resultat = mysqli_query($connexion, $requete);
 					
-					$ligne = mysql_fetch_array($resultat);
+					$ligne = mysqli_fetch_array($resultat);
 					
 					if ($ligne==false) return false;
 					//le membre n'existe pas.
@@ -63,12 +63,12 @@
 
 		include 'Fonctions/ConnectionBaseDonnees.php';
 
-		$connexion = mysql_pconnect($server,$user,$motdepasse) ;
+		$connexion = mysqli_connect($server, $user, $motdepasse, $base);
 		if (!$connexion) {
 			echo "Pas de connexion au serveur" ;
 		}
 		else {
-			if (!mysql_select_db($base, $connexion)) {
+			if (!$connexion) {
 				echo "Pas d'accès à la base" ;
 			}
 			else {
@@ -76,9 +76,9 @@
 				$id = $_SESSION['id'];
 
 				$requete = 'SELECT * FROM asso WHERE id="'.$id.'"';
-				$resultat = mysql_query($requete,$connexion) ;
+				$resultat = mysqli_query($connexion, $requete);
 
-				$ligne = mysql_fetch_array($resultat);
+				$ligne = mysqli_fetch_array($resultat);
 
 				$anciennete = CalcAnciennete($ligne["datedinscription"]);
 

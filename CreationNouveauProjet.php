@@ -34,12 +34,12 @@
 		}else {	
 			include 'Fonctions/ConnectionBaseDonnees.php';
 
-			$connexion = mysql_pconnect($server,$user,$motdepasse) ;
+			$connexion = mysqli_connect($server, $user, $motdepasse, $base);
 
 			if (!$connexion) {
 			echo "Pas de connexion au serveur" ;
 			}else {
-				if (!mysql_select_db($base, $connexion)) {
+				if (!$connexion) {
 					echo "Pas d'accès à la base" ;
 				}else {
 
@@ -56,23 +56,23 @@
 					//echo $date;
 					
 					$sql = 'INSERT INTO projets (Texte, objet, idprojet, date, heure, id) VALUES ("'.$texte.'","'.$objet.'","'.$idprojet.'","'.$date.'","'.$heure.'","'.$_SESSION['id'].'")';
-					mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
+					mysqli_query($connexion, $sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 
 
 					$sql = 'UPDATE asso SET datedudernierprojet="'.$date.'" WHERE id="'.$_SESSION['id'].'" AND motdepasse="'.$_SESSION['motdepasse'].'"';
-					mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
+					mysqli_query($connexion, $sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 		
 					$requete = 'SELECT nombredeprojets FROM asso WHERE id="'.$_SESSION['id'].'"';
-					$resultat = mysql_query($requete,$connexion) ;
+					$resultat = mysqli_query($connexion, $requete);
 
-					$ligne = mysql_fetch_array($resultat);
+					$ligne = mysqli_fetch_array($resultat);
 
 					$nombredeprojets = $ligne['nombredeprojets']+1;	
 
 					//echo '$nombredeprojets'." = ".$nombredeprojets;
 
 					$sql = 'UPDATE asso SET nombredeprojets="'.$nombredeprojets.'" WHERE id="'.$_SESSION['id'].'" AND motdepasse="'.$_SESSION['motdepasse'].'"';
-					mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
+					mysqli_query($connexion, $sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 
 					header('Location: '.$serveur.'NouveauProjet.php');
 

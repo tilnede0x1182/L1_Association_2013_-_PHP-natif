@@ -111,11 +111,11 @@ if (verifieConnection()) {
 
 		include 'Fonctions/ConnectionBaseDonnees.php';
 
-		$connexion = mysql_pconnect($server,$user,$motdepasse) ;
+		$connexion = mysqli_connect($server, $user, $motdepasse, $base);
 		if (!$connexion) {
 			echo "Pas de connexion au serveur" ;
 		}else {
-			if (!mysql_select_db($base, $connexion)) {
+			if (!$connexion) {
 				echo "Pas d'accès à la base" ;
 			}
 			else {
@@ -131,8 +131,8 @@ if (verifieConnection()) {
 				if ($infomembre=="motdepasse") {
 					$requete2 = 'SELECT motdepasse FROM asso WHERE id="'
 					.$_SESSION['id'].'"';
-					$resultat2 = mysql_query($requete2,$connexion) ;
-					$ligne2 = mysql_fetch_array($resultat2);
+					$resultat2 = mysqli_query($connexion, $requete2);
+					$ligne2 = mysqli_fetch_array($resultat2);
 
 					if ($ligne2==false) {
 						echo "<h4>Mot de passe incorrect.</h4>"; $g=0;
@@ -209,8 +209,7 @@ if (verifieConnection()) {
 						.'" WHERE id="'.$_SESSION['id']
 						.'" AND motdepasse="'
 						.$_SESSION['motdepasse'].'"';
-						mysql_query($sql) or die('Erreur SQL !'.$sql
-						.'<br />'.mysql_error());
+						mysqli_query($connexion, $sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 
 						header('Location: '.$serveur
 						.'Accueil%20%281%29.php');
@@ -233,8 +232,7 @@ if (verifieConnection()) {
 						.$date.'" WHERE id="'
 						.$_SESSION['id'].'" AND motdepasse="'
 						.$_SESSION['motdepasse'].'"';
-						mysql_query($sql) or die('Erreur SQL !'
-						.$sql.'<br />'.mysql_error());
+						mysqli_query($connexion, $sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 
 						if (!empty($_SESSION['pageCourante']))
 							header('Location: '
@@ -255,8 +253,8 @@ if (verifieConnection()) {
 					else if ($infomembre=="id") {
 						$requete1 = 'SELECT id FROM asso WHERE id="'
 						.$_POST['id'].'"';
-						$resultat1 = mysql_query($requete1,$connexion) ;
-						$ligne1 = mysql_fetch_array($resultat1);
+						$resultat1 = mysqli_query($connexion, $requete1);
+						$ligne1 = mysqli_fetch_array($resultat1);
 
 						if ($ligne1!=false) {
 							echo '	 <h4 class="texte">'
@@ -269,43 +267,36 @@ if (verifieConnection()) {
 							.'" WHERE id="'.$_SESSION['id']
 							.'" AND motdepasse="'
 							.$_SESSION['motdepasse'].'"';
-							mysql_query($sql) or die('Erreur SQL !'
-							.$sql.'<br />'.mysql_error());
+							mysqli_query($connexion, $sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 							
 							$sql = 'UPDATE posts SET id="'.$_POST["id"]
 							.'" WHERE id="'.$_SESSION['id'].'"';
-							mysql_query($sql) or die('Erreur SQL !'.$sql
-							.'<br />'.mysql_error());
+							mysqli_query($connexion, $sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 							
 							$sql = 'UPDATE projets SET id="'
 							.$_POST["id"]
 							.'" WHERE id="'.$_SESSION['id'].'"';
-							mysql_query($sql) or die('Erreur SQL !'.$sql
-							.'<br />'.mysql_error());
+							mysqli_query(\$connexion, \$sql) or die('Erreur SQL !'.\$sql.'<br />'.mysqli_error(\$connexion));
 							
 							$sql = 'UPDATE dataposts SET idmembre="'
 							.$_POST["id"].'" WHERE idmembre="'
 							.$_SESSION['id'].'"';
-							mysql_query($sql) or die('Erreur SQL !'
-							.$sql.'<br />'.mysql_error());																
+							mysqli_query(\$connexion, \$sql) or die('Erreur SQL !'.\$sql.'<br />'.mysqli_error(\$connexion));																
 
 							$sql = 'UPDATE dataprojets SET idmembre="'
 							.$_POST["id"].'" WHERE idmembre="'
 							.$_SESSION['id'].'"';
-							mysql_query($sql) or die('Erreur SQL !'
-							.$sql.'<br />'.mysql_error());
+							mysqli_query(\$connexion, \$sql) or die('Erreur SQL !'.\$sql.'<br />'.mysqli_error(\$connexion));
 
 							$sql = 'UPDATE dataposts SET idauteur="'
 							.$_POST["id"].'" WHERE idauteur="'
 							.$_SESSION['id'].'"';
-							mysql_query($sql) or die('Erreur SQL !'
-							.$sql.'<br />'.mysql_error());																
+							mysqli_query(\$connexion, \$sql) or die('Erreur SQL !'.\$sql.'<br />'.mysqli_error(\$connexion));																
 							
 							$sql = 'UPDATE dataprojets SET idauteur="'
 							.$_POST["id"].'" WHERE idauteur="'
 							.$_SESSION['id'].'"';
-							mysql_query($sql) or die('Erreur SQL !'
-							.$sql.'<br />'.mysql_error());
+							mysqli_query(\$connexion, \$sql) or die('Erreur SQL !'.\$sql.'<br />'.mysqli_error(\$connexion));
 
 							header('Location: '.$serveur
 							.'Accueil%20%281%29.php');
@@ -322,8 +313,7 @@ if (verifieConnection()) {
 						.$_POST["$infomembre"]
 						.'" WHERE id="'.$_SESSION['id'].'" AND motdepasse="'
 						.$_SESSION['motdepasse'].'"';
-						mysql_query($sql) or die('Erreur SQL !'
-						.$sql.'<br />'.mysql_error());
+						mysqli_query(\$connexion, \$sql) or die('Erreur SQL !'.\$sql.'<br />'.mysqli_error(\$connexion));
 
 						if (!empty($_SESSION['pageCourante'])) header('Location: '.$_SESSION['pageCourante']);
 						else header('Location: '.$serveur
@@ -352,12 +342,12 @@ if (verifieConnection()) {
 		if ($infomembre!="motdepasse") {
 			include 'Fonctions/ConnectionBaseDonnees.php';
 
-			$connexion = mysql_pconnect($server,$user,$motdepasse) ;
+			$connexion = mysqli_connect(\$server, \$user, \$motdepasse, \$base);
 			if (!$connexion) {
 				echo "Pas de connexion au serveur" ;
 			}
 			else {
-				if (!mysql_select_db($base, $connexion)) {
+				if (!\$connexion) {
 					echo "Pas d'accès à la base" ;
 				}
 				else {
@@ -368,8 +358,8 @@ if (verifieConnection()) {
 
 					$requete3 = 'SELECT '.$infomembre.' FROM asso WHERE '
 					.'id="'.$_SESSION['id'].'"';
-					$resultat3 = mysql_query($requete3,$connexion) ;
-					$ligne3 = mysql_fetch_array($resultat3);
+					$resultat3 = mysqli_query($connexion, $requete3);
+					$ligne3 = mysqli_fetch_array($resultat3);
 
 					if ($ligne3!=false) $valeur = $ligne3[$infomembre];
 					else $valeur = "";

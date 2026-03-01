@@ -35,17 +35,17 @@
 
 	include 'Fonctions/ConnectionBaseDonnees.php';
 
-	$connexion = mysql_pconnect($server,$user,$motdepasse) ;
+	$connexion = mysqli_connect($server, $user, $motdepasse, $base);
 
 	if (!$connexion) {
 		echo "Pas de connexion au serveur" ;
 	}else {
-		if (!mysql_select_db($base, $connexion)) {
+		if (!$connexion) {
 			echo "Pas d'accès à la base" ;
 		}else {
 
 			$requete1 = 'SELECT * FROM posts WHERE idpost="'.$idpost.'"';
-			$resultat1 = mysql_query($requete1,$connexion);
+			$resultat1 = mysqli_query($connexion, $requete1);
 
 			include 'Fonctions/VerifieCompetence.php';
 
@@ -58,16 +58,16 @@
 			echo '   <th>Modifications</th>'."\n";
 			echo '      </tr>';
 
-				$ligne = mysql_fetch_array($resultat1);
+				$ligne = mysqli_fetch_array($resultat1);
 
 				//echo '$ligne['."'".'idpost'."'".'] = '.$ligne['idpost']."<br>\n";
 
 				$idpost=$ligne['idpost'];
 
 				$requete2 = 'SELECT idmembre, date FROM dataposts WHERE idpost="'.$idpost.'" ORDER BY date DESC';
-				$resultat2 = mysql_query($requete2,$connexion);
+				$resultat2 = mysqli_query($connexion, $requete2);
 
-				$dataposts = mysql_fetch_array($resultat2);
+				$dataposts = mysqli_fetch_array($resultat2);
 
 				if ($dataposts!=false) $affdataposts = "<br>Dernière modification : <br>\n".'<a href="'.$serveur.'InformationMembre.php?idmembre='.$dataposts['idmembre'].'">'.$dataposts['idmembre']."</a> (".convertDate($dataposts['date']).")<br>";
 				else $affdataposts="";
@@ -90,7 +90,7 @@
 			} else {
 
 			$requete5 = 'SELECT Post, Objet, date, id FROM posts ORDER by date DESC';
-			$resultat5 = mysql_query($requete5,$connexion);
+			$resultat5 = mysqli_query($connexion, $requete5);
 
 			echo '    <table border="1">
 			      <tr>
@@ -99,7 +99,7 @@
 			        <th>Date de publication</th>
 			      </tr>';
 
-				$ligne = mysql_fetch_array($resultat5);
+				$ligne = mysqli_fetch_array($resultat5);
 
 				if (!empty($ligne['Objet'])) $titrearticle = "<h4>".$ligne['Objet']." : </h4>";
 				else $titrearticle = "";

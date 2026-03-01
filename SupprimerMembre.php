@@ -31,11 +31,11 @@
 
 		include 'Fonctions/ConnectionBaseDonnees.php';
 		
-		$connexion = mysql_pconnect($server,$user,$motdepasse) ;
+		$connexion = mysqli_connect($server, $user, $motdepasse, $base);
 		if (!$connexion) {
 			echo "Pas de connexion au serveur" ;
 		}else {
-			if (!mysql_select_db($base, $connexion)) {
+			if (!$connexion) {
 				echo "Pas d'accès à la base" ;
 			}else {
 
@@ -50,19 +50,19 @@
 				else {
 					if ($_POST['choix']==1) {
 						$sql ='DELETE from asso WHERE id="'.$idmembre.'" AND motdepasse="'.$motdepasse.'"'; 
-						mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
+						mysqli_query($connexion, $sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 
 
 						$sql ='DELETE from projets WHERE id="'.$idmembre.'"'; 
-						mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
+						mysqli_query($connexion, $sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 
 						
 						$sql ='DELETE from dataposts WHERE idmembre="'.$idmembre.'"'; 
-						mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());    
+						mysqli_query(\$connexion, \$sql) or die('Erreur SQL !'.\$sql.'<br />'.mysqli_error(\$connexion));    
 
 
 						$sql ='DELETE from dataprojets WHERE idmembre="'.$idmembre.'"'; 
-						mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
+						mysqli_query(\$connexion, \$sql) or die('Erreur SQL !'.\$sql.'<br />'.mysqli_error(\$connexion));
 
 
 						echo '	 <h4>Votre compte, ainsi que tous les projets que vous avez postés ont étés supprimés.</h4>'."\n";

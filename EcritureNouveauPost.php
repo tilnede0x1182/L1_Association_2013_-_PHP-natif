@@ -47,11 +47,11 @@
 
 			include 'Fonctions/ConnectionBaseDonnees.php';
 
-			$connexion = mysql_pconnect($server,$user,$motdepasse) ;
+			$connexion = mysqli_connect($server, $user, $motdepasse, $base);
 			if (!$connexion) {
 			echo "Pas de connexion au serveur" ;
 			}else {
-				if (!mysql_select_db($base, $connexion)) {
+				if (!$connexion) {
 					echo "Pas d'accès à la base" ;
 				}else {
 
@@ -74,19 +74,19 @@
 					//echo $date;
 					
 					$sql = 'INSERT INTO posts (Post,Objet,date,id, idpost, heure) VALUES ("'.$article.'","'.$objet.'","'.$date.'","'.$_SESSION['id'].'","'.$idpost.'","'.$heure.'")';
-					mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
+					mysqli_query($connexion, $sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 
 					$sql = 'UPDATE asso SET datedudernierpost="'.$date.'" WHERE id="'.$_SESSION['id'].'" AND motdepasse="'.$_SESSION['motdepasse'].'"';
-					mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
+					mysqli_query($connexion, $sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 		
 					$requete = 'SELECT nombredeposts FROM asso WHERE id="'.$_SESSION['id'].'"';
-					$resultat = mysql_query($requete,$connexion) ;
-					$ligne = mysql_fetch_array($resultat);
+					$resultat = mysqli_query($connexion, $requete);
+					$ligne = mysqli_fetch_array($resultat);
 
 					$nombredeposts = $ligne['nombredeposts']+1;	
 
 					$sql = 'UPDATE asso SET nombredeposts="'.$nombredeposts.'" WHERE id="'.$_SESSION['id'].'" AND motdepasse="'.$_SESSION['motdepasse'].'"';
-					mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
+					mysqli_query($connexion, $sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 
 					header('Location: '.$serveur.'Accueil%20%281%29.php');
 	

@@ -28,11 +28,11 @@
 
 		include 'Fonctions/ConnectionBaseDonnees.php';
 		
-		$connexion = mysql_pconnect($server,$user,$motdepasse) ;
+		$connexion = mysqli_connect($server, $user, $motdepasse, $base);
 		if (!$connexion) {
 			echo "Pas de connexion au serveur" ;
 		}else {
-			if (!mysql_select_db($base, $connexion)) {
+			if (!$connexion) {
 				echo "Pas d'accès à la base" ;
 			}else {
 
@@ -53,14 +53,14 @@
 	 <tr>'."\n";
 	 
 					$requete = 'SELECT idmembre,date FROM dataposts WHERE idpost="'.$idpost.'" ORDER BY date DESC, heure DESC';
-					$resultat = mysql_query($requete,$connexion) ;
+					$resultat = mysqli_query($connexion, $requete);
 
 					$cmp=0;
 
 					while (true) {
 						$cmp = $cmp+1;
 
-						$ligne = mysql_fetch_array($resultat);
+						$ligne = mysqli_fetch_array($resultat);
 
 						if ($ligne==false){
 							if ($cmp==1){

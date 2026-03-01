@@ -28,17 +28,17 @@
 		
 		include 'Fonctions/ConnectionBaseDonnees.php';
 		
-		$connexion = mysql_pconnect($server,$user,$motdepasse) ;
+		$connexion = mysqli_connect($server, $user, $motdepasse, $base);
 		if (!$connexion) {
 			echo "Pas de connexion au serveur" ;
 		}else {
-			if (!mysql_select_db($base, $connexion)) {
+			if (!$connexion) {
 				echo "Pas d'accès à la base" ;
 			}else {
 
 				$requete1 = 'SELECT * FROM posts WHERE idpost="'.$idarticle.'"';
-				$resultat1 = mysql_query($requete1,$connexion) ;
-				$ligne1 = mysql_fetch_array($resultat1);
+				$resultat1 = mysqli_query($connexion, $requete1);
+				$ligne1 = mysqli_fetch_array($resultat1);
 
 				$date = date("dmY");
 				$heure = date("His");
@@ -69,10 +69,10 @@
 
 					else {
 						$sql = 'UPDATE posts SET Post="'.htmlspecialchars($_POST['article']).'" WHERE idpost="'.$idarticle.'"';
-						mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
+						mysqli_query($connexion, $sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 						
 						$sql = 'INSERT INTO dataposts (idauteur, idmembre,date,heure,idpost) VALUES ("'.$ligne1['id'].'","'.$_SESSION['id'].'","'.$date.'","'.$heure.'","'.$idarticle.'")';
-						mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
+						mysqli_query($connexion, $sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 
 						if (!empty($_SESSION['pageCourante'])) header('Location: '.$_SESSION['pageCourante']);
 						else header('Location: '.$serveur.'Accueil%20%281%29.php');

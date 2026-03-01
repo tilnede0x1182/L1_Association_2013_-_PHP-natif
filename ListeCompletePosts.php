@@ -28,23 +28,23 @@
 
 	include 'Fonctions/ConnectionBaseDonnees.php';
 	
-	$connexion = mysql_pconnect($server,$user,$motdepasse) ;
+	$connexion = mysqli_connect($server, $user, $motdepasse, $base);
 	if (!$connexion) {
 		echo "Pas de connexion au serveur" ;
 	}else {
-		if (!mysql_select_db($base, $connexion)) {
+		if (!$connexion) {
 			echo "Pas d'accès à la base" ;
 		}else {
 
 			$requete1 = 'SELECT Post, Objet, date, idpost, id FROM posts ORDER BY date DESC, heure DESC';
-			$resultat1 = mysql_query($requete1,$connexion);
+			$resultat1 = mysqli_query($connexion, $requete1);
 
 			include 'Fonctions/VerifieCompetence.php';
 			
 			//if ($competence==1) {
 
 			$requete5 = 'SELECT * FROM posts ORDER by date DESC';
-			$resultat5 = mysql_query($requete5,$connexion);
+			$resultat5 = mysqli_query($connexion, $requete5);
 
 			echo '    <table border="1">
 			      <tr>
@@ -57,7 +57,7 @@
 
 			while (true) {
 				$tmp=$tmp+1;
-				$ligne = mysql_fetch_array($resultat5);
+				$ligne = mysqli_fetch_array($resultat5);
 
 				if (($ligne==false) || ($tmp>199)) break;
 
@@ -67,9 +67,9 @@
 				$idpost = $ligne['idpost'];
 
 				$requete2 = 'SELECT date FROM dataposts WHERE idpost="'.$idpost.'" ORDER BY date DESC';
-				$resultat2 = mysql_query($requete2,$connexion);
+				$resultat2 = mysqli_query($connexion, $requete2);
 
-				$dataposts = mysql_fetch_array($resultat2);
+				$dataposts = mysqli_fetch_array($resultat2);
 
 				if ($dataposts!=false) $affdataposts = ", dernière modification : ".convertDate($dataposts['date']);
 				else $affdataposts="";

@@ -32,11 +32,11 @@
 
 		include 'Fonctions/ConnectionBaseDonnees.php';
 		
-		$connexion = mysql_pconnect($server,$user,$motdepasse) ;
+		$connexion = mysqli_connect($server, $user, $motdepasse, $base);
 		if (!$connexion) {
 			echo "Pas de connexion au serveur" ;
 		}else {
-			if (!mysql_select_db($base, $connexion)) {
+			if (!$connexion) {
 				echo "Pas d'accès à la base" ;
 			}else {
 
@@ -51,11 +51,11 @@
 
 					if ($_POST['choix']==1) {
 						$sql ='DELETE from posts WHERE idpost="'.$idpost.'"'; 
-						mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
+						mysqli_query($connexion, $sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 
 						
 						$sql ='DELETE from dataposts WHERE idpost="'.$idpost.'"'; 
-						mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
+						mysqli_query($connexion, $sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 
 						if (!empty($_SESSION['pageCourante'])) header('Location: '.$_SESSION['pageCourante']);
 						else header('Location: '.$serveur.'Accueil%20%281%29.php');

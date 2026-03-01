@@ -31,19 +31,19 @@ function detectlId ($dd1) {
 
 			include 'ConnectionBaseDonnees.php';
 	
-			$connexion = mysql_pconnect($server,$user,$motdepasse) ;
+			$connexion = mysqli_connect($server, $user, $motdepasse, $base);
 
 			if (!$connexion) {
 				echo "Pas de connexion au serveur" ;
 			}else {
-				if (!mysql_select_db($base, $connexion)) {
+				if (!$connexion) {
 					echo "Pas d'accès à la base" ;
 				}else {
 
 					$requete = 'SELECT id FROM asso WHERE id="'.$j.'"';
-					$resultat = mysql_query($requete,$connexion);
+					$resultat = mysqli_query($connexion, $requete);
 		
-					$ligne = mysql_fetch_array($resultat);
+					$ligne = mysqli_fetch_array($resultat);
 
 					if ($ligne==false) $l=$l.$j; 
 					//le membre n'existe pas ou plus.

@@ -96,11 +96,11 @@
 
 			include 'Fonctions/ConnectionBaseDonnees.php';
 			
-			$connexion = mysql_pconnect($server,$user) ;
+			$connexion = mysqli_connect($server, $user, $motdepasse, $base);
 			if (!$connexion) {
 				echo "Pas de connexion au serveur" ;
 			}else {
-				if (!mysql_select_db($base, $connexion)) {
+				if (!$connexion) {
 					echo "Pas d'accès à la base" ;
 				}else {
 					if ((!empty($_POST['d1'])) && (!empty($_POST['d2'])) && (!empty($_POST['d3']))) {
@@ -129,8 +129,8 @@
 					//echo $datedinscription;
 
 					$requete= 'SELECT id FROM asso WHERE id="'.$_POST['id'].'"';
-					$resultat = mysql_query($requete,$connexion);
-					$ligne = mysql_fetch_array($resultat);
+					$resultat = mysqli_query($connexion, $requete);
+					$ligne = mysqli_fetch_array($resultat);
 					
 					if ($ligne!=false) {
 						echo "<p>Trouvez un autre nom d'utilisateur (identifiant).</p>\n<p>Celui-ci est déjà utilisé.</p>";
@@ -142,7 +142,7 @@
 						$datenaissance = $_POST['d2'].$_POST['d1'].$_POST['d3'];
 						$sql = 'INSERT INTO asso (competence, Nom, Prenom,CodePostal,Pays,DateNaissance,mail,id,motdepasse,datedinscription,datedederniereconnection,datedudernierpost) VALUES ("Membre","'.$_POST["nom"].'","'.$_POST["prenom"].'","'.$_POST["adresse"].'","'.$_POST["pays"].'","'.$date.'","'.$_POST["mail"].'","'.$_POST["id"].'","'.md5($motdepassealeat).'","'.$datedinscription.'","-11","-11")';
 						
-						mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
+						mysqli_query($connexion, $sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 						
 						echo "<p>Tout est correct.</p>";	
 						echo "<p>Voici votre mot de passe : ".$motdepassealeat.".<br><br>Il servira à confirmer votre inscription.<br><br>Veuillez entrer ce mot de passe lors de vos prochaînes connections.<br><br>Cepandant, vous pourrez changer ce mot de passe dès votre première connection.</p>\n".'<p><br><a href="'.$serveur.'Accueil%20%281%29.php">'."Revenir à la page d'accueil</a></p>";

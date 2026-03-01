@@ -30,16 +30,16 @@
 
 		include 'Fonctions/ConnectionBaseDonnees.php';
 		
-		$connexion = mysql_pconnect($server,$user,$motdepasse) ;
+		$connexion = mysqli_connect($server, $user, $motdepasse, $base);
 		if (!$connexion) {
 			echo "Pas de connexion au serveur" ;
 		}else {
-			if (!mysql_select_db($base, $connexion)) {
+			if (!$connexion) {
 				echo "Pas d'accès à la base" ;
 			}else {
 
 				$requete = 'SELECT * FROM projets ORDER by date DESC, heure DESC';
-				$resultat = mysql_query($requete,$connexion);
+				$resultat = mysqli_query($connexion, $requete);
 
 				echo '    <table border="1">
 				<tr>
@@ -53,7 +53,7 @@
 
 				while (true) {
 					$tmp=$tmp+1;
-					$ligne = mysql_fetch_array($resultat);
+					$ligne = mysqli_fetch_array($resultat);
 
 					if (($ligne==false) || ($tmp>15)) break;
 

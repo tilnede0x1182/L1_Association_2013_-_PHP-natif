@@ -33,17 +33,17 @@
 
 		include 'Fonctions/ConnectionBaseDonnees.php';
 		
-		$connexion = mysql_pconnect($server,$user,$motdepasse) ;
+		$connexion = mysqli_connect($server, $user, $motdepasse, $base);
 		if (!$connexion) {
 			echo "Pas de connexion au serveur" ;
 		}else {
-			if (!mysql_select_db($base, $connexion)) {
+			if (!$connexion) {
 				echo "Pas d'accès à la base" ;
 			}else {
 
 				$requete1 = 'SELECT * FROM projets WHERE idprojet="'.$idprojet.'"';
-				$resultat1 = mysql_query($requete1,$connexion) ;
-				$ligne1 = mysql_fetch_array($resultat1);
+				$resultat1 = mysqli_query($connexion, $requete1);
+				$ligne1 = mysqli_fetch_array($resultat1);
 
 				$date = date("dmY");
 				$heure = date("His");
@@ -74,10 +74,10 @@
 
 					else {
 						$sql = 'UPDATE projets SET Texte="'.htmlspecialchars($_POST['article']).'" WHERE idprojet="'.$idprojet.'"';
-						mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
+						mysqli_query($connexion, $sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 						
 						$sql = 'INSERT INTO dataprojets (idauteur, idmembre,date,heure,idprojet) VALUES ("'.$ligne1['id'].'","'.$_SESSION['id'].'","'.$date.'","'.$heure.'","'.$idprojet.'")';
-						mysql_query($sql) or die('Erreur SQL !'.$sql.'<br />'.mysql_error());
+						mysqli_query($connexion, $sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
 
 						if (!empty($_SESSION['pageCourante'])) header('Location: '.$_SESSION['pageCourante']);
 						else header('Location: '.$serveur.'NouveauProjet.php');

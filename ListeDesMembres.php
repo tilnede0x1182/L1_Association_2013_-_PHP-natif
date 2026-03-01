@@ -29,11 +29,11 @@
 
 	include 'Fonctions/ConnectionBaseDonnees.php';
 	
-	$connexion = mysql_pconnect($server,$user,$motdepasse) ;
+	$connexion = mysqli_connect($server, $user, $motdepasse, $base);
 	if (!$connexion) {
 		echo "Pas de connexion au serveur" ;
 	}else {
-		if (!mysql_select_db($base, $connexion)) {
+		if (!$connexion) {
 			echo "Pas d'accès à la base" ;
 		}else {
 
@@ -100,7 +100,7 @@
 			//echo '$classement = '.$classement."\n".'$ordre = '.$ordre;		
 
 			$requete = "SELECT * FROM asso  ORDER BY ".$classement." ".$ordre."" ;
-			$resultat = mysql_query($requete,$connexion) ;
+			$resultat = mysqli_query($connexion, $requete);
 
 			echo'    <table border="1">
 			      <tr>
@@ -114,7 +114,7 @@
 			
 			while (true){
 				echo '   <tr>';
-				$ligne = mysql_fetch_array($resultat);
+				$ligne = mysqli_fetch_array($resultat);
 
 				if ($ligne==false) break;
 

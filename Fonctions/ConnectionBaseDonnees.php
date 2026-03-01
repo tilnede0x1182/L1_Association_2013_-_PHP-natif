@@ -1,6 +1,6 @@
 ﻿<?php
 			$server = "localhost" ;
-			$user = "root" ;
-			$motdepasse = "";
+			$user = "tilnede0x1182" ;
+			$motdepasse = "tilnede0x1182";
 			$base = "association1" ;
 ?>

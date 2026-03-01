@@ -4,9 +4,9 @@
 
 			if (!empty($_SESSION)){				
 				$requete3 = 'SELECT competence FROM asso WHERE id="'.$_SESSION['id'].'"';
-				$resultat3 = mysql_query($requete3,$connexion);
+				$resultat3 = mysqli_query($connexion, $requete3);
 
-				$ControleMembre = mysql_fetch_array($resultat3);
+				$ControleMembre = mysqli_fetch_array($resultat3);
 
 				if ($ControleMembre!=false) {
 					if (($ControleMembre['competence']=="President") || ($ControleMembre['competence']=="Secretaire") || ($ControleMembre['competence']=="Administrateur")) {
