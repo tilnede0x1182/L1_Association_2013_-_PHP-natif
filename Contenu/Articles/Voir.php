@@ -6,13 +6,13 @@ require_once __DIR__ . '/../../includes/init.php';
 
 // Gestion de la page précédente
 $pagePrecedente = "";
-if (!empty($_SESSION['pageCourante']) && strpos($_SESSION['pageCourante'], "AfficheArticle") === false) {
+if (!empty($_SESSION['pageCourante']) && strpos($_SESSION['pageCourante'], "Voir") === false) {
 	$pagePrecedente = $_SESSION['pageCourante'];
 }
 
 // Récupérer l'ID de l'article
 $idpost = isset($_GET['idpost']) ? $_GET['idpost'] : 'inconnu';
-$_SESSION['pageCourante'] = $serveur . "Contenu/Posts/AfficheArticle.php?idpost=" . $idpost;
+$_SESSION['pageCourante'] = $serveur . "Contenu/Articles/Voir.php?idpost=" . $idpost;
 
 // Récupérer l'article
 $article = getArticle($idpost);
@@ -26,7 +26,7 @@ $estAdmin = verifieConnectionMembre();
 // Récupérer les modifications
 $modifs = getModificationsArticle($idpost, 1);
 $dateModif = !empty($modifs)
-	? "<br>Dernière modification :<br><a href=\"" . $serveur . "Membres/InformationMembre.php?idmembre=" . $modifs[0]['idmembre'] . "\">" . $modifs[0]['idmembre'] . "</a> (" . convertDate($modifs[0]['date']) . ")<br>"
+	? "<br>Dernière modification :<br><a href=\"" . $serveur . "Membres/Voir.php?idmembre=" . $modifs[0]['idmembre'] . "\">" . $modifs[0]['idmembre'] . "</a> (" . convertDate($modifs[0]['date']) . ")<br>"
 	: "";
 
 $titrePage = "Article de " . $article['id'];
@@ -53,10 +53,10 @@ $titrePage = "Article de " . $article['id'];
 		<td>
 			<?= $dateModif ?>
 			<br>Publication :<br>
-			<a href="<?= $serveur ?>Membres/InformationMembre.php?idmembre=<?= $article['id'] ?>"><?= htmlspecialchars($article['id']) ?></a>
+			<a href="<?= $serveur ?>Membres/Voir.php?idmembre=<?= $article['id'] ?>"><?= htmlspecialchars($article['id']) ?></a>
 			(<?= convertDate($article['date']) ?>)
 			<?php if (!empty($modifs)): ?>
-				<br><br><a href="<?= $serveur ?>Contenu/Posts/ListeAuteursPost.php?idpost=<?= $idpost ?>">Afficher la liste</a>
+				<br><br><a href="<?= $serveur ?>Contenu/Articles/Historique.php?idpost=<?= $idpost ?>">Afficher la liste</a>
 			<?php endif; ?>
 		</td>
 		<td>
@@ -66,9 +66,9 @@ $titrePage = "Article de " . $article['id'];
 			<?= nl2br(detectlId($article['Post'])) ?>
 		</td>
 		<td>
-			<a href="<?= $serveur ?>Contenu/Posts/ModifierArticle.php?idarticle=<?= $idpost ?>">modifier</a>
+			<a href="<?= $serveur ?>Contenu/Articles/Editer.php?idarticle=<?= $idpost ?>">modifier</a>
 			<br><br><br>
-			<a href="<?= $serveur ?>Contenu/Posts/SupprimerArticle.php?idpost=<?= $idpost ?>">supprimer</a>
+			<a href="<?= $serveur ?>Contenu/Articles/Supprimer.php?idpost=<?= $idpost ?>">supprimer</a>
 		</td>
 	</tr>
 </table>
@@ -81,7 +81,7 @@ $titrePage = "Article de " . $article['id'];
 		<th>Date de publication</th>
 	</tr>
 	<tr>
-		<td><a href="<?= $serveur ?>Membres/InformationMembre.php?idmembre=<?= $article['id'] ?>"><?= htmlspecialchars($article['id']) ?></a></td>
+		<td><a href="<?= $serveur ?>Membres/Voir.php?idmembre=<?= $article['id'] ?>"><?= htmlspecialchars($article['id']) ?></a></td>
 		<td>
 			<?php if (!empty($article['Objet'])): ?>
 				<h4><?= htmlspecialchars($article['Objet']) ?> :</h4>

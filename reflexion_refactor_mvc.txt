@@ -175,4 +175,26 @@ Fonctions ajoutées au model Membre.php :
 - supprimerMembreAvecVerification() - suppression avec vérification mot de passe
 ____
 
+● Refactoring MVC terminé.
+
+Résumé des modifications :
+
+1. Renommages effectués :
+- Accueil/Accueil (1).php → Accueil/index.php
+- Inscription_Desinscription/ → Auth/ (Connexion, Deconnexion, Inscription, FormulaireConnexion)
+- Membres/ : Liste, Voir, MonCompte, EditerChamp, Supprimer
+- Contenu/Posts/ → Contenu/Articles/ (Liste, ListeMembre, Voir, Creer, Editer, Supprimer, Historique)
+- Contenu/Projets/ : Liste, ListeMembre, Creer, Editer, Supprimer, Historique
+2. Liens mis à jour dans :
+- index.php
+- templates/nav.php
+- Accueil/index.php
+- Auth/* (tous les fichiers)
+- Membres/* (tous les fichiers)
+- Contenu/Articles/* (tous les fichiers)
+- Contenu/Projets/* (tous les fichiers)
+- Images/index.php, Styles/index.php
+- Utilitaires/Affichage/*
+- includes/fonctions.php
+3. Documentation : tmp/tree_tmp_mvc.txt mis à jour avec le mapping ancien → nouveau.
 

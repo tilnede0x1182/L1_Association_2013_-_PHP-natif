@@ -26,11 +26,11 @@
 	if ($style=="2") $_SESSION['style']="2";
 
 	if (!empty($_SESSION['pageCourante'])) header('Location: '.$_SESSION['pageCourante']);
-	else header('Location: '.$serveur.'Accueil/Accueil%20%281%29.php');
+	else header('Location: '.$serveur.'Accueil/index.php');
 
 	echo '<h4>Le style a été modifié.<br>'."\n";
 	if (!empty($_SESSION['pageCourante'])) echo ' <a href="'.$_SESSION['pageCourante'].'">Retour</a>';
-	else echo ' <a href="'.$serveur.'Accueil/Accueil%20%281%29.php">Retour à la page d'."'".'acceuil</a>';
+	else echo ' <a href="'.$serveur.'Accueil/index.php">Retour à la page d'."'".'acceuil</a>';
 
 	include 'footer.php';
 ?>

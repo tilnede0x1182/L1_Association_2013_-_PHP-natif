@@ -36,11 +36,11 @@ if ($afficherFormulaireConnexion):
 	<p class="erreur"><?= $erreurConnexion ?></p>
 	<?php endif; ?>
 
-	<form action="Connection1.php" method="POST">
+	<form action="Connexion.php" method="POST">
 		Identifiant : <input type="text" name="id"><br>
 		Mot de passe : <input type="password" name="motdepasse"><br>
 		<input type="submit" value="Se connecter"><br>
-		<a href="<?= $serveur ?>Inscription_Desinscription/NouveauMembre3.php">S'inscrire</a>
+		<a href="<?= $serveur ?>Auth/Inscription.php">S'inscrire</a>
 	</form>
 </div>
 
@@ -48,5 +48,5 @@ if ($afficherFormulaireConnexion):
 <p><a href="<?= $_SESSION['pageCourante'] ?>">Retour</a></p>
 <?php endif; ?>
 
-<p><a href="<?= $serveur ?>Accueil/Accueil%20%281%29.php">Aller à la page d'accueil</a></p>
+<p><a href="<?= $serveur ?>Accueil/index.php">Aller à la page d'accueil</a></p>
 <?php endif; ?>

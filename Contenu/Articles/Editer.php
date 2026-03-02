@@ -6,7 +6,7 @@ require_once __DIR__ . '/../../includes/init.php';
 
 // Vérifier la connexion
 if (!verifieConnection()) {
-	header("Location: " . $serveur . "Accueil/Accueil%20%281%29.php");
+	header("Location: " . $serveur . "Accueil/index.php");
 	exit;
 }
 
@@ -25,7 +25,7 @@ $erreur = "";
 // Traitement du formulaire
 if (!empty($_POST)) {
 	// Vérifier la source
-	if (isset($_SERVER["HTTP_REFERER"]) && $_SERVER["HTTP_REFERER"] !== $serveur . "Contenu/Posts/ModifierArticle.php?idarticle=" . $idarticle) {
+	if (isset($_SERVER["HTTP_REFERER"]) && $_SERVER["HTTP_REFERER"] !== $serveur . "Contenu/Articles/Editer.php?idarticle=" . $idarticle) {
 		$erreur = "Le formulaire est soumis depuis une source externe !";
 	} elseif (empty($_POST["article"])) {
 		$erreur = "Veuillez entrer quelque chose, ou quitter cette page.";
@@ -34,7 +34,7 @@ if (!empty($_POST)) {
 			if (!empty($_SESSION['pageCourante'])) {
 				header('Location: ' . $_SESSION['pageCourante']);
 			} else {
-				header('Location: ' . $serveur . 'Accueil/Accueil%20%281%29.php');
+				header('Location: ' . $serveur . 'Accueil/index.php');
 			}
 			exit;
 		} else {
@@ -58,7 +58,7 @@ if (!empty($_POST)) {
 <h4 class="erreur"><?= $erreur ?></h4>
 <?php endif; ?>
 
-<form action="<?= $serveur ?>Contenu/Posts/ModifierArticle.php?idarticle=<?= $idarticle ?>" method="POST">
+<form action="<?= $serveur ?>Contenu/Articles/Editer.php?idarticle=<?= $idarticle ?>" method="POST">
 	<label>Objet : <input type="text" value="<?= htmlspecialchars($article['Objet']) ?>" disabled></label><br>
 	<label><p>Contenu de l'article :</p><textarea rows="25" cols="82" name="article" autofocus><?= htmlspecialchars($article['Post']) ?></textarea></label><br>
 	<input type="submit" value="Modifier">

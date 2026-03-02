@@ -25,7 +25,7 @@ if (!empty($_POST)) {
 			if (!empty($_SESSION['pageCourante'])) {
 				header('Location: ' . $_SESSION['pageCourante']);
 			} else {
-				header('Location: ' . $serveur . 'Accueil/Accueil%20%281%29.php');
+				header('Location: ' . $serveur . 'Accueil/index.php');
 			}
 			exit;
 		} else {
@@ -57,13 +57,13 @@ $titrePage = "Connexion membre";
 <div class="Accès membres">
 	<p>Accès membres :</p>
 
-	<form action="Connection1.php" method="POST">
+	<form action="Connexion.php" method="POST">
 		<label for="id">Identifiant :</label>
 		<input type="text" name="id" id="id"><br>
 		<label for="motdepasse">Mot de passe :</label>
 		<input type="password" name="motdepasse" id="motdepasse"><br>
 		<input type="submit" value="Se connecter"><br>
-		<a href="<?= $serveur ?>Inscription_Desinscription/NouveauMembre3.php">S'inscrire</a>
+		<a href="<?= $serveur ?>Auth/Inscription.php">S'inscrire</a>
 	</form>
 </div>
 
@@ -71,7 +71,7 @@ $titrePage = "Connexion membre";
 <p><a href="<?= $_SESSION['pageCourante'] ?>">Retour</a></p>
 <?php endif; ?>
 
-<p><a href="<?= $serveur ?>Accueil/Accueil%20%281%29.php">Aller à la page d'accueil</a></p>
+<p><a href="<?= $serveur ?>Accueil/index.php">Aller à la page d'accueil</a></p>
 <?php endif; ?>
 
 <?php include __DIR__ . '/../templates/footer.php'; ?>

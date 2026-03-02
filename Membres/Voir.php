@@ -6,13 +6,13 @@ require_once __DIR__ . '/../includes/init.php';
 
 // Gestion de la page précédente
 $pagePrecedente = "";
-if (!empty($_SESSION['pageCourante']) && strpos($_SESSION['pageCourante'], $serveur . "Membres/InformationMembre") === false) {
+if (!empty($_SESSION['pageCourante']) && strpos($_SESSION['pageCourante'], $serveur . "Membres/Voir") === false) {
 	$pagePrecedente = $_SESSION['pageCourante'];
 }
 
 // Récupérer l'ID du membre
 $idMembre = isset($_GET['idmembre']) ? $_GET['idmembre'] : '';
-$_SESSION['pageCourante'] = $serveur . "Membres/InformationMembre.php" . ($idMembre ? "?idmembre=" . $idMembre : "");
+$_SESSION['pageCourante'] = $serveur . "Membres/Voir.php" . ($idMembre ? "?idmembre=" . $idMembre : "");
 
 // Vérifier les droits
 $estAdmin = verifieConnectionMembre();
@@ -72,10 +72,10 @@ $titrePage = "Information sur le membre " . $membre['id'];
 		<td><?= htmlspecialchars($membre['id']) ?></td>
 		<td><?= $datedudernierprojet ?></td>
 		<?php if ($estAdmin && $membreEstAdmin): ?>
-		<td><a href="<?= $serveur ?>Contenu/Posts/ListedesPosts.php?idmembre=<?= $idMembre ?>">Liste des articles publiés par ce membre</a></td>
+		<td><a href="<?= $serveur ?>Contenu/Articles/ListeMembre.php?idmembre=<?= $idMembre ?>">Liste des articles publiés par ce membre</a></td>
 		<?php endif; ?>
 		<?php if ($estConnecte): ?>
-		<td><a href="<?= $serveur ?>Contenu/Projets/ListedesProjet.php?idmembre=<?= $membre['id'] ?>">Liste des projets</a></td>
+		<td><a href="<?= $serveur ?>Contenu/Projets/ListeMembre.php?idmembre=<?= $membre['id'] ?>">Liste des projets</a></td>
 		<?php endif; ?>
 		<td><?= $connecte ?></td>
 	</tr>

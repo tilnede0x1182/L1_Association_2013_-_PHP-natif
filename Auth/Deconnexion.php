@@ -17,7 +17,7 @@ if (verifieConnection()) {
 if (!empty($_SESSION['pageCourante'])) {
 	header('Location: ' . $_SESSION['pageCourante']);
 } else {
-	header('Location: ' . $serveur . 'Accueil/Accueil%20%281%29.php');
+	header('Location: ' . $serveur . 'Accueil/index.php');
 }
 exit;
 ?>

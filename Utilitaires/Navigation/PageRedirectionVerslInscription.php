@@ -23,9 +23,9 @@
 
 	echo '<h2 class="texte">Contenu privé : </h2>
 
-	<h3 class="texte1">Pour voir cette page vous devez vous <a href="'.$serveur.'Inscription_Desinscription/NouveauMembre3.php">inscrire</a> ou, si c'."'".'est déjà fait, vous identifer.</h3>';
+	<h3 class="texte1">Pour voir cette page vous devez vous <a href="'.$serveur.'Auth/Inscription.php">inscrire</a> ou, si c'."'".'est déjà fait, vous identifer.</h3>';
 
-	if (verifieConnection()) header('Location: '.$serveur.'Contenu/Projets/NouveauProjet.php');
+	if (verifieConnection()) header('Location: '.$serveur.'Contenu/Projets/Liste.php');
 
 ?>
 

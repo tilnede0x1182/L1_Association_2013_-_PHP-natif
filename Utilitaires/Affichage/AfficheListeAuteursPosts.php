@@ -46,13 +46,13 @@
 
 				echo "\n<tr>";
 	
-				echo "<td>".'<a href="http://localhost/Projet1/InformationMembre.php?idmembre='.$ligne['id'].'">'.$ligne['id']."</a> (".convertDate($ligne['date']).") \n";
+				echo "<td>".'<a href="http://localhost/Projet1/Membres/Voir.php?idmembre='.$ligne['id'].'">'.$ligne['id']."</a> (".convertDate($ligne['date']).") \n";
 				for ($i=0; ($i<$tmp2-1) && ($i<0); $i=$i+1) {
-					echo "<br>".'<a href="http://localhost/Projet1/InformationMembre.php?idmembre='.$membre[$i].'">'.$membre[$i]."</a> (".convertDate($date[$i]).") \n";
+					echo "<br>".'<a href="http://localhost/Projet1/Membres/Voir.php?idmembre='.$membre[$i].'">'.$membre[$i]."</a> (".convertDate($date[$i]).") \n";
 				}
 				echo '<br><br><a href="">Voir la liste</a>&nbsp;&nbsp;</td>'."\n";					
 				echo "<td>".detectlId ($ligne['Post'])."</td>\n";
-				echo "<td>Dernière modification : <br>\n".'<a href="http://localhost/Projet1/InformationMembre.php?idmembre='.$membre[$i].'">'.$membre[$i]."</a>(".convertDate($date[$tmp2-2]).")<br>\nPublication : \n<br>".'<a href="http://localhost/Projet1/InformationMembre.php?idmembre='.$ligne['id'].'">'.$ligne['id']."</a> (".convertDate($ligne['date']).") \n";
+				echo "<td>Dernière modification : <br>\n".'<a href="http://localhost/Projet1/Membres/Voir.php?idmembre='.$membre[$i].'">'.$membre[$i]."</a>(".convertDate($date[$tmp2-2]).")<br>\nPublication : \n<br>".'<a href="http://localhost/Projet1/Membres/Voir.php?idmembre='.$ligne['id'].'">'.$ligne['id']."</a> (".convertDate($ligne['date']).") \n";
 				echo "      </tr>\n";
 			}
 

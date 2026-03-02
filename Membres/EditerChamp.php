@@ -6,7 +6,7 @@ require_once __DIR__ . '/../includes/init.php';
 
 // Vérifier la connexion
 if (!verifieConnection()) {
-  header("Location: " . $serveur . "Accueil/Accueil%20%281%29.php");
+  header("Location: " . $serveur . "Accueil/index.php");
   exit;
 }
 
@@ -50,7 +50,7 @@ $infomembre = isset($_GET['info']) ? $_GET['info'] : '';
 // Liste des champs valides
 $champsValides = array('motdepasse', 'mail', 'id', 'Nom', 'Prenom', 'CodePostal', 'DateNaissance', 'Pays');
 if (!in_array($infomembre, $champsValides)) {
-  header("Location: " . $serveur . "Membres/ModifierInformationMembre.php");
+  header("Location: " . $serveur . "Membres/MonCompte.php");
   exit;
 }
 
@@ -93,7 +93,7 @@ if (!empty($_POST)) {
     if ($valide) {
       updateMembre($_SESSION['id'], 'motdepasse', md5($_POST["motdepasse1"]));
       $_SESSION['motdepasse'] = md5($_POST["motdepasse1"]);
-      header('Location: ' . $serveur . 'Accueil/Accueil%20%281%29.php');
+      header('Location: ' . $serveur . 'Accueil/index.php');
       exit;
     }
   } elseif ($infomembre == "DateNaissance") {
@@ -106,7 +106,7 @@ if (!empty($_POST)) {
       $date = $_POST['d1'] . $_POST['d2'] . $_POST['d3'];
       if ($date == "") $date = "-11";
       updateMembre($_SESSION['id'], 'DateNaissance', $date);
-      header('Location: ' . $serveur . 'Membres/ModifierInformationMembre.php');
+      header('Location: ' . $serveur . 'Membres/MonCompte.php');
       exit;
     }
   } elseif ($infomembre == "id") {
@@ -136,7 +136,7 @@ if (!empty($_POST)) {
       mysqli_query($connexion, 'UPDATE dataprojets SET idauteur="' . mysqli_real_escape_string($connexion, $nouvelId) . '" WHERE idauteur="' . mysqli_real_escape_string($connexion, $ancienId) . '"');
 
       $_SESSION['id'] = $nouvelId;
-      header('Location: ' . $serveur . 'Accueil/Accueil%20%281%29.php');
+      header('Location: ' . $serveur . 'Accueil/index.php');
       exit;
     }
   } elseif ($infomembre == "CodePostal") {
@@ -150,7 +150,7 @@ if (!empty($_POST)) {
 
     if ($valide) {
       updateMembre($_SESSION['id'], $infomembre, $_POST[$infomembre]);
-      header('Location: ' . $serveur . 'Membres/ModifierInformationMembre.php');
+      header('Location: ' . $serveur . 'Membres/MonCompte.php');
       exit;
     }
   } elseif ($infomembre == "mail") {
@@ -164,7 +164,7 @@ if (!empty($_POST)) {
 
     if ($valide) {
       updateMembre($_SESSION['id'], $infomembre, $_POST[$infomembre]);
-      header('Location: ' . $serveur . 'Membres/ModifierInformationMembre.php');
+      header('Location: ' . $serveur . 'Membres/MonCompte.php');
       exit;
     }
   } else {
@@ -179,7 +179,7 @@ if (!empty($_POST)) {
 
     if ($valide) {
       updateMembre($_SESSION['id'], $infomembre, $_POST[$infomembre]);
-      header('Location: ' . $serveur . 'Membres/ModifierInformationMembre.php');
+      header('Location: ' . $serveur . 'Membres/MonCompte.php');
       exit;
     }
   }
@@ -218,7 +218,7 @@ $titrePage = "Modifier mes informations";
 <h4 class="texte erreur"><?= $erreur ?></h4>
 <?php endif; ?>
 
-<form class="texte" action="<?= $serveur ?>Membres/ModifierInfo.php?info=<?= $infomembre ?>" method="POST">
+<form class="texte" action="<?= $serveur ?>Membres/EditerChamp.php?info=<?= $infomembre ?>" method="POST">
 
 <?php if ($infomembre == "motdepasse"): ?>
   <label>Entrez votre mot de passe actuel : <input type="password" name="motdepasseactuel" autofocus></label><br><br>
@@ -241,7 +241,7 @@ $titrePage = "Modifier mes informations";
 <?php if (!empty($_SESSION['pageCourante'])): ?>
 <p class="texte"><a href="<?= $_SESSION['pageCourante'] ?>">Annuler</a></p>
 <?php else: ?>
-<p class="texte"><a href="<?= $serveur ?>Membres/ModifierInformationMembre.php">Retour à la page de modification de vos informations.</a></p>
+<p class="texte"><a href="<?= $serveur ?>Membres/MonCompte.php">Retour à la page de modification de vos informations.</a></p>
 <?php endif; ?>
 
 <?php include __DIR__ . '/../templates/footer.php'; ?>

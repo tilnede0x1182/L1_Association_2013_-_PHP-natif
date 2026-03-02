@@ -6,19 +6,19 @@ require_once __DIR__ . '/../../includes/init.php';
 
 // Gestion de la page précédente
 $pagePrecedente = "";
-if (!empty($_SESSION['pageCourante']) && strpos($_SESSION['pageCourante'], "ListeAuteursProjets") === false) {
+if (!empty($_SESSION['pageCourante']) && strpos($_SESSION['pageCourante'], "Historique") === false) {
 	$pagePrecedente = $_SESSION['pageCourante'];
 }
 
 // Vérifier la connexion
 if (!verifieConnection()) {
-	header("Location: " . $serveur . "Accueil/Accueil%20%281%29.php");
+	header("Location: " . $serveur . "Accueil/index.php");
 	exit;
 }
 
 // Récupérer l'ID du projet
 $idprojet = isset($_GET['idprojet']) ? $_GET['idprojet'] : '';
-$_SESSION['pageCourante'] = $serveur . "Contenu/Projets/ListeAuteursProjets.php?idprojet=" . $idprojet;
+$_SESSION['pageCourante'] = $serveur . "Contenu/Projets/Historique.php?idprojet=" . $idprojet;
 
 // Récupérer le projet
 $projet = getProjet($idprojet);
@@ -55,7 +55,7 @@ $titrePage = "Liste des auteurs d'un projet";
 	<?php else: ?>
 		<?php foreach ($modifications as $modif): ?>
 		<tr>
-			<td><a href="<?= $serveur ?>Membres/InformationMembre.php?idmembre=<?= $modif['idmembre'] ?>"><?= htmlspecialchars($modif['idmembre']) ?></a></td>
+			<td><a href="<?= $serveur ?>Membres/Voir.php?idmembre=<?= $modif['idmembre'] ?>"><?= htmlspecialchars($modif['idmembre']) ?></a></td>
 			<td><?= convertDate($modif['date']) ?></td>
 		</tr>
 		<?php endforeach; ?>
@@ -66,13 +66,13 @@ $titrePage = "Liste des auteurs d'un projet";
 	<?php if ($pagePrecedente): ?>
 		<a href="<?= $pagePrecedente ?>">Retour</a><br>
 	<?php else: ?>
-		<a href="<?= $serveur ?>Accueil/Accueil%20%281%29.php">Retour à la page d'accueil</a>
+		<a href="<?= $serveur ?>Accueil/index.php">Retour à la page d'accueil</a>
 	<?php endif; ?>
 	</p>
 
 <?php else: ?>
 	<p>Vous n'avez pas accès à cette page.</p>
-	<p><a href="<?= $serveur ?>Accueil/Accueil%20%281%29.php">Retour à la page d'accueil</a></p>
+	<p><a href="<?= $serveur ?>Accueil/index.php">Retour à la page d'accueil</a></p>
 <?php endif; ?>
 
 <?php include __DIR__ . '/../../templates/footer.php'; ?>

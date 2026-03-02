@@ -4,12 +4,12 @@
  */
 require_once __DIR__ . '/../includes/init.php';
 
-$_SESSION['pageCourante'] = $serveur . "Membres/ListeDesMembres.php";
+$_SESSION['pageCourante'] = $serveur . "Membres/Liste.php";
 $titrePage = "Liste des membres";
 
 // Vérifier la connexion
 if (!verifieConnection()) {
-	header("Location: " . $serveur . "Accueil/Accueil%20%281%29.php");
+	header("Location: " . $serveur . "Accueil/index.php");
 	exit;
 }
 
@@ -32,7 +32,7 @@ $ordreOptions = array(
 );
 
 // Vérifier la source du formulaire
-if (!empty($_POST) && isset($_SERVER["HTTP_REFERER"]) && $_SERVER["HTTP_REFERER"] !== $serveur . "Membres/ListeDesMembres.php") {
+if (!empty($_POST) && isset($_SERVER["HTTP_REFERER"]) && $_SERVER["HTTP_REFERER"] !== $serveur . "Membres/Liste.php") {
 	die("<h1>Attention</h1><h4>Le formulaire est soumis depuis une source externe !</h4>");
 }
 
@@ -51,7 +51,7 @@ $membres = getAllMembres($classement, $ordre);
 <?php include __DIR__ . '/../templates/nav.php'; ?>
 
 <nav class="ClassementResultats">
-	<form action="<?= $serveur ?>Membres/ListeDesMembres.php" method="POST">
+	<form action="<?= $serveur ?>Membres/Liste.php" method="POST">
 		<label>Trier par :
 			<select name="classement">
 				<option <?= $optionsTri['datedudernierprojet'] ?> value="datedudernierpost">Date du dernier projet</option>
@@ -84,7 +84,7 @@ $membres = getAllMembres($classement, $ordre);
 <?php foreach ($membres as $membre): ?>
 	<tr>
 		<td><?= htmlspecialchars($membre['competence']) ?></td>
-		<td><a href="<?= $serveur ?>Membres/InformationMembre.php?idmembre=<?= $membre['id'] ?>"><?= htmlspecialchars($membre['id']) ?></a></td>
+		<td><a href="<?= $serveur ?>Membres/Voir.php?idmembre=<?= $membre['id'] ?>"><?= htmlspecialchars($membre['id']) ?></a></td>
 		<td>
 			<?php if ($membre['datedudernierprojet'] == -11 || $membre['datedudernierprojet'] == 0): ?>
 				Aucun projet à ce jour

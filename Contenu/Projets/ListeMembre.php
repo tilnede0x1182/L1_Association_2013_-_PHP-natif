@@ -6,11 +6,11 @@ require_once __DIR__ . '/../../includes/init.php';
 
 // Récupérer l'ID du membre
 $membre = isset($_GET['idmembre']) ? $_GET['idmembre'] : 'inconnu';
-$_SESSION['pageCourante'] = $serveur . "Contenu/Projets/ListedesProjet.php?idmembre=" . $membre;
+$_SESSION['pageCourante'] = $serveur . "Contenu/Projets/ListeMembre.php?idmembre=" . $membre;
 
 // Vérifier la connexion
 if (!verifieConnection()) {
-	header("Location: " . $serveur . "Accueil/Accueil%20%281%29.php");
+	header("Location: " . $serveur . "Accueil/index.php");
 	exit;
 }
 
@@ -34,7 +34,7 @@ $titrePage = "Liste des projets du membre " . $membre;
 
 <?php include __DIR__ . '/../../templates/nav.php'; ?>
 
-<h1>Liste des projets du membre <a href="<?= $serveur ?>Membres/InformationMembre.php?idmembre=<?= $membre ?>"><?= htmlspecialchars($membre) ?></a> :</h1>
+<h1>Liste des projets du membre <a href="<?= $serveur ?>Membres/Voir.php?idmembre=<?= $membre ?>"><?= htmlspecialchars($membre) ?></a> :</h1>
 
 <table border="1">
 	<tr>
@@ -61,13 +61,13 @@ $titrePage = "Liste des projets du membre " . $membre;
 			<?php else: ?>
 				<?php $nbAffiche = 0; foreach ($modifs as $modif): ?>
 					<?php if ($nbAffiche < 3): ?>
-						<a href="<?= $serveur ?>Membres/InformationMembre.php?idmembre=<?= $modif['idmembre'] ?>"><?= $modif['idmembre'] ?></a>
+						<a href="<?= $serveur ?>Membres/Voir.php?idmembre=<?= $modif['idmembre'] ?>"><?= $modif['idmembre'] ?></a>
 						(<?= convertDate($modif['date']) ?>)<br>
 						<?php $nbAffiche++; ?>
 					<?php endif; ?>
 				<?php endforeach; ?>
 				<?php if (count($modifs) > 5): ?>
-					<a href="<?= $serveur ?>Contenu/Projets/ListeAuteursProjets.php?idprojet=<?= $projet['idprojet'] ?>">Afficher la liste</a>
+					<a href="<?= $serveur ?>Contenu/Projets/Historique.php?idprojet=<?= $projet['idprojet'] ?>">Afficher la liste</a>
 				<?php elseif (count($modifs) > 3): ?>
 					... et <?= count($modifs) - 3 ?> autres
 				<?php endif; ?>

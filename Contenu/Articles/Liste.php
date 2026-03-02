@@ -4,7 +4,7 @@
  */
 require_once __DIR__ . '/../../includes/init.php';
 
-$_SESSION['pageCourante'] = $serveur . "Contenu/Posts/ListeCompletePosts.php";
+$_SESSION['pageCourante'] = $serveur . "Contenu/Articles/Liste.php";
 
 // Récupérer les droits et articles
 $estAdmin = verifieConnectionMembre();
@@ -35,8 +35,8 @@ $titrePage = "Liste complète des articles";
 	$dateModif = !empty($modifs) ? ", dernière modification : " . convertDate($modifs[0]['date']) : "";
 	?>
 	<tr>
-		<td><a href="<?= $serveur ?>Membres/InformationMembre.php?idmembre=<?= $article['id'] ?>"><?= htmlspecialchars($article['id']) ?></a></td>
-		<th><a href="<?= $serveur ?>Contenu/Posts/AfficheArticle.php?idpost=<?= $article['idpost'] ?>"><?= htmlspecialchars($article['Objet']) ?></a></th>
+		<td><a href="<?= $serveur ?>Membres/Voir.php?idmembre=<?= $article['id'] ?>"><?= htmlspecialchars($article['id']) ?></a></td>
+		<th><a href="<?= $serveur ?>Contenu/Articles/Voir.php?idpost=<?= $article['idpost'] ?>"><?= htmlspecialchars($article['Objet']) ?></a></th>
 		<td>
 			Publication : <?= convertDate($article['date']) ?>
 			<?php if ($estAdmin): ?>
@@ -47,6 +47,6 @@ $titrePage = "Liste complète des articles";
 <?php endforeach; ?>
 </table>
 
-<p><a href="<?= $serveur ?>Accueil/Accueil%20%281%29.php">Retour à la page d'accueil</a></p>
+<p><a href="<?= $serveur ?>Accueil/index.php">Retour à la page d'accueil</a></p>
 
 <?php include __DIR__ . '/../../templates/footer.php'; ?>

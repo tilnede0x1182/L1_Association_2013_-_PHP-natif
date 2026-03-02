@@ -6,7 +6,7 @@ require_once __DIR__ . '/../includes/init.php';
 
 // Vérifier la connexion
 if (!verifieConnection()) {
-  header("Location: " . $serveur . "Accueil/Accueil%20%281%29.php");
+  header("Location: " . $serveur . "Accueil/index.php");
   exit;
 }
 
@@ -28,7 +28,7 @@ if (!empty($_POST)) {
     if (!empty($_SESSION['pageCourante'])) {
       header('Location: ' . $_SESSION['pageCourante']);
     } else {
-      header('Location: ' . $serveur . 'Accueil/Accueil%20%281%29.php');
+      header('Location: ' . $serveur . 'Accueil/index.php');
     }
     exit;
   }
@@ -47,11 +47,11 @@ $titrePage = "Suppression d'un membre";
 
 <?php include __DIR__ . '/../templates/nav.php'; ?>
 
-<div class="lien"><p><a href="<?= $serveur ?>Contenu/Projets/CreationNouveauProjet.php">Nouveau projet</a></p></div>
+<div class="lien"><p><a href="<?= $serveur ?>Contenu/Projets/Creer.php">Nouveau projet</a></p></div>
 
 <?php if ($supprime): ?>
 <h4>Votre compte, ainsi que tous les projets que vous avez postés ont été supprimés.</h4>
-<p><a href="<?= $serveur ?>Accueil/Accueil%20%281%29.php">Retour à la page d'accueil</a>.</p>
+<p><a href="<?= $serveur ?>Accueil/index.php">Retour à la page d'accueil</a>.</p>
 
 <?php elseif (empty($_POST)): ?>
 <h4>Attention, vous êtes sur le point de supprimer votre compte.<br>

@@ -173,7 +173,7 @@ function detectlId($texte) {
 				if ($ligne == false) {
 					$resultat .= $pseudo;
 				} else {
-					$resultat .= '<a href="' . $serveur . 'Membres/InformationMembre.php?idmembre=' . $pseudo . '">' . $pseudo . '</a>';
+					$resultat .= '<a href="' . $serveur . 'Membres/Voir.php?idmembre=' . $pseudo . '">' . $pseudo . '</a>';
 				}
 			}
 			$index += $decalage + 5;

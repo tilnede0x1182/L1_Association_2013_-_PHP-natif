@@ -1,452 +1,130 @@
-~/code/tilnede0x1182/Personnel/2025/Entrainement/projet_fac/Web_et_Reseau/Sites_Gestion_Utilisateurs/Gestion_Membres_Association/L1_Association_2013_-_PHP-natif ^ master
-% tree
-.
-├── Accueil
-│   ├── Accueil (1).php
-│   ├── Contact.php
-│   └── Presentation.php
-├── A_faire.md
-├── Archives
-│   ├── Accueil
-│   │   ├── Accueil (1).php
-│   │   ├── Contact.php
-│   │   ├── MenuAccueil.php
-│   │   └── Presentation.php
-│   ├── A_faire.md
-│   ├── Base_de_donnees
-│   │   ├── ConnectionBaseDonnees.php
-│   │   ├── creation_db.sql
-│   │   ├── seed.php
-│   │   └── users.txt
-│   ├── Contenu
-│   │   ├── Posts
-│   │   │   ├── AfficheArticle.php
-│   │   │   ├── EcritureNouveauPost.php
-│   │   │   ├── ListeAuteursPost.php
-│   │   │   ├── ListeCompletePosts.php
-│   │   │   ├── ListedesPosts.php
-│   │   │   ├── ModifierArticle.php
-│   │   │   └── SupprimerArticle.php
-│   │   └── Projets
-│   │       ├── CreationNouveauProjet.php
-│   │       ├── ListeAuteursProjets.php
-│   │       ├── ListedesProjet.php
-│   │       ├── ModifierProjet.php
-│   │       ├── NouveauProjet.php
-│   │       └── SupprimerProjet.php
-│   ├── Fonctions
-│   │   ├── AffDate.php
-│   │   ├── AffHeure.php
-│   │   ├── CalcAnciennete2.php
-│   │   ├── CalcAnciennete3.php
-│   │   ├── CalcAnciennete4.php
-│   │   ├── ConvertChiffre.php
-│   │   ├── échaper les char en php pour html et mysql.txt
-│   │   ├── EnregistrerDate.php
-│   │   ├── Essai1.php
-│   │   ├── EssaiDate.php
-│   │   ├── EssaiTab.php
-│   │   ├── GenereAleat.php
-│   │   ├── includeStylesheet2.php
-│   │   ├── index.php
-│   │   ├── Inscritpion.php
-│   │   ├── Premières fonctions de vérifiaction.txt
-│   │   ├── Test (2).php
-│   │   ├── Test.php
-│   │   └── Teststrlen.php
-│   ├── Images
-│   │   └── index.php
-│   ├── index.php
-│   ├── Inscription_Desinscription
-│   │   ├── Connection1.php
-│   │   ├── Connection2.php
-│   │   ├── Deconnection.php
-│   │   ├── NouveauMembre3.php
-│   │   ├── VerifieConnectionMembre.php
-│   │   └── VerifieConnection.php
-│   ├── ListeDesMembres - mise en route.txt
-│   ├── Membres
-│   │   ├── InformationMembre.php
-│   │   ├── ListeDesMembres.php
-│   │   ├── ModifierInfo.php
-│   │   ├── ModifierInformationMembre.php
-│   │   └── SupprimerMembre.php
-│   ├── PageConnection.php
-│   ├── Read-me.txt
-│   ├── Ressources
-│   │   ├── CSS
-│   │   │   ├── style1.css
-│   │   │   └── style2.css
-│   │   └── Images
-│   │       ├── Fonds
-│   │       │   ├── 01-plante-720px.jpg
-│   │       │   ├── 1280_1024_200911110914491132114.jpg
-│   │       │   ├── fond-d-ecran-sympa-HL2.jpg
-│   │       │   ├── img-images-nuage-fractal-cebeul-8721.jpg
-│   │       │   ├── Palmiers.jpg
-│   │       │   ├── untitl100.jpg
-│   │       │   └── untitl10.jpg
-│   │       └── Styles
-│   │           ├── Orangebicolore4.jpg
-│   │           └── vertbicolore2.jpg
-│   ├── Styles
-│   │   └── index.php
-│   ├── tmp
-│   │   └── tree_tmp.txt
-│   └── Utilitaires
-│       ├── Affichage
-│       │   ├── AfficheListeAuteursPosts.php
-│       │   ├── footer.php
-│       │   ├── includeStylesheet.php
-│       │   └── ModifierStyle.php
-│       ├── Dates
-│       │   ├── CalcAnciennete.php
-│       │   └── ConversionDate.php
-│       ├── Navigation
-│       │   ├── AdresseServeur.php
-│       │   └── PageRedirectionVerslInscription.php
-│       └── Verification
-│           ├── detectlId.php
-│           └── VerifieCompetence.php
-├── Base_de_donnees
-│   ├── creation_db.sql
-│   ├── seed.php
-│   └── users.txt
-├── Contenu
-│   ├── Posts
-│   │   ├── AfficheArticle.php
-│   │   ├── EcritureNouveauPost.php
-│   │   ├── ListeAuteursPost.php
-│   │   ├── ListeCompletePosts.php
-│   │   ├── ListedesPosts.php
-│   │   ├── ModifierArticle.php
-│   │   └── SupprimerArticle.php
-│   └── Projets
-│       ├── CreationNouveauProjet.php
-│       ├── ListeAuteursProjets.php
-│       ├── ListedesProjet.php
-│       ├── ModifierProjet.php
-│       ├── NouveauProjet.php
-│       └── SupprimerProjet.php
-├── Fonctions
-│   ├── échaper les char en php pour html et mysql.txt
-│   └── Premières fonctions de vérifiaction.txt
-├── Images
-│   └── index.php
-├── includes
-│   ├── config.php
-│   ├── fonctions.php
-│   └── init.php
+Tree MVC refactoré - 2026-03-02
+================================
+
+AVANT (anciens noms) -> APRES (nouveaux noms)
+=============================================
+
+Accueil/Accueil (1).php         -> Accueil/index.php
+Inscription_Desinscription/     -> Auth/
+  Connection1.php               -> Connexion.php
+  Connection2.php               -> FormulaireConnexion.php
+  Deconnection.php              -> Deconnexion.php
+  NouveauMembre3.php            -> Inscription.php
+Membres/
+  ListeDesMembres.php           -> Liste.php
+  InformationMembre.php         -> Voir.php
+  ModifierInformationMembre.php -> MonCompte.php
+  ModifierInfo.php              -> EditerChamp.php
+  SupprimerMembre.php           -> Supprimer.php
+Contenu/Posts/                  -> Contenu/Articles/
+  ListeCompletePosts.php        -> Liste.php
+  ListedesPosts.php             -> ListeMembre.php
+  AfficheArticle.php            -> Voir.php
+  EcritureNouveauPost.php       -> Creer.php
+  ModifierArticle.php           -> Editer.php
+  SupprimerArticle.php          -> Supprimer.php
+  ListeAuteursPost.php          -> Historique.php
+Contenu/Projets/
+  NouveauProjet.php             -> Liste.php (affichait la liste!)
+  ListedesProjet.php            -> ListeMembre.php
+  CreationNouveauProjet.php     -> Creer.php
+  ModifierProjet.php            -> Editer.php
+  SupprimerProjet.php           -> Supprimer.php
+  ListeAuteursProjets.php       -> Historique.php
+
+TREE ACTUEL (après refactoring)
+===============================
+
+L1_Association_2013_-_PHP-natif/
 ├── index.php
-├── Inscription_Desinscription
-│   ├── Connection1.php
-│   ├── Connection2.php
-│   ├── Deconnection.php
-│   └── NouveauMembre3.php
-├── ListeDesMembres - mise en route.txt
-├── Membres
-│   ├── InformationMembre.php
-│   ├── ListeDesMembres.php
-│   ├── ModifierInfo.php
-│   ├── ModifierInformationMembre.php
-│   └── SupprimerMembre.php
-├── models
-│   ├── Article.php
-│   ├── Membre.php
-│   └── Projet.php
 ├── PageConnection.php
-├── README.md
-├── Read-me.txt
-├── Reflexion
-├── reflexion_refactor_mvc.txt
-├── Ressources
-│   ├── CSS
-│   │   └── style.css
-│   └── Images
-│       ├── Fonds
-│       │   ├── 01-plante-720px.jpg
-│       │   ├── 1280_1024_200911110914491132114.jpg
-│       │   ├── fond-d-ecran-sympa-HL2.jpg
-│       │   ├── img-images-nuage-fractal-cebeul-8721.jpg
-│       │   ├── Palmiers.jpg
-│       │   ├── untitl100.jpg
-│       │   └── untitl10.jpg
-│       └── Styles
-│           ├── Orangebicolore4.jpg
-│           └── vertbicolore2.jpg
-├── Styles
-│   └── index.php
-├── templates
-│   ├── footer.php
-│   ├── header.php
-│   └── nav.php
-├── tmp
-│   ├── tree_tmp_archives.txt
-│   └── tree_tmp_mvc.txt
-├── TMP
-│   ├── AdresseServeur.php
-│   ├── AffDate.php
-│   ├── AffHeure.php
-│   ├── CalcAnciennete2.php
-│   ├── CalcAnciennete3.php
-│   ├── CalcAnciennete4.php
-│   ├── CalcAnciennete.php
-│   ├── ConnectionBaseDonnees.php
-│   ├── ConversionDate.php
-│   ├── ConvertChiffre.php
-│   ├── detectlId.php
-│   ├── EnregistrerDate.php
-│   ├── Essai1.php
-│   ├── EssaiDate.php
-│   ├── EssaiTab.php
-│   ├── footer.php
-│   ├── GenereAleat.php
-│   ├── includeStylesheet2.php
-│   ├── includeStylesheet.php
-│   ├── index.php
-│   ├── Inscritpion.php
-│   ├── MenuAccueil.php
-│   ├── Test (2).php
-│   ├── Test.php
-│   ├── Teststrlen.php
-│   ├── VerifieConnectionMembre.php
-│   └── VerifieConnection.php
-└── Utilitaires
-    ├── Affichage
-    │   ├── AfficheListeAuteursPosts.php
-    │   └── ModifierStyle.php
-    ├── Dates
-    ├── Navigation
-    │   └── PageRedirectionVerslInscription.php
-    └── Verification
-        └── VerifieCompetence.php
+│
+├── Accueil/
+│   ├── index.php
+│   ├── Contact.php
+│   └── Presentation.php
+│
+├── Auth/
+│   ├── Connexion.php
+│   ├── Deconnexion.php
+│   ├── FormulaireConnexion.php
+│   └── Inscription.php
+│
+├── Membres/
+│   ├── Liste.php
+│   ├── Voir.php
+│   ├── MonCompte.php
+│   ├── EditerChamp.php
+│   └── Supprimer.php
+│
+├── Contenu/
+│   ├── Articles/
+│   │   ├── Liste.php
+│   │   ├── ListeMembre.php
+│   │   ├── Voir.php
+│   │   ├── Creer.php
+│   │   ├── Editer.php
+│   │   ├── Supprimer.php
+│   │   └── Historique.php
+│   │
+│   └── Projets/
+│       ├── Liste.php
+│       ├── ListeMembre.php
+│       ├── Creer.php
+│       ├── Editer.php
+│       ├── Supprimer.php
+│       └── Historique.php
+│
+├── includes/
+│   ├── init.php
+│   ├── config.php
+│   └── fonctions.php
+│
+├── models/
+│   ├── Article.php
+│   ├── Membre.php
+│   └── Projet.php
+│
+├── templates/
+│   ├── nav.php
+│   ├── header.php
+│   └── footer.php
+│
+├── Images/
+│   └── index.php
+│
+├── Styles/
+│   └── index.php
+│
+└── tmp/
+    └── tree_tmp_mvc.txt
 
-49 directories, 171 files
-___
+MAPPING DES URLS (pour mise à jour des liens)
+==============================================
 
-~/code/tilnede0x1182/Personnel/2025/Entrainement/projet_fac/Web_et_Reseau/Sites_Gestion_Utilisateurs/Gestion_Membres_Association/L1_Association_2013_-_PHP-natif ^ master
-% tree
-.
-├── Accueil
-│   ├── Contact.php
-│   ├── index.php
-│   └── Presentation.php
-├── A_faire.md
-├── Archives
-│   ├── Accueil
-│   │   ├── Accueil (1).php
-│   │   ├── Contact.php
-│   │   ├── MenuAccueil.php
-│   │   └── Presentation.php
-│   ├── A_faire.md
-│   ├── Base_de_donnees
-│   │   ├── ConnectionBaseDonnees.php
-│   │   ├── creation_db.sql
-│   │   ├── seed.php
-│   │   └── users.txt
-│   ├── Contenu
-│   │   ├── Posts
-│   │   │   ├── AfficheArticle.php
-│   │   │   ├── EcritureNouveauPost.php
-│   │   │   ├── ListeAuteursPost.php
-│   │   │   ├── ListeCompletePosts.php
-│   │   │   ├── ListedesPosts.php
-│   │   │   ├── ModifierArticle.php
-│   │   │   └── SupprimerArticle.php
-│   │   └── Projets
-│   │       ├── CreationNouveauProjet.php
-│   │       ├── ListeAuteursProjets.php
-│   │       ├── ListedesProjet.php
-│   │       ├── ModifierProjet.php
-│   │       ├── NouveauProjet.php
-│   │       └── SupprimerProjet.php
-│   ├── Fonctions
-│   │   ├── AffDate.php
-│   │   ├── AffHeure.php
-│   │   ├── CalcAnciennete2.php
-│   │   ├── CalcAnciennete3.php
-│   │   ├── CalcAnciennete4.php
-│   │   ├── ConvertChiffre.php
-│   │   ├── échaper les char en php pour html et mysql.txt
-│   │   ├── EnregistrerDate.php
-│   │   ├── Essai1.php
-│   │   ├── EssaiDate.php
-│   │   ├── EssaiTab.php
-│   │   ├── GenereAleat.php
-│   │   ├── includeStylesheet2.php
-│   │   ├── index.php
-│   │   ├── Inscritpion.php
-│   │   ├── Premières fonctions de vérifiaction.txt
-│   │   ├── Test (2).php
-│   │   ├── Test.php
-│   │   └── Teststrlen.php
-│   ├── Images
-│   │   └── index.php
-│   ├── index.php
-│   ├── Inscription_Desinscription
-│   │   ├── Connection1.php
-│   │   ├── Connection2.php
-│   │   ├── Deconnection.php
-│   │   ├── NouveauMembre3.php
-│   │   ├── VerifieConnectionMembre.php
-│   │   └── VerifieConnection.php
-│   ├── ListeDesMembres - mise en route.txt
-│   ├── Membres
-│   │   ├── InformationMembre.php
-│   │   ├── ListeDesMembres.php
-│   │   ├── ModifierInfo.php
-│   │   ├── ModifierInformationMembre.php
-│   │   └── SupprimerMembre.php
-│   ├── PageConnection.php
-│   ├── Read-me.txt
-│   ├── Ressources
-│   │   ├── CSS
-│   │   │   ├── style1.css
-│   │   │   └── style2.css
-│   │   └── Images
-│   │       ├── Fonds
-│   │       │   ├── 01-plante-720px.jpg
-│   │       │   ├── 1280_1024_200911110914491132114.jpg
-│   │       │   ├── fond-d-ecran-sympa-HL2.jpg
-│   │       │   ├── img-images-nuage-fractal-cebeul-8721.jpg
-│   │       │   ├── Palmiers.jpg
-│   │       │   ├── untitl100.jpg
-│   │       │   └── untitl10.jpg
-│   │       └── Styles
-│   │           ├── Orangebicolore4.jpg
-│   │           └── vertbicolore2.jpg
-│   ├── Styles
-│   │   └── index.php
-│   ├── tmp
-│   │   └── tree_tmp.txt
-│   └── Utilitaires
-│       ├── Affichage
-│       │   ├── AfficheListeAuteursPosts.php
-│       │   ├── footer.php
-│       │   ├── includeStylesheet.php
-│       │   └── ModifierStyle.php
-│       ├── Dates
-│       │   ├── CalcAnciennete.php
-│       │   └── ConversionDate.php
-│       ├── Navigation
-│       │   ├── AdresseServeur.php
-│       │   └── PageRedirectionVerslInscription.php
-│       └── Verification
-│           ├── detectlId.php
-│           └── VerifieCompetence.php
-├── Auth
-│   ├── Connexion.php
-│   ├── Deconnexion.php
-│   ├── FormulaireConnexion.php
-│   └── Inscription.php
-├── Base_de_donnees
-│   ├── creation_db.sql
-│   ├── seed.php
-│   └── users.txt
-├── Contenu
-│   ├── Articles
-│   │   ├── Creer.php
-│   │   ├── Editer.php
-│   │   ├── Historique.php
-│   │   ├── ListeMembre.php
-│   │   ├── Liste.php
-│   │   ├── Supprimer.php
-│   │   └── Voir.php
-│   ├── Posts
-│   └── Projets
-│       ├── Creer.php
-│       ├── Editer.php
-│       ├── Historique.php
-│       ├── ListeMembre.php
-│       ├── Liste.php
-│       └── Supprimer.php
-├── Fonctions
-│   ├── échaper les char en php pour html et mysql.txt
-│   └── Premières fonctions de vérifiaction.txt
-├── Images
-│   └── index.php
-├── includes
-│   ├── config.php
-│   ├── fonctions.php
-│   └── init.php
-├── index.php
-├── Inscription_Desinscription
-├── ListeDesMembres - mise en route.txt
-├── Membres
-│   ├── EditerChamp.php
-│   ├── Liste.php
-│   ├── MonCompte.php
-│   ├── Supprimer.php
-│   └── Voir.php
-├── models
-│   ├── Article.php
-│   ├── Membre.php
-│   └── Projet.php
-├── PageConnection.php
-├── README.md
-├── Read-me.txt
-├── Reflexion
-├── reflexion_refactor_mvc.txt
-├── Ressources
-│   ├── CSS
-│   │   └── style.css
-│   └── Images
-│       ├── Fonds
-│       │   ├── 01-plante-720px.jpg
-│       │   ├── 1280_1024_200911110914491132114.jpg
-│       │   ├── fond-d-ecran-sympa-HL2.jpg
-│       │   ├── img-images-nuage-fractal-cebeul-8721.jpg
-│       │   ├── Palmiers.jpg
-│       │   ├── untitl100.jpg
-│       │   └── untitl10.jpg
-│       └── Styles
-│           ├── Orangebicolore4.jpg
-│           └── vertbicolore2.jpg
-├── Styles
-│   └── index.php
-├── templates
-│   ├── footer.php
-│   ├── header.php
-│   └── nav.php
-├── tmp
-│   ├── tree_tmp_archives.txt
-│   └── tree_tmp_mvc.txt
-├── TMP
-│   ├── AdresseServeur.php
-│   ├── AffDate.php
-│   ├── AffHeure.php
-│   ├── CalcAnciennete2.php
-│   ├── CalcAnciennete3.php
-│   ├── CalcAnciennete4.php
-│   ├── CalcAnciennete.php
-│   ├── ConnectionBaseDonnees.php
-│   ├── ConversionDate.php
-│   ├── ConvertChiffre.php
-│   ├── detectlId.php
-│   ├── EnregistrerDate.php
-│   ├── Essai1.php
-│   ├── EssaiDate.php
-│   ├── EssaiTab.php
-│   ├── footer.php
-│   ├── GenereAleat.php
-│   ├── includeStylesheet2.php
-│   ├── includeStylesheet.php
-│   ├── index.php
-│   ├── Inscritpion.php
-│   ├── MenuAccueil.php
-│   ├── Test (2).php
-│   ├── Test.php
-│   ├── Teststrlen.php
-│   ├── VerifieConnectionMembre.php
-│   └── VerifieConnection.php
-└── Utilitaires
-    ├── Affichage
-    │   ├── AfficheListeAuteursPosts.php
-    │   └── ModifierStyle.php
-    ├── Dates
-    ├── Navigation
-    │   └── PageRedirectionVerslInscription.php
-    └── Verification
-        └── VerifieCompetence.php
-
-51 directories, 171 files
+ANCIEN                                              NOUVEAU
+------                                              -------
+Accueil/Accueil%20%281%29.php                      Accueil/index.php
+Accueil/Accueil (1).php                            Accueil/index.php
+Inscription_Desinscription/Connection1.php         Auth/Connexion.php
+Inscription_Desinscription/Connection2.php         Auth/FormulaireConnexion.php
+Inscription_Desinscription/Deconnection.php        Auth/Deconnexion.php
+Inscription_Desinscription/NouveauMembre3.php      Auth/Inscription.php
+Membres/ListeDesMembres.php                        Membres/Liste.php
+Membres/InformationMembre.php                      Membres/Voir.php
+Membres/ModifierInformationMembre.php              Membres/MonCompte.php
+Membres/ModifierInfo.php                           Membres/EditerChamp.php
+Membres/SupprimerMembre.php                        Membres/Supprimer.php
+Contenu/Posts/ListeCompletePosts.php               Contenu/Articles/Liste.php
+Contenu/Posts/ListedesPosts.php                    Contenu/Articles/ListeMembre.php
+Contenu/Posts/AfficheArticle.php                   Contenu/Articles/Voir.php
+Contenu/Posts/EcritureNouveauPost.php              Contenu/Articles/Creer.php
+Contenu/Posts/ModifierArticle.php                  Contenu/Articles/Editer.php
+Contenu/Posts/SupprimerArticle.php                 Contenu/Articles/Supprimer.php
+Contenu/Posts/ListeAuteursPost.php                 Contenu/Articles/Historique.php
+Contenu/Projets/NouveauProjet.php                  Contenu/Projets/Liste.php
+Contenu/Projets/ListedesProjet.php                 Contenu/Projets/ListeMembre.php
+Contenu/Projets/CreationNouveauProjet.php          Contenu/Projets/Creer.php
+Contenu/Projets/ModifierProjet.php                 Contenu/Projets/Editer.php
+Contenu/Projets/SupprimerProjet.php                Contenu/Projets/Supprimer.php
+Contenu/Projets/ListeAuteursProjets.php            Contenu/Projets/Historique.php

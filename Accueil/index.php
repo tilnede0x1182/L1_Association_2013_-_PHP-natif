@@ -4,7 +4,7 @@
  */
 require_once __DIR__ . '/../includes/init.php';
 
-$_SESSION['pageCourante'] = $serveur . "Accueil/Accueil%20%281%29.php";
+$_SESSION['pageCourante'] = $serveur . "Accueil/index.php";
 
 // Récupérer les données
 $estAdmin = verifieConnectionMembre();
@@ -43,14 +43,14 @@ $titrePage = "Accueil Association";
 		<td>
 			<?php if (!empty($article['modifications'])): ?>
 				Dernière modification :<br>
-				<a href="<?= $serveur ?>Membres/InformationMembre.php?idmembre=<?= $article['modifications'][0]['idmembre'] ?>"><?= $article['modifications'][0]['idmembre'] ?></a>
+				<a href="<?= $serveur ?>Membres/Voir.php?idmembre=<?= $article['modifications'][0]['idmembre'] ?>"><?= $article['modifications'][0]['idmembre'] ?></a>
 				(<?= convertDate($article['modifications'][0]['date']) ?>)<br><br>
 			<?php endif; ?>
 			Publication :<br>
-			<a href="<?= $serveur ?>Membres/InformationMembre.php?idmembre=<?= $article['id'] ?>"><?= $article['id'] ?></a>
+			<a href="<?= $serveur ?>Membres/Voir.php?idmembre=<?= $article['id'] ?>"><?= $article['id'] ?></a>
 			(<?= convertDate($article['date']) ?>)
 			<?php if ($article['nbModifs'] > 0): ?>
-				<br><br><a href="<?= $serveur ?>Contenu/Posts/ListeAuteursPost.php?idpost=<?= $article['idpost'] ?>">Afficher la liste</a>
+				<br><br><a href="<?= $serveur ?>Contenu/Articles/Historique.php?idpost=<?= $article['idpost'] ?>">Afficher la liste</a>
 			<?php endif; ?>
 		</td>
 		<td>
@@ -60,9 +60,9 @@ $titrePage = "Accueil Association";
 			<p><?= nl2br(detectlId($article['Post'])) ?></p>
 		</td>
 		<td>
-			<div class="lien"><a href="<?= $serveur ?>Contenu/Posts/ModifierArticle.php?idarticle=<?= $article['idpost'] ?>">modifier</a></div>
+			<div class="lien"><a href="<?= $serveur ?>Contenu/Articles/Editer.php?idarticle=<?= $article['idpost'] ?>">modifier</a></div>
 			<br><br><br>
-			<div class="lien"><a href="<?= $serveur ?>Contenu/Posts/SupprimerArticle.php?idpost=<?= $article['idpost'] ?>">supprimer</a></div>
+			<div class="lien"><a href="<?= $serveur ?>Contenu/Articles/Supprimer.php?idpost=<?= $article['idpost'] ?>">supprimer</a></div>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -77,7 +77,7 @@ $titrePage = "Accueil Association";
 	</tr>
 <?php foreach ($articlesAvecModifs as $article): ?>
 	<tr>
-		<td><a href="<?= $serveur ?>Membres/InformationMembre.php?idmembre=<?= $article['id'] ?>"><?= $article['id'] ?></a></td>
+		<td><a href="<?= $serveur ?>Membres/Voir.php?idmembre=<?= $article['id'] ?>"><?= $article['id'] ?></a></td>
 		<td>
 			<?php if (!empty($article['Objet'])): ?>
 				<h4><?= htmlspecialchars($article['Objet']) ?> :</h4>
@@ -90,6 +90,6 @@ $titrePage = "Accueil Association";
 </table>
 <?php endif; ?>
 
-<a href="<?= $serveur ?>Contenu/Posts/ListeCompletePosts.php">Afficher la liste complète</a>
+<a href="<?= $serveur ?>Contenu/Articles/Liste.php">Afficher la liste complète</a>
 
 <?php include __DIR__ . '/../templates/footer.php'; ?>

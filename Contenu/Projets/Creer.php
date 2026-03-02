@@ -6,7 +6,7 @@ require_once __DIR__ . '/../../includes/init.php';
 
 // Vérifier la connexion
 if (!verifieConnection()) {
-	header("Location: " . $serveur . "Accueil/Accueil%20%281%29.php");
+	header("Location: " . $serveur . "Accueil/index.php");
 	exit;
 }
 
@@ -20,7 +20,7 @@ if (!empty($_POST['sujet']) && !empty($_POST['contenu'])) {
 	$texte = htmlspecialchars($_POST['contenu']);
 
 	if (creerProjet($_SESSION['id'], $objet, $texte)) {
-		header('Location: ' . $serveur . 'Contenu/Projets/NouveauProjet.php');
+		header('Location: ' . $serveur . 'Contenu/Projets/Liste.php');
 		exit;
 	} else {
 		$erreur = "Erreur lors de la création du projet.";
@@ -42,7 +42,7 @@ if (!empty($_POST['sujet']) && !empty($_POST['contenu'])) {
 <h4 class="erreur"><?= $erreur ?></h4>
 <?php endif; ?>
 
-<form action="<?= $serveur ?>Contenu/Projets/CreationNouveauProjet.php" method="POST">
+<form action="<?= $serveur ?>Contenu/Projets/Creer.php" method="POST">
 	<label>Objet : <input type="text" name="sujet" autofocus></label><br>
 	<label><p>Texte :</p><textarea rows="25" cols="82" name="contenu"></textarea></label><br>
 	<input type="submit" value="Créer">

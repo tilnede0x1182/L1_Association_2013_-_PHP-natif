@@ -6,7 +6,7 @@ require_once __DIR__ . '/../../includes/init.php';
 
 // Vérifier la connexion
 if (!verifieConnection()) {
-	header("Location: " . $serveur . "Accueil/Accueil%20%281%29.php");
+	header("Location: " . $serveur . "Accueil/index.php");
 	exit;
 }
 
@@ -24,7 +24,7 @@ if (!empty($_POST) && isset($_POST['choix'])) {
 	if (!empty($_SESSION['pageCourante'])) {
 		header('Location: ' . $_SESSION['pageCourante']);
 	} else {
-		header('Location: ' . $serveur . 'Contenu/Projets/NouveauProjet.php');
+		header('Location: ' . $serveur . 'Contenu/Projets/Liste.php');
 	}
 	exit;
 }
@@ -40,7 +40,7 @@ if (!empty($_POST) && isset($_POST['choix'])) {
 
 <?php include __DIR__ . '/../../templates/nav.php'; ?>
 
-<div class="lien"><p><a href="<?= $serveur ?>Contenu/Projets/CreationNouveauProjet.php">Nouveau projet</a></p></div>
+<div class="lien"><p><a href="<?= $serveur ?>Contenu/Projets/Creer.php">Nouveau projet</a></p></div>
 
 <h3>Voulez-vous réellement supprimer ce projet ?</h3>
 

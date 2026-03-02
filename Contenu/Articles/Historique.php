@@ -6,26 +6,26 @@ require_once __DIR__ . '/../../includes/init.php';
 
 // Gestion de la page précédente
 $pagePrecedente = "";
-if (!empty($_SESSION['pageCourante']) && strpos($_SESSION['pageCourante'], "ListeAuteursPost") === false) {
+if (!empty($_SESSION['pageCourante']) && strpos($_SESSION['pageCourante'], "Historique") === false) {
 	$pagePrecedente = $_SESSION['pageCourante'];
 }
 
 // Vérifier la connexion
 if (!verifieConnection()) {
-	header("Location: " . $serveur . "Accueil/Accueil%20%281%29.php");
+	header("Location: " . $serveur . "Accueil/index.php");
 	exit;
 }
 
 // Vérifier les droits admin
 $estAdmin = verifieConnectionMembre();
 if (!$estAdmin) {
-	header("Location: " . $serveur . "Accueil/Accueil%20%281%29.php");
+	header("Location: " . $serveur . "Accueil/index.php");
 	exit;
 }
 
 // Récupérer l'ID de l'article
 $idpost = isset($_GET['idpost']) ? $_GET['idpost'] : '';
-$_SESSION['pageCourante'] = $serveur . "Contenu/Posts/ListeAuteursPost.php?idpost=" . $idpost;
+$_SESSION['pageCourante'] = $serveur . "Contenu/Articles/Historique.php?idpost=" . $idpost;
 
 // Récupérer les modifications
 $modifications = getModificationsArticle($idpost);
@@ -55,7 +55,7 @@ $titrePage = "Liste des auteurs d'un article";
 <?php else: ?>
 	<?php foreach ($modifications as $modif): ?>
 	<tr>
-		<td><a href="<?= $serveur ?>Membres/InformationMembre.php?idmembre=<?= $modif['idmembre'] ?>"><?= htmlspecialchars($modif['idmembre']) ?></a></td>
+		<td><a href="<?= $serveur ?>Membres/Voir.php?idmembre=<?= $modif['idmembre'] ?>"><?= htmlspecialchars($modif['idmembre']) ?></a></td>
 		<td><?= convertDate($modif['date']) ?></td>
 	</tr>
 	<?php endforeach; ?>
@@ -66,7 +66,7 @@ $titrePage = "Liste des auteurs d'un article";
 <?php if ($pagePrecedente): ?>
 	<a href="<?= $pagePrecedente ?>">Retour</a><br>
 <?php else: ?>
-	<a href="<?= $serveur ?>Accueil/Accueil%20%281%29.php">Retour à la page d'accueil</a>
+	<a href="<?= $serveur ?>Accueil/index.php">Retour à la page d'accueil</a>
 <?php endif; ?>
 </p>
 

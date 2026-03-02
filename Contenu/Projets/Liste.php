@@ -4,11 +4,11 @@
  */
 require_once __DIR__ . '/../../includes/init.php';
 
-$_SESSION['pageCourante'] = $serveur . "Contenu/Projets/NouveauProjet.php";
+$_SESSION['pageCourante'] = $serveur . "Contenu/Projets/Liste.php";
 
 // Vérifier la connexion
 if (!verifieConnection()) {
-	header("Location: " . $serveur . "Accueil/Accueil%20%281%29.php");
+	header("Location: " . $serveur . "Accueil/index.php");
 	exit;
 }
 
@@ -29,7 +29,7 @@ $titrePage = "Nouveau Projet";
 
 <?php include __DIR__ . '/../../templates/nav.php'; ?>
 
-<div class="lien"><p><a href="<?= $serveur ?>Contenu/Projets/CreationNouveauProjet.php">Nouveau projet</a></p></div>
+<div class="lien"><p><a href="<?= $serveur ?>Contenu/Projets/Creer.php">Nouveau projet</a></p></div>
 
 <table border="1">
 	<tr>
@@ -41,7 +41,7 @@ $titrePage = "Nouveau Projet";
 	<?php $estProprietaire = ($projet['id'] == $_SESSION['id']); ?>
 	<tr>
 		<td>
-			<a href="<?= $serveur ?>Membres/InformationMembre.php?idmembre=<?= $projet['id'] ?>"><?= htmlspecialchars($projet['id']) ?></a>
+			<a href="<?= $serveur ?>Membres/Voir.php?idmembre=<?= $projet['id'] ?>"><?= htmlspecialchars($projet['id']) ?></a>
 			<?php if ($estAdmin || $estProprietaire): ?>
 				<br><br>
 				<?php
@@ -52,13 +52,13 @@ $titrePage = "Nouveau Projet";
 				<?php else: ?>
 					<?php $nbAffiche = 0; foreach ($modifs as $modif): ?>
 						<?php if ($nbAffiche < 3): ?>
-							<a href="<?= $serveur ?>Membres/InformationMembre.php?idmembre=<?= $modif['idmembre'] ?>"><?= $modif['idmembre'] ?></a>
+							<a href="<?= $serveur ?>Membres/Voir.php?idmembre=<?= $modif['idmembre'] ?>"><?= $modif['idmembre'] ?></a>
 							(<?= convertDate($modif['date']) ?>)<br>
 							<?php $nbAffiche++; ?>
 						<?php endif; ?>
 					<?php endforeach; ?>
 					<?php if (count($modifs) > 5): ?>
-						<a href="<?= $serveur ?>Contenu/Projets/ListeAuteursProjets.php?idprojet=<?= $projet['idprojet'] ?>">Afficher la liste</a>
+						<a href="<?= $serveur ?>Contenu/Projets/Historique.php?idprojet=<?= $projet['idprojet'] ?>">Afficher la liste</a>
 					<?php elseif (count($modifs) > 3): ?>
 						... et <?= count($modifs) - 3 ?> autres
 					<?php endif; ?>
@@ -74,6 +74,6 @@ $titrePage = "Nouveau Projet";
 <?php endforeach; ?>
 </table>
 
-<div class="lien"><p><a href="<?= $serveur ?>Contenu/Projets/CreationNouveauProjet.php">Nouveau projet</a></p></div>
+<div class="lien"><p><a href="<?= $serveur ?>Contenu/Projets/Creer.php">Nouveau projet</a></p></div>
 
 <?php include __DIR__ . '/../../templates/footer.php'; ?>

@@ -6,7 +6,7 @@ require_once __DIR__ . '/../../includes/init.php';
 
 // Vérifier la connexion
 if (!verifieConnection()) {
-	header("Location: " . $serveur . "Accueil/Accueil%20%281%29.php");
+	header("Location: " . $serveur . "Accueil/index.php");
 	exit;
 }
 
@@ -16,14 +16,14 @@ $erreur = "";
 // Traitement du formulaire
 if (!empty($_POST['article']) && !empty($_POST['objet'])) {
 	// Vérifier la source
-	if (isset($_SERVER["HTTP_REFERER"]) && $_SERVER["HTTP_REFERER"] !== $serveur . "Contenu/Posts/EcritureNouveauPost.php") {
+	if (isset($_SERVER["HTTP_REFERER"]) && $_SERVER["HTTP_REFERER"] !== $serveur . "Contenu/Articles/Creer.php") {
 		$erreur = "Le formulaire est soumis depuis une source externe !";
 	} else {
 		$objet = htmlspecialchars($_POST['objet']);
 		$texte = htmlspecialchars($_POST['article']);
 
 		if (creerArticle($_SESSION['id'], $objet, $texte)) {
-			header('Location: ' . $serveur . 'Accueil/Accueil%20%281%29.php');
+			header('Location: ' . $serveur . 'Accueil/index.php');
 			exit;
 		} else {
 			$erreur = "Erreur lors de la création de l'article.";
@@ -46,7 +46,7 @@ if (!empty($_POST['article']) && !empty($_POST['objet'])) {
 <h4 class="erreur"><?= $erreur ?></h4>
 <?php endif; ?>
 
-<form action="<?= $serveur ?>Contenu/Posts/EcritureNouveauPost.php" method="POST">
+<form action="<?= $serveur ?>Contenu/Articles/Creer.php" method="POST">
 	<label>Objet : <input type="text" name="objet" autofocus></label>
 	<label><p>Taper le texte de l'article :</p><textarea rows="25" cols="82" name="article"></textarea></label><br>
 	<input type="submit" value="Publier">

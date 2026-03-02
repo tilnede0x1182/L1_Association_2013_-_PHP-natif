@@ -47,7 +47,7 @@ function verifierDate() {
 // Traitement du formulaire
 if (!empty($_POST)) {
 	// Vérifier la source
-	if (isset($_SERVER["HTTP_REFERER"]) && $_SERVER["HTTP_REFERER"] !== $serveur . "Inscription_Desinscription/NouveauMembre3.php") {
+	if (isset($_SERVER["HTTP_REFERER"]) && $_SERVER["HTTP_REFERER"] !== $serveur . "Auth/Inscription.php") {
 		$erreur = "Le formulaire est soumis depuis une source externe !";
 	} elseif (empty($_POST["nom"]) || empty($_POST["prenom"]) || empty($_POST["id"]) || empty($_POST["mail"]) || empty($_POST["adresse"]) || empty($_POST["pays"])) {
 		$erreur = "Veuillez compléter tous les champs munis d'une étoile (*).";
@@ -89,7 +89,7 @@ if (!empty($_POST)) {
 <p>Il servira à confirmer votre inscription.<br><br>
 Veuillez entrer ce mot de passe lors de vos prochaines connexions.<br><br>
 Cependant, vous pourrez changer ce mot de passe dès votre première connexion.</p>
-<p><br><a href="<?= $serveur ?>Accueil/Accueil%20%281%29.php">Revenir à la page d'accueil</a></p>
+<p><br><a href="<?= $serveur ?>Accueil/index.php">Revenir à la page d'accueil</a></p>
 
 <?php else: ?>
 
@@ -102,7 +102,7 @@ Cependant, vous pourrez changer ce mot de passe dès votre première connexion.<
 <?php endif; ?>
 
 <p>Veuillez compléter le formulaire ci-dessous et remplir tous les champs obligatoires (*) :</p>
-<form action="<?= $serveur ?>Inscription_Desinscription/NouveauMembre3.php" method="POST">
+<form action="<?= $serveur ?>Auth/Inscription.php" method="POST">
 	Nom : <input type="text" name="nom" value="<?= isset($_POST['nom']) ? htmlspecialchars($_POST['nom']) : '' ?>">(*)<br>
 	Prénom : <input type="text" name="prenom" value="<?= isset($_POST['prenom']) ? htmlspecialchars($_POST['prenom']) : '' ?>">(*)<br>
 	e-mail : <input type="email" name="mail" value="<?= isset($_POST['mail']) ? htmlspecialchars($_POST['mail']) : '' ?>">(*)<br>
@@ -113,7 +113,7 @@ Cependant, vous pourrez changer ce mot de passe dès votre première connexion.<
 	<input type="submit" value="S'inscrire">
 </form>
 
-<p><a href="<?= $serveur ?>Accueil/Accueil%20%281%29.php">Retour à la page d'accueil</a></p>
+<p><a href="<?= $serveur ?>Accueil/index.php">Retour à la page d'accueil</a></p>
 <?php endif; ?>
 
 <?php include __DIR__ . '/../templates/footer.php'; ?>

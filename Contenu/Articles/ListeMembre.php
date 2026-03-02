@@ -6,11 +6,11 @@ require_once __DIR__ . '/../../includes/init.php';
 
 // Récupérer l'ID du membre
 $membre = isset($_GET['idmembre']) ? $_GET['idmembre'] : 'inconnu';
-$_SESSION['pageCourante'] = $serveur . "Contenu/Posts/ListedesPosts.php?idmembre=" . $membre;
+$_SESSION['pageCourante'] = $serveur . "Contenu/Articles/ListeMembre.php?idmembre=" . $membre;
 
 // Vérifier la connexion
 if (!verifieConnection()) {
-	header("Location: " . $serveur . "Accueil/Accueil%20%281%29.php");
+	header("Location: " . $serveur . "Accueil/index.php");
 	exit;
 }
 
@@ -30,7 +30,7 @@ $titrePage = "Liste des articles publiés par le membre " . $membre;
 
 <?php include __DIR__ . '/../../templates/nav.php'; ?>
 
-<h1>Liste des articles publiés par le membre <a href="<?= $serveur ?>Membres/InformationMembre.php?idmembre=<?= $membre ?>"><?= htmlspecialchars($membre) ?></a> :</h1>
+<h1>Liste des articles publiés par le membre <a href="<?= $serveur ?>Membres/Voir.php?idmembre=<?= $membre ?>"><?= htmlspecialchars($membre) ?></a> :</h1>
 
 <table border="1">
 	<tr>
@@ -46,14 +46,14 @@ $titrePage = "Liste des articles publiés par le membre " . $membre;
 	<?php foreach ($articles as $article): ?>
 	<tr>
 		<td>
-			<h4><a href="<?= $serveur ?>Contenu/Posts/AfficheArticle.php?idpost=<?= $article['idpost'] ?>"><?= htmlspecialchars($article['Objet']) ?></a></h4>
+			<h4><a href="<?= $serveur ?>Contenu/Articles/Voir.php?idpost=<?= $article['idpost'] ?>"><?= htmlspecialchars($article['Objet']) ?></a></h4>
 			<?= nl2br(detectlId($article['Post'])) ?>
 		</td>
 		<td><?= convertDate($article['date']) ?></td>
 		<td>
-			<div class="lien"><a href="<?= $serveur ?>Contenu/Posts/ModifierArticle.php?idarticle=<?= $article['idpost'] ?>">modifier</a></div>
+			<div class="lien"><a href="<?= $serveur ?>Contenu/Articles/Editer.php?idarticle=<?= $article['idpost'] ?>">modifier</a></div>
 			<br><br><br>
-			<div class="lien"><a href="<?= $serveur ?>Contenu/Posts/SupprimerArticle.php?idpost=<?= $article['idpost'] ?>">supprimer</a></div>
+			<div class="lien"><a href="<?= $serveur ?>Contenu/Articles/Supprimer.php?idpost=<?= $article['idpost'] ?>">supprimer</a></div>
 		</td>
 	</tr>
 	<?php endforeach; ?>
