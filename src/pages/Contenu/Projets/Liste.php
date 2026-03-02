@@ -36,6 +36,7 @@ $titrePage = "Nouveau Projet";
 		<th>Auteurs et dates de modification</th>
 		<th>Derniers projets</th>
 		<th>Date de publication</th>
+		<th>Modifications</th>
 	</tr>
 <?php foreach ($projets as $projet): ?>
 	<?php $estProprietaire = ($projet['id'] == $_SESSION['id']); ?>
@@ -70,6 +71,13 @@ $titrePage = "Nouveau Projet";
 			<?= nl2br(detectlId($projet['Texte'])) ?>
 		</td>
 		<td><?= convertDate($projet['date']) ?></td>
+		<?php if ($estAdmin || $estProprietaire): ?>
+		<td>
+			<div class="lien"><a href="<?= $serveur ?>src/pages/Contenu/Projets/Editer.php?idprojet=<?= $projet['idprojet'] ?>">modifier</a></div>
+			<br><br><br>
+			<div class="lien"><a href="<?= $serveur ?>src/pages/Contenu/Projets/Supprimer.php?idprojet=<?= $projet['idprojet'] ?>">supprimer</a></div>
+		</td>
+		<?php endif; ?>
 	</tr>
 <?php endforeach; ?>
 </table>

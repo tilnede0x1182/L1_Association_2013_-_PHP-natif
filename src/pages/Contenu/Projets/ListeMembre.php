@@ -43,6 +43,7 @@ $titrePage = "Liste des projets du membre " . $membre;
 		<?php endif; ?>
 		<th>Contenu du projet</th>
 		<th>Date de publication</th>
+		<th>Modifications</th>
 	</tr>
 <?php if (empty($projets)): ?>
 	<tr>
@@ -79,6 +80,13 @@ $titrePage = "Liste des projets du membre " . $membre;
 			<?= nl2br(detectlId($projet['Texte'])) ?>
 		</td>
 		<td><?= convertDate($projet['date']) ?></td>
+		<?php if ($estAdmin || $estProprietaire): ?>
+		<td>
+			<div class="lien"><a href="<?= $serveur ?>src/pages/Contenu/Projets/Editer.php?idprojet=<?= $projet['idprojet'] ?>">modifier</a></div>
+			<br><br><br>
+			<div class="lien"><a href="<?= $serveur ?>src/pages/Contenu/Projets/Supprimer.php?idprojet=<?= $projet['idprojet'] ?>">supprimer</a></div>
+		</td>
+		<?php endif; ?>
 	</tr>
 	<?php endforeach; ?>
 <?php endif; ?>

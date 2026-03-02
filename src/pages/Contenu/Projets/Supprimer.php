@@ -13,6 +13,20 @@ if (!verifieConnection()) {
 // Récupérer l'ID du projet
 $idprojet = isset($_GET['idprojet']) ? $_GET['idprojet'] : 'inconnu';
 
+// Récupérer le projet et vérifier les droits
+$projet = getProjet($idprojet);
+if (!$projet) {
+	header("Location: " . $serveur . "src/pages/Accueil/index.php");
+	exit;
+}
+
+$estAdmin = verifieConnectionMembre();
+$estProprietaire = ($projet['id'] == $_SESSION['id']);
+if (!$estAdmin && !$estProprietaire) {
+	header("Location: " . $serveur . "src/pages/Accueil/index.php");
+	exit;
+}
+
 $titrePage = "Suppression d'un projet";
 
 // Traitement du formulaire
@@ -24,7 +38,7 @@ if (!empty($_POST) && isset($_POST['choix'])) {
 	if (!empty($_SESSION['pageCourante'])) {
 		header('Location: ' . $_SESSION['pageCourante']);
 	} else {
-		header('Location: ' . $serveur . 'Contenu/Projets/Liste.php');
+		header('Location: ' . $serveur . 'src/pages/Contenu/Projets/Liste.php');
 	}
 	exit;
 }

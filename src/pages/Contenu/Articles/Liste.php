@@ -28,6 +28,9 @@ $titrePage = "Liste complète des articles";
 		<th>Auteur</th>
 		<th>Titre de l'article</th>
 		<th>Dates de publication et de dernière modification</th>
+		<?php if ($estAdmin): ?>
+		<th>Modifications</th>
+		<?php endif; ?>
 	</tr>
 <?php foreach ($articles as $article): ?>
 	<?php
@@ -43,6 +46,13 @@ $titrePage = "Liste complète des articles";
 				<?= $dateModif ?>
 			<?php endif; ?>
 		</td>
+		<?php if ($estAdmin): ?>
+		<td>
+			<div class="lien"><a href="<?= $serveur ?>src/pages/Contenu/Articles/Editer.php?idarticle=<?= $article['idpost'] ?>">modifier</a></div>
+			<br><br><br>
+			<div class="lien"><a href="<?= $serveur ?>src/pages/Contenu/Articles/Supprimer.php?idpost=<?= $article['idpost'] ?>">supprimer</a></div>
+		</td>
+		<?php endif; ?>
 	</tr>
 <?php endforeach; ?>
 </table>

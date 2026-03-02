@@ -6,7 +6,7 @@ require_once __DIR__ . '/../../../../utils/includes/init.php';
 
 // Vérifier la connexion
 if (!verifieConnection()) {
-	header("Location: " . $serveur . "src/pages/src/pages/Accueil/index.php");
+	header("Location: " . $serveur . "src/pages/Accueil/index.php");
 	exit;
 }
 
@@ -17,7 +17,7 @@ if (empty($idprojet)) {
 	if (!empty($_SESSION['pageCourante'])) {
 		echo '<h3><a href="' . $_SESSION['pageCourante'] . '">Revenir à la page précédente</a></h3>';
 	} else {
-		echo '<h3><a href="' . $serveur . 'Accueil/index.php">Retour à la page d\'accueil</a></h3>';
+		echo '<h3><a href="' . $serveur . 'src/pages/Accueil/index.php">Retour à la page d\'accueil</a></h3>';
 	}
 	exit;
 }
@@ -26,6 +26,14 @@ if (empty($idprojet)) {
 $projet = getProjet($idprojet);
 if (!$projet) {
 	die("Projet non trouvé");
+}
+
+// Vérifier les droits (admin OU créateur du projet)
+$estAdmin = verifieConnectionMembre();
+$estProprietaire = ($projet['id'] == $_SESSION['id']);
+if (!$estAdmin && !$estProprietaire) {
+	header("Location: " . $serveur . "src/pages/Accueil/index.php");
+	exit;
 }
 
 $titrePage = "Modification d'un projet";
@@ -43,7 +51,7 @@ if (!empty($_POST)) {
 			if (!empty($_SESSION['pageCourante'])) {
 				header('Location: ' . $_SESSION['pageCourante']);
 			} else {
-				header('Location: ' . $serveur . 'Contenu/Projets/Liste.php');
+				header('Location: ' . $serveur . 'src/pages/Contenu/Projets/Liste.php');
 			}
 			exit;
 		} else {
