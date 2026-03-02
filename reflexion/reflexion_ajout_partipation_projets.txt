@@ -1,0 +1,21 @@
+Système de participation aux projets :
+
+1. Nouvelle colonne "Participants" à droite des tableaux de projets dans :
+- Projets/Liste.php
+- Projets/ListeMembre.php
+2. Bouton "Participer" sur chaque projet (membres connectés)
+3. Demande de participation : statut "en_attente" → validation par créateur/admin
+4. Page de gestion des demandes : boutons "Oui" / "Non" pour chaque demande
+5. Bouton "Exclure [pseudo] du projet [nom]" dans la colonne Participants :
+- Visible uniquement par le créateur du projet
+- Page de confirmation avec style "alerte rouge" (fond rouge, texte d'avertissement sérieux) pour montrer l'importance de l'action
+6. Cohérence obligatoire : une modification de projet ne peut être faite que par un participant (ou le créateur/admin)
+
+Structure technique :
+- Table SQL participations (idprojet, idmembre, statut, date_demande)
+- Modifier seed.php : ajouter des participants cohérents avec les modifications existantes dans dataprojets
+- Fonctions CRUD pour les participations
+- Vérification dans Projets/Editer.php : seuls les participants peuvent modifier
+- CSS : style .alerte-danger (fond rouge, bordure rouge foncé, texte blanc)
+____
+
