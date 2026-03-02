@@ -24,6 +24,7 @@ $estAdmin = $estConnecte ? verifieConnectionMembre() : false;
 	</ul>
 </nav>
 
+<?php if (strpos($_SERVER["SCRIPT_NAME"], "Auth/Connexion.php") === false): ?>
 <div class="accesMembre">
 	<p>Accès membres :</p>
 	<form action="<?= $serveur ?>src/pages/Auth/Connexion.php" method="POST">
@@ -33,6 +34,7 @@ $estAdmin = $estConnecte ? verifieConnectionMembre() : false;
 		<a href="<?= $serveur ?>src/pages/Auth/Inscription.php">S'inscrire</a>
 	</form>
 </div>
+<?php endif; ?>
 
 <?php else: ?>
 		<li><a href="<?= $serveur ?>src/pages/Auth/Deconnexion.php">Se déconnecter</a></li>

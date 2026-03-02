@@ -1,3 +1,3 @@
-	<footer>Copyrights &copy; Les anciens de Paris. Tous droits réservés.</footer>
+	<footer>Copyrights &copy; Les anciens de Paris 7. Tous droits réservés.</footer>
 </body>
 </html>
