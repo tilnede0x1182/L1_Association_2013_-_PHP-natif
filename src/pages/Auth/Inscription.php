@@ -98,10 +98,10 @@ Cependant, vous pourrez changer ce mot de passe dès votre première connexion.<
 <?php endif; ?>
 
 <?php if (empty($_POST)): ?>
-<h2>Inscription nouveau membre :</h2>
+<h2 class="texte">Inscription nouveau membre :</h2>
 <?php endif; ?>
 
-<p>Veuillez compléter le formulaire ci-dessous et remplir tous les champs obligatoires (*) :</p>
+<p class="texte">Veuillez compléter le formulaire ci-dessous et remplir tous les champs obligatoires (*) :</p>
 <form action="<?= $serveur ?>src/pages/Auth/Inscription.php" method="POST">
 	Nom : <input type="text" name="nom" value="<?= isset($_POST['nom']) ? htmlspecialchars($_POST['nom']) : '' ?>">(*)<br>
 	Prénom : <input type="text" name="prenom" value="<?= isset($_POST['prenom']) ? htmlspecialchars($_POST['prenom']) : '' ?>">(*)<br>
@@ -113,7 +113,7 @@ Cependant, vous pourrez changer ce mot de passe dès votre première connexion.<
 	<input type="submit" value="S'inscrire">
 </form>
 
-<p><a href="<?= $serveur ?>src/pages/Accueil/index.php">Retour à la page d'accueil</a></p>
+<div class="texte"><div class="lien"><a href="<?= $serveur ?>src/pages/Accueil/index.php">Retour à la page d'accueil</a></div></div>
 <?php endif; ?>
 
 <?php include __DIR__ . '/../../../utils/templates/footer.php'; ?>

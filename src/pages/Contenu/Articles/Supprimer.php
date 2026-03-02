@@ -5,7 +5,7 @@
 require_once __DIR__ . '/../../../../utils/includes/init.php';
 
 // Vérifier la connexion admin (seuls les admins peuvent supprimer les articles)
-if (!verifieConnection() || !verifieConnectionMembre()) {
+if (!verifieConnection() || !verifieConnectionAdmin()) {
 	header("Location: " . $serveur . "src/pages/Accueil/index.php");
 	exit;
 }
@@ -42,7 +42,7 @@ if (!empty($_POST) && isset($_POST['choix'])) {
 
 <div class="lien"><p><a href="<?= $serveur ?>src/pages/Contenu/Projets/Creer.php">Nouveau projet</a></p></div>
 
-<h3>Voulez-vous réellement supprimer cet article ?</h3>
+<h3 class="texte">Voulez-vous réellement supprimer cet article ?</h3>
 
 <form action="" method="POST" style="display: inline;">
 	<input name="choix" value="1" type="hidden">

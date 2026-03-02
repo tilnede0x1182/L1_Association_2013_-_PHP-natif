@@ -15,7 +15,7 @@ $idMembre = isset($_GET['idmembre']) ? $_GET['idmembre'] : '';
 $_SESSION['pageCourante'] = $serveur . "src/pages/Membres/Voir.php" . ($idMembre ? "?idmembre=" . $idMembre : "");
 
 // Vérifier les droits
-$estAdmin = verifieConnectionMembre();
+$estAdmin = verifieConnectionAdmin();
 $estConnecte = verifieConnection();
 
 // Récupérer les données du membre
@@ -52,6 +52,7 @@ $titrePage = "Information sur le membre " . $membre['id'];
 
 <?php include __DIR__ . '/../../../utils/templates/nav.php'; ?>
 
+<div class="texte">
 <h1>Information sur le membre <?= htmlspecialchars($membre['id']) ?> :</h1>
 
 <table border="1">
@@ -81,7 +82,7 @@ $titrePage = "Information sur le membre " . $membre['id'];
 	</tr>
 </table>
 
-<p></p>
+
 
 <table border="1">
 	<tr>
@@ -107,7 +108,8 @@ $titrePage = "Information sur le membre " . $membre['id'];
 </table>
 
 <?php if ($pagePrecedente): ?>
-<p class="texte"><a href="<?= $pagePrecedente ?>">Retour</a></p>
+<div class="lien"><a href="<?= $pagePrecedente ?>">Retour</a></div>
 <?php endif; ?>
+</div>
 
 <?php include __DIR__ . '/../../../utils/templates/footer.php'; ?>

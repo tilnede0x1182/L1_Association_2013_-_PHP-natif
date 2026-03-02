@@ -13,7 +13,7 @@ if (!verifieConnection()) {
 	exit;
 }
 
-$estAdmin = verifieConnectionMembre();
+$estAdmin = verifieConnectionAdmin();
 
 // Récupérer les paramètres de tri
 $classement = isset($_POST['classement']) ? $_POST['classement'] : 'id';

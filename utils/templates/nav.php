@@ -1,10 +1,10 @@
 <?php
 /**
  * Template de navigation
- * Nécessite : $serveur, fonctions verifieConnection() et verifieConnectionMembre()
+ * Nécessite : $serveur, fonctions verifieConnection() et verifieConnectionAdmin()
  */
 $estConnecte = verifieConnection();
-$estAdmin = $estConnecte ? verifieConnectionMembre() : false;
+$estAdmin = $estConnecte ? verifieConnectionAdmin() : false;
 ?>
 
 <img class="principale" src="<?= $serveur ?>assets/images/fonds/untitl10.jpg" alt="Paris Diderot">

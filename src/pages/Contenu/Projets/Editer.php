@@ -29,7 +29,7 @@ if (!$projet) {
 }
 
 // Vérifier les droits (admin OU créateur du projet)
-$estAdmin = verifieConnectionMembre();
+$estAdmin = verifieConnectionAdmin();
 $estProprietaire = ($projet['id'] == $_SESSION['id']);
 if (!$estAdmin && !$estProprietaire) {
 	header("Location: " . $serveur . "src/pages/Accueil/index.php");
@@ -82,7 +82,7 @@ if (!empty($_POST)) {
 </form>
 
 <?php if (!empty($_SESSION['pageCourante'])): ?>
-<a href="<?= $_SESSION['pageCourante'] ?>">Annuler</a>
+<div class="lien"><a href="<?= $_SESSION['pageCourante'] ?>">Annuler</a></div>
 <?php endif; ?>
 
 <?php include __DIR__ . '/../../../../utils/templates/footer.php'; ?>

@@ -7,7 +7,7 @@ require_once __DIR__ . '/../../../../utils/includes/init.php';
 $_SESSION['pageCourante'] = $serveur . "src/pages/Contenu/Articles/Liste.php";
 
 // Récupérer les droits et articles
-$estAdmin = verifieConnectionMembre();
+$estAdmin = verifieConnectionAdmin();
 $articles = getAllArticles(199);
 
 $titrePage = "Liste complète des articles";
@@ -39,7 +39,7 @@ $titrePage = "Liste complète des articles";
 	?>
 	<tr>
 		<td><a href="<?= $serveur ?>src/pages/Membres/Voir.php?idmembre=<?= $article['id'] ?>"><?= htmlspecialchars($article['id']) ?></a></td>
-		<th><a href="<?= $serveur ?>src/pages/Contenu/Articles/Voir.php?idpost=<?= $article['idpost'] ?>"><?= htmlspecialchars($article['Objet']) ?></a></th>
+		<td><a href="<?= $serveur ?>src/pages/Contenu/Articles/Voir.php?idpost=<?= $article['idpost'] ?>"><?= htmlspecialchars($article['Objet']) ?></a></td>
 		<td<?php if (!$estAdmin): ?> style="text-align: center;"<?php endif; ?>>
 			Publication : <?= convertDate($article['date']) ?>
 			<?php if ($estAdmin): ?>

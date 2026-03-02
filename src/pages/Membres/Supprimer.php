@@ -11,7 +11,7 @@ if (!verifieConnection()) {
 }
 
 // Vérifier si admin supprime un autre membre
-$estAdmin = verifieConnectionMembre();
+$estAdmin = verifieConnectionAdmin();
 $idMembreCible = isset($_GET['idmembre']) && $estAdmin ? $_GET['idmembre'] : $_SESSION['id'];
 $estPropreSon = ($idMembreCible == $_SESSION['id']);
 
@@ -69,11 +69,11 @@ $titrePage = "Suppression d'un membre";
 
 <?php elseif (empty($_POST)): ?>
 <?php if ($estPropreSon): ?>
-<h4>Attention, vous êtes sur le point de supprimer votre compte.<br>
+<h4 class="texte">Attention, vous êtes sur le point de supprimer votre compte.<br>
 La suppression de votre compte entraînera la perte de tous vos projets.<br><br>
 Souhaitez-vous réellement supprimer votre compte ?</h4>
 <?php else: ?>
-<h4>Attention, vous êtes sur le point de supprimer le compte de <?= htmlspecialchars($idmembre) ?>.<br>
+<h4 class="texte">Attention, vous êtes sur le point de supprimer le compte de <?= htmlspecialchars($idmembre) ?>.<br>
 La suppression de ce compte entraînera la perte de tous ses projets.<br><br>
 Souhaitez-vous réellement supprimer ce compte ?</h4>
 <?php endif; ?>

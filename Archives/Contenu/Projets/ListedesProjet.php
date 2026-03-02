@@ -42,7 +42,7 @@
 					echo '<h1>Liste des projets du membre <a href="'.$serveur.'Membres/InformationMembre.php?idmembre='.$membre.'">'.$membre.'</a> : </h1>'."\n";
 
 					
-					$estAdmin = verifieConnectionMembre();
+					$estAdmin = verifieConnectionAdmin();
 					$estProprietaire = ($membre==$_SESSION['id']);
 
 					echo '<table border="1">

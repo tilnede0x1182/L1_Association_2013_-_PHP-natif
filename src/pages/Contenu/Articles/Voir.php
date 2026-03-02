@@ -21,7 +21,7 @@ if (!$article) {
 }
 
 // Vérifier les droits
-$estAdmin = verifieConnectionMembre();
+$estAdmin = verifieConnectionAdmin();
 
 // Récupérer les modifications
 $modifs = getModificationsArticle($idpost, 1);
@@ -94,7 +94,7 @@ $titrePage = "Article de " . $article['id'];
 <?php endif; ?>
 
 <?php if ($pagePrecedente): ?>
-<p><a href="<?= $pagePrecedente ?>">Retour</a></p>
+<div class="lien"><a href="<?= $pagePrecedente ?>">Retour</a></div>
 <?php endif; ?>
 
 <?php include __DIR__ . '/../../../../utils/templates/footer.php'; ?>

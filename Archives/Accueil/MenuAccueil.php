@@ -3,7 +3,7 @@
 		include __DIR__ . '/../Utilitaires/Navigation/AdresseServeur.php';
 	}
 	include RACINE_PROJET . 'Inscription_Desinscription/VerifieConnection.php';
-	include RACINE_PROJET . 'Inscription_Desinscription/VerifieConnectionMembre.php';
+	include RACINE_PROJET . 'Inscription_Desinscription/verifieConnectionAdmin.php';
 
     echo '    <img class="principale" src="'.$serveur.'Ressources/Images/Fonds/untitl10.jpg" alt="Paris Diderot">'."\n".'	<div class="clear"></div>'."\n";
     echo '    <h1 class="titre">Bienvenue sur le site des Anciens de Paris 7</h1>'."\n";
@@ -43,7 +43,7 @@
 		echo '    <li><a href="'.$serveur.'Membres/ModifierInformationMembre.php">Modifier mes informations</a></li>'."\n";
 		echo '    <li><a href="'.$serveur.'Membres/ListeDesMembres.php">Voir la liste des membres</a></li></ul></nav>'."\n";
 		echo '    <ul><nav class="listeGauche"<li><a href="'.$serveur.'Contenu/Projets/NouveauProjet.php">Projets</a></li>';
-		if (verifieConnectionMembre())	echo "\n".'    <li><a href="'.$serveur.'Contenu/Posts/EcritureNouveauPost.php">Ecrire un nouvel article</a></ul></li>';
+		if (verifieConnectionAdmin())	echo "\n".'    <li><a href="'.$serveur.'Contenu/Posts/EcritureNouveauPost.php">Ecrire un nouvel article</a></ul></li>';
 	}
 
 	echo "\n";	

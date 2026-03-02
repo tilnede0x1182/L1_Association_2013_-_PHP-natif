@@ -24,7 +24,7 @@ $_SESSION['pageCourante'] = $serveur . "src/pages/Contenu/Projets/Historique.php
 $projet = getProjet($idprojet);
 
 // Vérifier les droits
-$estAdmin = verifieConnectionMembre();
+$estAdmin = verifieConnectionAdmin();
 $estProprietaire = ($projet && $projet['id'] == $_SESSION['id']);
 
 $titrePage = "Liste des auteurs d'un projet";

@@ -15,7 +15,7 @@ if (!verifieConnection()) {
 }
 
 // Vérifier les droits
-$estAdmin = verifieConnectionMembre();
+$estAdmin = verifieConnectionAdmin();
 $estProprietaire = ($membre == $_SESSION['id']);
 
 // Récupérer les projets du membre

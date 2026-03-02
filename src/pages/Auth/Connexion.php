@@ -52,26 +52,22 @@ $titrePage = "Connexion membre";
 <?php endif; ?>
 
 <?php if ($afficherFormulaire): ?>
-<h3>Entrez votre identifiant et votre mot de passe.</h3>
-
-<div class="Accès membres">
+<div class="texte">
+	<h3>Entrez votre identifiant et votre mot de passe.</h3>
 	<p>Accès membres :</p>
-
 	<form action="Connexion.php" method="POST">
 		<label for="id">Identifiant :</label>
 		<input type="text" name="id" id="id"><br>
 		<label for="motdepasse">Mot de passe :</label>
 		<input type="password" name="motdepasse" id="motdepasse"><br>
 		<input type="submit" value="Se connecter"><br>
-		<a href="<?= $serveur ?>src/pages/Auth/Inscription.php">S'inscrire</a>
+		<div class="lien"><a href="<?= $serveur ?>src/pages/Auth/Inscription.php">S'inscrire</a></div>
 	</form>
+	<?php if (!empty($_SESSION['pageCourante'])): ?>
+	<div class="lien"><a href="<?= $_SESSION['pageCourante'] ?>">Retour</a></div>
+	<?php endif; ?>
+	<div class="lien"><a href="<?= $serveur ?>src/pages/Accueil/index.php">Aller à la page d'accueil</a></div>
 </div>
-
-<?php if (!empty($_SESSION['pageCourante'])): ?>
-<p><a href="<?= $_SESSION['pageCourante'] ?>">Retour</a></p>
-<?php endif; ?>
-
-<p><a href="<?= $serveur ?>src/pages/Accueil/index.php">Aller à la page d'accueil</a></p>
 <?php endif; ?>
 
 <?php include __DIR__ . '/../../../utils/templates/footer.php'; ?>

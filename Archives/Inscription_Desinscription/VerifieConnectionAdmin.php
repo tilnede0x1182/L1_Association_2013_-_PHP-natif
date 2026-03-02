@@ -1,5 +1,5 @@
 ﻿<?php
-	function verifieConnectionMembre() {
+	function verifieConnectionAdmin() {
 
 		include RACINE_PROJET . 'Base_de_donnees/ConnectionBaseDonnees.php';
 	
@@ -32,7 +32,7 @@
 
 				//echo '$ligne['."'".'competence'."'".'] = '.$ligne['competence'];
 
-				if (($ligne['competence']!="President") && ($ligne['competence']!="Secretaire") && ($ligne['competence']!="Administrateur")) return false;
+				if (($ligne['competence']!="Administrateur")) return false;
 	
 				return true;			
 			}

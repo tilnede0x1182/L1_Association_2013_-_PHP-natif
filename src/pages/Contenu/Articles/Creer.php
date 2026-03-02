@@ -5,7 +5,7 @@
 require_once __DIR__ . '/../../../../utils/includes/init.php';
 
 // Vérifier la connexion
-if (!verifieConnection() || !verifieConnectionMembre()) {
+if (!verifieConnection() || !verifieConnectionAdmin()) {
 	header("Location: " . $serveur . "src/pages/Accueil/index.php");
 	exit;
 }
@@ -53,7 +53,7 @@ if (!empty($_POST['article']) && !empty($_POST['objet'])) {
 </form>
 
 <?php if (!empty($_SESSION['pageCourante'])): ?>
-<a href="<?= $_SESSION['pageCourante'] ?>">Annuler</a>
+<div class="lien"><a href="<?= $_SESSION['pageCourante'] ?>">Annuler</a></div>
 <?php endif; ?>
 
 <?php include __DIR__ . '/../../../../utils/templates/footer.php'; ?>

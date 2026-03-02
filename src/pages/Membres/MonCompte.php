@@ -13,7 +13,7 @@ if (!verifieConnection()) {
 }
 
 // Vérifier si admin consulte un autre membre
-$estAdmin = verifieConnectionMembre();
+$estAdmin = verifieConnectionAdmin();
 $idMembreCible = isset($_GET['idmembre']) && $estAdmin ? $_GET['idmembre'] : $_SESSION['id'];
 $estPropreSon = ($idMembreCible == $_SESSION['id']);
 

@@ -7,7 +7,7 @@ require_once __DIR__ . '/../../../utils/includes/init.php';
 $_SESSION['pageCourante'] = $serveur . "src/pages/Accueil/index.php";
 
 // Récupérer les données
-$estAdmin = verifieConnectionMembre();
+$estAdmin = verifieConnectionAdmin();
 $articles = getDerniersArticles(5);
 
 // Préparer les données pour l'affichage
@@ -30,6 +30,8 @@ $titrePage = "Accueil Association";
 <body>
 
 <?php include __DIR__ . '/../../../utils/templates/nav.php'; ?>
+
+<div class="lien"><a href="<?= $serveur ?>src/pages/Contenu/Articles/Liste.php">Afficher la liste complète</a></div>
 
 <?php if ($estAdmin): ?>
 <table border="1">
@@ -90,6 +92,6 @@ $titrePage = "Accueil Association";
 </table>
 <?php endif; ?>
 
-<a href="<?= $serveur ?>src/pages/Contenu/Articles/Liste.php">Afficher la liste complète</a>
+<div class="lien"><a href="<?= $serveur ?>src/pages/Contenu/Articles/Liste.php">Afficher la liste complète</a></div>
 
 <?php include __DIR__ . '/../../../utils/templates/footer.php'; ?>

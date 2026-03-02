@@ -17,7 +17,7 @@ if (!verifieConnection()) {
 }
 
 // Vérifier les droits admin
-$estAdmin = verifieConnectionMembre();
+$estAdmin = verifieConnectionAdmin();
 if (!$estAdmin) {
 	header("Location: " . $serveur . "src/pages/Accueil/index.php");
 	exit;

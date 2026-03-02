@@ -114,7 +114,7 @@ function verifieConnection() {
  * Vérifie si l'utilisateur est un membre avec privilèges (admin/président/secrétaire)
  * @return bool True si membre privilégié, false sinon
  */
-function verifieConnectionMembre() {
+function verifieConnectionAdmin() {
 	$connexion = getConnexion();
 	if (!$connexion) return false;
 
@@ -195,7 +195,8 @@ function detectlId($texte) {
  */
 function includeStylesheet() {
 	global $serveur;
-	$html = '    <link rel="stylesheet" href="' . $serveur . 'assets/css/style.css">' . "\n";
+	$html = '    <link rel="icon" type="image/x-icon" href="' . $serveur . 'assets/favicon.ico">' . "\n";
+	$html .= '    <link rel="stylesheet" href="' . $serveur . 'assets/css/style.css">' . "\n";
 
 	if (!empty($_SESSION['style']) && $_SESSION['style'] == 2) {
 		$html .= '    <script>document.addEventListener("DOMContentLoaded", function() { document.body.classList.add("theme2"); });</script>' . "\n";

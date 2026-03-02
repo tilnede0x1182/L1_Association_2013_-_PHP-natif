@@ -239,7 +239,7 @@ $titrePage = "Modifier mes informations";
 </form>
 
 <?php if (!empty($_SESSION['pageCourante'])): ?>
-<p class="texte"><a href="<?= $_SESSION['pageCourante'] ?>">Annuler</a></p>
+<div class="lien"><a href="<?= $_SESSION['pageCourante'] ?>">Annuler</a></div>
 <?php else: ?>
 <p class="texte"><a href="<?= $serveur ?>src/pages/Membres/MonCompte.php">Retour à la page de modification de vos informations.</a></p>
 <?php endif; ?>

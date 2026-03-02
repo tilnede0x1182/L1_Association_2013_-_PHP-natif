@@ -49,7 +49,7 @@ if (!empty($_POST['sujet']) && !empty($_POST['contenu'])) {
 </form>
 
 <?php if (!empty($_SESSION['pageCourante'])): ?>
-<a href="<?= $_SESSION['pageCourante'] ?>">Annuler</a>
+<div class="lien"><a href="<?= $_SESSION['pageCourante'] ?>">Annuler</a></div>
 <?php endif; ?>
 
 <?php include __DIR__ . '/../../../../utils/templates/footer.php'; ?>

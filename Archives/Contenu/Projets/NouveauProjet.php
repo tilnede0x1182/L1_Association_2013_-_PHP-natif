@@ -38,7 +38,7 @@
 				echo "Pas d'accès à la base" ;
 			}else {
 
-				$estAdmin = verifieConnectionMembre();
+				$estAdmin = verifieConnectionAdmin();
 
 				$requete = 'SELECT * FROM projets ORDER by date DESC, heure DESC';
 				$resultat = mysqli_query($connexion, $requete);

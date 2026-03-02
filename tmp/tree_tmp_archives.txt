@@ -84,7 +84,7 @@
 ├── tmp
 │   └── tree_tmp.txt
 ├── users.txt
-├── VerifieConnectionMembre.php
+├── verifieConnectionAdmin.php
 └── VerifieConnection.php
 
 6 directories, 81 files
@@ -147,7 +147,7 @@
 │   ├── Connection2.php
 │   ├── Deconnection.php
 │   ├── NouveauMembre3.php
-│   ├── VerifieConnectionMembre.php
+│   ├── verifieConnectionAdmin.php
 │   └── VerifieConnection.php
 ├── ListeDesMembres - mise en route.txt
 ├── Membres

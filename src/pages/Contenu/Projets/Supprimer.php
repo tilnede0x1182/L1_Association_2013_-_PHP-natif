@@ -20,7 +20,7 @@ if (!$projet) {
 	exit;
 }
 
-$estAdmin = verifieConnectionMembre();
+$estAdmin = verifieConnectionAdmin();
 $estProprietaire = ($projet['id'] == $_SESSION['id']);
 if (!$estAdmin && !$estProprietaire) {
 	header("Location: " . $serveur . "src/pages/Accueil/index.php");
@@ -56,7 +56,7 @@ if (!empty($_POST) && isset($_POST['choix'])) {
 
 <div class="lien"><p><a href="<?= $serveur ?>src/pages/Contenu/Projets/Creer.php">Nouveau projet</a></p></div>
 
-<h3>Voulez-vous réellement supprimer ce projet ?</h3>
+<h3 class="texte">Voulez-vous réellement supprimer ce projet ?</h3>
 
 <form action="" method="POST" style="display: inline;">
 	<input name="choix" value="1" type="hidden">

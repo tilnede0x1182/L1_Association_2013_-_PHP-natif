@@ -1,34 +1,35 @@
-﻿<?php session_start();
-	include 'AdresseServeur.php';
-	if (empty($_SESSION['id'])) $_SESSION['id']=80;
-	if (empty($_SESSION['motdepasse'])) $_SESSION['motdepasse']=80;
-	$_SESSION['pageCourante']=$serveur."utils/PageRedirectionVerslInscription.php";
-	if (empty($_SESSION['style'])) $_SESSION['style']=1;
+﻿<?php
+/**
+ * Page de redirection vers inscription/connexion
+ */
+require_once __DIR__ . '/includes/init.php';
+
+$_SESSION['pageCourante'] = $serveur . "utils/PageRedirectionVerslInscription.php";
+
+if (verifieConnection()) {
+	header('Location: ' . $serveur . 'src/pages/Contenu/Projets/Liste.php');
+	exit;
+}
+
+$titrePage = "Contenu privé";
 ?>
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <title>A propos</title>
-<?php
-	include '../Affichage/includeStylesheet.php';
-?>
-  </head>
+<head>
+	<meta charset="utf-8">
+	<title><?= $titrePage ?></title>
+	<?= includeStylesheet() ?>
+</head>
+<body>
 
-  <body>
+<?php include __DIR__ . '/templates/nav.php'; ?>
 
-<?php
-	include '../../Accueil/MenuAccueil.php';
-	include '../Dates/ConversionDate.php';
+<div class="texte">
+	<h2>Contenu privé</h2>
+	<p>Pour voir cette page vous devez vous <a href="<?= $serveur ?>src/pages/Auth/Inscription.php">inscrire</a> ou, si c'est déjà fait, <a href="<?= $serveur ?>src/pages/Auth/Connexion.php">vous identifier</a>.</p>
+</div>
 
-	echo '<h2 class="texte">Contenu privé : </h2>
-
-	<h3 class="texte1">Pour voir cette page vous devez vous <a href="'.$serveur.'src/pages/Auth/Inscription.php">inscrire</a> ou, si c'."'".'est déjà fait, vous identifer.</h3>';
-
-	if (verifieConnection()) header('Location: '.$serveur.'src/pages/Contenu/Projets/Liste.php');
-
-?>
-
-  </body>
+<?php include __DIR__ . '/templates/footer.php'; ?>
+</body>
 </html>
 

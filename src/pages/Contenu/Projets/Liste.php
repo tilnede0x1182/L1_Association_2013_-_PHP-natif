@@ -13,7 +13,7 @@ if (!verifieConnection()) {
 }
 
 // Récupérer les droits et projets
-$estAdmin = verifieConnectionMembre();
+$estAdmin = verifieConnectionAdmin();
 $projets = getDerniersProjets(15);
 
 $titrePage = "Nouveau Projet";

@@ -28,7 +28,11 @@ body.theme2 {
    Styles communs
    ============================================================================== */
 
+/* Police friendly et moderne */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
 body {
+	font-family: 'Nunito', 'Segoe UI', Tahoma, sans-serif;
 	color: var(--couleur-texte);
 	margin-top: 0px;
 	background-image: -webkit-linear-gradient(bottom, var(--gradient-debut), var(--gradient-fin));
@@ -68,59 +72,400 @@ strong#imp {
 }
 
 /* ==============================================================================
-   Navigation
+   Navigation - Navbar principale
    ============================================================================== */
 
-nav#menuAcceuil img {
-	height: 30px;
-	width: 30px;
+nav#menuAcceuil {
+	background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+	backdrop-filter: blur(10px);
+	border-radius: 20px;
+	margin: 5px 25px;
+	padding: 12px 20px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+	width: calc(100% - 50px);
+	box-sizing: border-box;
 }
 
-nav#menuAcceuil {
+nav#menuAcceuil ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+nav#menuAcceuil li {
 	margin: 0;
 }
 
-#menuAcceuil ul {
-	width: 1380px;
-	list-style: none;
-	margin: 0 auto;
-	height: 60px;
+nav#menuAcceuil li a {
+	display: block;
+	padding: 10px 18px;
+	color: #444;
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 0.95em;
+	border-radius: 20px;
+	transition: all 0.25s ease;
 }
 
-#menuAcceuil li {
-	float: left;
-	width: 145px;
-	height: 3px;
-	text-shadow: 0.06em 0.06em 0.07em black;
+nav#menuAcceuil li a:hover {
+	background: linear-gradient(135deg, var(--couleur-fond), var(--gradient-fin));
+	color: white;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
+
+nav#menuAcceuil img {
+	height: 28px;
+	width: 28px;
+	border-radius: 6px;
+	transition: transform 0.2s;
+	vertical-align: middle;
+}
+
+nav#menuAcceuil img:hover {
+	transform: scale(1.15);
+}
+
+/* ==============================================================================
+   Volet Accès Membres (formulaire connexion)
+   ============================================================================== */
 
 div.accesMembre {
-	width: 250px;
-	margin: 2em 0 2em 1%;
-	text-align: left;
+	position: fixed;
+	left: 20px;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 220px;
+	background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,255,255,0.88));
+	backdrop-filter: blur(10px);
+	border-radius: 16px;
+	padding: 20px;
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+	z-index: 100;
+}
+
+div.accesMembre p {
+	color: var(--couleur-fond);
+	font-weight: 700;
+	font-size: 1.1em;
+	margin: 0 0 15px 0;
+	text-align: center;
+	text-shadow: none;
+}
+
+div.accesMembre label {
+	color: #555;
+	font-size: 0.9em;
+	font-weight: 600;
+	display: block;
+	margin-bottom: 12px;
+}
+
+div.accesMembre input[type="text"],
+div.accesMembre input[type="password"] {
+	width: 100%;
+	box-sizing: border-box;
+	margin-top: 4px;
+}
+
+div.accesMembre input[type="submit"] {
+	width: 100%;
+	margin-top: 10px;
+}
+
+div.accesMembre a {
+	display: block;
+	text-align: center;
+	margin-top: 12px;
+	color: var(--couleur-fond);
+	font-weight: 600;
+	text-decoration: none;
+}
+
+div.accesMembre a:hover {
+	text-decoration: underline;
+}
+
+/* ==============================================================================
+   Volet de gauche - Navigation connecté
+   ============================================================================== */
+
+nav.listeGauche {
+	position: fixed;
+	left: 20px;
+	top: 50%;
+	transform: translateY(-50%);
+	background: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(255,255,255,0.88));
+	backdrop-filter: blur(10px);
+	border-radius: 16px;
+	padding: 15px;
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+	z-index: 100;
+	min-width: 180px;
+}
+
+nav.listeGauche ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+nav.listeGauche li {
+	margin: 6px 0;
+}
+
+nav.listeGauche li a {
+	display: block;
+	padding: 12px 18px;
+	color: #444;
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 0.95em;
+	border-radius: 12px;
+	transition: all 0.25s ease;
+	border-left: 3px solid transparent;
+}
+
+nav.listeGauche li a:hover {
+	background: linear-gradient(90deg, rgba(var(--couleur-fond-rgb, 230, 138, 46), 0.15), transparent);
+	border-left: 3px solid var(--couleur-fond);
+	color: var(--couleur-fond);
+	padding-left: 22px;
 }
 
 div.lien {
-	text-shadow: 0.06em 0.06em 0.07em black;
-}
-
-nav.listeGauche {
-	text-shadow: 0.06em 0.06em 0.07em black;
-	list-style: none;
+	text-shadow: none;
 }
 
 /* ==============================================================================
    Contenu
    ============================================================================== */
 
+/* ==============================================================================
+   Tableaux - Style arrondi 2012-2013
+   ============================================================================== */
+
 table {
-	margin: 1em 20%;
+	margin: 1em auto 1em 280px;
+	border-collapse: separate;
+	border-spacing: 0;
+	background-color: white;
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	overflow: hidden;
+	width: 90%;
+	max-width: 1000px;
 }
 
-.texte {
-	margin: 1em 20%;
+table th {
+	background: linear-gradient(135deg, var(--couleur-fond), var(--gradient-fin));
+	color: white;
+	padding: 14px 18px;
+	text-align: center;
+	font-weight: 600;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+	border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+table th:first-child {
+	border-top-left-radius: 12px;
+}
+
+table th:last-child {
+	border-top-right-radius: 12px;
+}
+
+table td {
+	padding: 12px 18px;
+	color: #333;
+	border-bottom: 1px solid #e8e8e8;
+	background-color: white;
+	text-align: center;
+}
+
+table tr:last-child td {
+	border-bottom: none;
+}
+
+table tr:last-child td:first-child {
+	border-bottom-left-radius: 12px;
+}
+
+table tr:last-child td:last-child {
+	border-bottom-right-radius: 12px;
+}
+
+table tr:hover td {
+	background-color: #f8f9fa;
+}
+
+table a {
+	color: var(--couleur-fond);
+	text-decoration: none;
+	font-weight: 600;
+}
+
+table a:hover {
+	text-decoration: underline;
+}
+
+/* ==============================================================================
+   Contenu principal - Décalage pour volet gauche
+   ============================================================================== */
+
+.contenu-principal,
+main,
+table,
+h1:not(.titre),
+h2,
+h3,
+h4,
+form:not(.accesMembre form) {
+	margin-left: 280px;
+}
+
+table h1,
+table h2,
+table h3,
+table h4,
+table p {
+	margin-left: 0;
+	text-align: center;
+}
+
+/* ==============================================================================
+   Carré de texte - Style 2012-2013
+   ============================================================================== */
+
+.texte,
+.texte1,
+.carte-texte {
+	background: linear-gradient(145deg, rgba(255,255,255,0.97), rgba(255,255,255,0.92));
+	backdrop-filter: blur(8px);
+	border-radius: 16px;
+	padding: 25px 30px;
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+	color: #444;
+	line-height: 1.7;
+	margin: 1.5em auto 1.5em 280px;
+	max-width: 700px;
+}
+
+.texte table,
+.texte1 table,
+.carte-texte table {
+	margin: 1em auto;
+	width: 100%;
+	max-width: none;
+}
+
+.texte h1,
+.texte h2,
+.texte h3,
+.texte h4,
+.texte1 h1,
+.texte1 h2,
+.texte1 h3,
+.texte1 h4,
+.carte-texte h1,
+.carte-texte h2,
+.carte-texte h3,
+.carte-texte h4 {
+	color: var(--couleur-fond);
+	text-shadow: none;
+	margin-left: 0;
+	margin-top: 0;
+}
+
+.texte p,
+.texte1 p,
+.carte-texte p {
+	margin: 0.8em 0;
+}
+
+.texte a,
+.texte1 a,
+.carte-texte a {
+	color: var(--couleur-fond);
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.texte a:hover,
+.texte1 a:hover,
+.carte-texte a:hover {
+	text-decoration: underline;
 }
 
 .texte1 {
-	margin: 1em 25%;
+	max-width: 600px;
+	padding: 20px 25px;
+}
+
+/* ==============================================================================
+   Boutons et liens d'action
+   ============================================================================== */
+
+.lien a {
+	display: inline-block;
+	background: linear-gradient(135deg, var(--couleur-fond), var(--gradient-fin));
+	color: white;
+	padding: 8px 16px;
+	border-radius: 20px;
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 0.9em;
+	transition: transform 0.2s, box-shadow 0.2s;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.lien a:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+input[type="submit"] {
+	background: linear-gradient(135deg, var(--couleur-fond), var(--gradient-fin));
+	color: white;
+	border: none;
+	padding: 10px 24px;
+	border-radius: 25px;
+	font-family: 'Nunito', sans-serif;
+	font-weight: 600;
+	font-size: 1em;
+	cursor: pointer;
+	transition: transform 0.2s, box-shadow 0.2s;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+	margin: 5px;
+}
+
+input[type="submit"]:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+}
+
+input[type="text"],
+input[type="password"],
+select,
+textarea {
+	padding: 10px 14px;
+	border: 2px solid #ddd;
+	border-radius: 8px;
+	font-family: 'Nunito', sans-serif;
+	font-size: 1em;
+	transition: border-color 0.2s;
+	margin: 5px 0;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus,
+textarea:focus {
+	border-color: var(--couleur-fond);
+	outline: none;
 }
