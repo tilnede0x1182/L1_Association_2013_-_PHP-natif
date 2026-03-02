@@ -77,9 +77,11 @@ if (isset($_POST['confirmer'])) {
 	<p>En participant à ce projet, vous pourrez modifier son contenu.</p>
 	<p>Votre demande sera envoyée au créateur du projet qui devra l'accepter.</p>
 
-	<form method="POST">
-		<input type="submit" name="confirmer" value="Confirmer ma demande de participation">
-	</form>
+	<div class="lien">
+		<form method="POST" style="display: inline;">
+			<input type="submit" name="confirmer" value="Confirmer ma demande de participation">
+		</form>
+	</div>
 
 	<br>
 	<div class="lien"><a href="<?= $_SESSION['pageCourante'] ?? $serveur . 'src/pages/Contenu/Projets/Liste.php' ?>">Annuler</a></div>

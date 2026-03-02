@@ -360,8 +360,25 @@ table p {
 .texte1 table,
 .carte-texte table {
 	margin: 1em auto;
-	width: 100%;
-	max-width: none;
+	margin-left: 0;
+	width: auto;
+	max-width: 100%;
+	font-size: 0.95em;
+}
+
+.texte table form,
+.texte1 table form,
+.carte-texte table form {
+	margin-left: 0;
+	display: inline-block;
+}
+
+.texte table input[type="submit"],
+.texte1 table input[type="submit"],
+.carte-texte table input[type="submit"] {
+	padding: 4px 8px;
+	margin: 1px;
+	font-size: 0.85em;
 }
 
 .texte h1,

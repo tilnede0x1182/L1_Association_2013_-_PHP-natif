@@ -81,3 +81,13 @@ ____
 - Modifier le style : fond blanc, bordure rouge subtile, bouton rouge modéré (#c0392b)
 ____
 
+Modifier le seed pour la cohérence entre participants et modifications :
+
+1. Chaque projet doit avoir 2 à 30 participants (aléatoire)
+2. Toutes les modifications doivent être faites par des participants (pas de modification par un non-participant)
+3. Exception admins : exactement 2% des projets ont des modifications faites par des admins
+- Calcul : nombre_projets_modifies_par_admin = nombre_total_projets * 0.02 (arrondi)
+- Sélection aléatoire de ces projets
+- Ajouter des modifications par des admins sur ces projets sélectionnés
+____
+

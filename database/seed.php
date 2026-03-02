@@ -290,12 +290,9 @@ function creerProjets($connexion) {
 		$identifiants[] = $row['id'];
 	}
 
-	// Seuls les admins peuvent modifier les projets
-	$admins = ['admin01', 'admin02', 'admin03'];
+
 
 	$totalProjets = 0;
-	$valuesMsg = [];
-	$sqlBaseMsg = "INSERT INTO dataprojets (idprojet, idmembre, date, heure) VALUES ";
 	$compteurParUtilisateur = [];
 
 	mysqli_begin_transaction($connexion);
@@ -318,21 +315,8 @@ function creerProjets($connexion) {
 			$idprojet = mysqli_insert_id($connexion);
 			$totalProjets++;
 
-			$nombreMessages = rand(5, 30);
-			for ($msgIdx = 0; $msgIdx < $nombreMessages; $msgIdx++) {
-				$auteurMessage = choisirAleatoire($admins);
-				$dateMsg = genererDateApres($dateProjet);
-				$heureMsg = genererHeure();
-				$valuesMsg[] = "($idprojet, '$auteurMessage', '$dateMsg', '$heureMsg')";
-
-				if (count($valuesMsg) >= $BATCH_SIZE) {
-					executerBatch($connexion, $sqlBaseMsg, $valuesMsg);
-				}
 			}
-		}
 	}
-
-	executerBatch($connexion, $sqlBaseMsg, $valuesMsg);
 
 	foreach ($compteurParUtilisateur as $identifiant => $nombre) {
 		mysqli_query($connexion, "UPDATE asso SET nombredeprojets = $nombre WHERE id = '$identifiant'");
@@ -391,63 +375,138 @@ function creerDataposts($connexion) {
 function creerParticipations($connexion) {
 	global $BATCH_SIZE;
 
-	// Les admins ne participent pas aux projets (ils ont accès via leurs droits admin)
+	// Les admins ne participent pas aux projets
 	$admins = ["admin01", "admin02", "admin03"];
+
+	// Récupérer tous les membres non-admins
+	$result = mysqli_query($connexion, "SELECT id FROM asso WHERE competence != 'Administrateur'");
+	$membres = [];
+	while ($row = mysqli_fetch_assoc($result)) {
+		$membres[] = $row["id"];
+	}
 
 	$totalParticipations = 0;
 	$values = [];
 	$sqlBase = "INSERT INTO participations (idprojet, idmembre, statut, date_demande) VALUES ";
+	$participantsParProjet = [];
 
 	mysqli_begin_transaction($connexion);
 
-	// Récupérer tous les projets avec leur créateur (sauf admins)
+	// Récupérer tous les projets
 	$result = mysqli_query($connexion, "SELECT idprojet, id, date FROM projets");
 	while ($row = mysqli_fetch_assoc($result)) {
 		$idprojet = $row["idprojet"];
 		$createur = $row["id"];
 		$dateProjet = $row["date"];
-
-		// Ignorer les admins
-		if (in_array($createur, $admins)) continue;
-
-		// Convertir date ddmmyyyy en dd/mm/yyyy
 		$dateFormatee = substr($dateProjet, 0, 2) . "/" . substr($dateProjet, 2, 2) . "/" . substr($dateProjet, 4, 4);
 
-		// Ajouter le créateur comme participant
-		$values[] = "($idprojet, \"$createur\", \"accepte\", \"$dateFormatee\")";
-		$totalParticipations++;
+		$participantsProjet = [];
 
-		if (count($values) >= $BATCH_SIZE) {
-			executerBatch($connexion, $sqlBase, $values);
+		// Ajouter le créateur comme participant (sauf si admin)
+		if (!in_array($createur, $admins)) {
+			$values[] = "($idprojet, \"$createur\", \"accepte\", \"$dateFormatee\")";
+			$participantsProjet[] = $createur;
+			$totalParticipations++;
+		}
+
+		// Ajouter 2-30 participants aléatoires
+		$nombreParticipants = rand(2, 30);
+		$membresDisponibles = array_diff($membres, [$createur]);
+		shuffle($membresDisponibles);
+		$participantsAleatoires = array_slice($membresDisponibles, 0, min($nombreParticipants, count($membresDisponibles)));
+
+		foreach ($participantsAleatoires as $participant) {
+			$dateParticipation = genererDateApres($dateProjet);
+			$datePartFormatee = substr($dateParticipation, 0, 2) . "/" . substr($dateParticipation, 2, 2) . "/" . substr($dateParticipation, 4, 4);
+			$values[] = "($idprojet, \"$participant\", \"accepte\", \"$datePartFormatee\")";
+			$participantsProjet[] = $participant;
+			$totalParticipations++;
+
+			if (count($values) >= $BATCH_SIZE) {
+				executerBatch($connexion, $sqlBase, $values);
+			}
+		}
+
+		$participantsParProjet[$idprojet] = $participantsProjet;
+	}
+
+	executerBatch($connexion, $sqlBase, $values);
+	mysqli_commit($connexion);
+	echo "Participations creees: $totalParticipations\n";
+
+	return $participantsParProjet;
+}
+
+/**
+	Crée les modifications de projets (dataprojets).
+	Les modifications sont faites par des participants.
+	Exception : exactement 2% des projets ont des modifications par des admins.
+	@param connexion Connexion mysqli
+	@param participantsParProjet Tableau idprojet => [participants]
+*/
+function creerModificationsProjets($connexion, $participantsParProjet) {
+	global $BATCH_SIZE;
+
+	$admins = ['admin01', 'admin02', 'admin03'];
+	$totalModifs = 0;
+	$values = [];
+	$sqlBase = "INSERT INTO dataprojets (idprojet, idmembre, date, heure) VALUES ";
+
+	// Récupérer tous les projets
+	$result = mysqli_query($connexion, "SELECT idprojet, date FROM projets");
+	$projets = [];
+	while ($row = mysqli_fetch_assoc($result)) {
+		$projets[] = $row;
+	}
+
+	// Calculer exactement 2% des projets pour modifications admin
+	$nombreProjetsAdmin = (int) round(count($projets) * 0.02);
+	$indicesProjetsAdmin = array_rand($projets, max(1, $nombreProjetsAdmin));
+	if (!is_array($indicesProjetsAdmin)) {
+		$indicesProjetsAdmin = [$indicesProjetsAdmin];
+	}
+	$projetsAdmin = [];
+	foreach ($indicesProjetsAdmin as $idx) {
+		$projetsAdmin[] = $projets[$idx]['idprojet'];
+	}
+
+	mysqli_begin_transaction($connexion);
+
+	foreach ($projets as $projet) {
+		$idprojet = $projet['idprojet'];
+		$dateProjet = $projet['date'];
+		$nombreModifs = rand(5, 30);
+
+		// Déterminer qui peut modifier ce projet
+		$estProjetAdmin = in_array($idprojet, $projetsAdmin);
+		$participants = isset($participantsParProjet[$idprojet]) ? $participantsParProjet[$idprojet] : [];
+
+		for ($idx = 0; $idx < $nombreModifs; $idx++) {
+			if ($estProjetAdmin && rand(1, 3) == 1) {
+				// 1/3 des modifs par admin sur les projets sélectionnés
+				$modificateur = choisirAleatoire($admins);
+			} elseif (!empty($participants)) {
+				// Modification par un participant
+				$modificateur = choisirAleatoire($participants);
+			} else {
+				// Fallback si pas de participants (ne devrait pas arriver)
+				continue;
+			}
+
+			$dateModif = genererDateApres($dateProjet);
+			$heureModif = genererHeure();
+			$values[] = "($idprojet, '$modificateur', '$dateModif', '$heureModif')";
+			$totalModifs++;
+
+			if (count($values) >= $BATCH_SIZE) {
+				executerBatch($connexion, $sqlBase, $values);
+			}
 		}
 	}
 
-	// Vider le batch des créateurs avant les modificateurs
 	executerBatch($connexion, $sqlBase, $values);
-
-	// Récupérer tous les modificateurs uniques par projet (sauf admins)
-	$result2 = mysqli_query($connexion, "SELECT DISTINCT idprojet, idmembre, date FROM dataprojets");
-	while ($row = mysqli_fetch_assoc($result2)) {
-		$idprojet = $row["idprojet"];
-		$idmembre = $row["idmembre"];
-		$dateModif = $row["date"];
-
-		// Ignorer les admins
-		if (in_array($idmembre, $admins)) continue;
-
-		// Convertir date ddmmyyyy en dd/mm/yyyy
-		$dateFormatee = substr($dateModif, 0, 2) . "/" . substr($dateModif, 2, 2) . "/" . substr($dateModif, 4, 4);
-
-		// ON DUPLICATE KEY UPDATE pour ignorer si déjà présent (créateur)
-		$sql = "INSERT INTO participations (idprojet, idmembre, statut, date_demande)
-				VALUES ($idprojet, \"$idmembre\", \"accepte\", \"$dateFormatee\")
-				ON DUPLICATE KEY UPDATE statut=\"accepte\"";
-		mysqli_query($connexion, $sql);
-		$totalParticipations++;
-	}
-
 	mysqli_commit($connexion);
-	echo "Participations creees: $totalParticipations\n";
+	echo "Modifications de projets creees: $totalModifs (" . count($projetsAdmin) . " projets avec modifs admin)\n";
 }
 
 // ==============================================================================
@@ -484,7 +543,8 @@ function main() {
 	creerPosts($connexion);
 	creerProjets($connexion);
 	creerDataposts($connexion);
-	creerParticipations($connexion);
+	$participantsParProjet = creerParticipations($connexion);
+	creerModificationsProjets($connexion, $participantsParProjet);
 
 	// Écriture du fichier users.txt
 	$cheminUsers = __DIR__ . '/users.txt';
