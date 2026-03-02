@@ -36,7 +36,7 @@ $titrePage = "Nouveau Projet";
 		<th>Auteurs et dates de modification</th>
 		<th>Derniers projets</th>
 		<th>Date de publication</th>
-		<th>Modifications</th>
+		<?php if ($estAdmin): ?><th>Modifications</th><?php endif; ?>
 	</tr>
 <?php foreach ($projets as $projet): ?>
 	<?php $estProprietaire = ($projet['id'] == $_SESSION['id']); ?>

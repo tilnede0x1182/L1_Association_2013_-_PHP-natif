@@ -43,7 +43,7 @@ $titrePage = "Liste des projets du membre " . $membre;
 		<?php endif; ?>
 		<th>Contenu du projet</th>
 		<th>Date de publication</th>
-		<th>Modifications</th>
+		<?php if ($estAdmin || $estProprietaire): ?><th>Modifications</th><?php endif; ?>
 	</tr>
 <?php if (empty($projets)): ?>
 	<tr>

@@ -106,7 +106,7 @@ if (!empty($_POST)) {
       $date = $_POST['d1'] . $_POST['d2'] . $_POST['d3'];
       if ($date == "") $date = "-11";
       updateMembre($_SESSION['id'], 'DateNaissance', $date);
-      header('Location: ' . $serveur . 'Membres/MonCompte.php');
+      header('Location: ' . $serveur . 'src/pages/Membres/MonCompte.php');
       exit;
     }
   } elseif ($infomembre == "id") {
@@ -150,7 +150,7 @@ if (!empty($_POST)) {
 
     if ($valide) {
       updateMembre($_SESSION['id'], $infomembre, $_POST[$infomembre]);
-      header('Location: ' . $serveur . 'Membres/MonCompte.php');
+      header('Location: ' . $serveur . 'src/pages/Membres/MonCompte.php');
       exit;
     }
   } elseif ($infomembre == "mail") {
@@ -164,7 +164,7 @@ if (!empty($_POST)) {
 
     if ($valide) {
       updateMembre($_SESSION['id'], $infomembre, $_POST[$infomembre]);
-      header('Location: ' . $serveur . 'Membres/MonCompte.php');
+      header('Location: ' . $serveur . 'src/pages/Membres/MonCompte.php');
       exit;
     }
   } else {
@@ -179,7 +179,7 @@ if (!empty($_POST)) {
 
     if ($valide) {
       updateMembre($_SESSION['id'], $infomembre, $_POST[$infomembre]);
-      header('Location: ' . $serveur . 'Membres/MonCompte.php');
+      header('Location: ' . $serveur . 'src/pages/Membres/MonCompte.php');
       exit;
     }
   }

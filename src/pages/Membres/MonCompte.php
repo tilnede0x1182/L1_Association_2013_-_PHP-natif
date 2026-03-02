@@ -4,7 +4,7 @@
  */
 require_once __DIR__ . '/../../../utils/includes/init.php';
 
-$_SESSION['pageCourante'] = $serveur . 'Membres/MonCompte.php';
+$_SESSION['pageCourante'] = $serveur . 'src/pages/Membres/MonCompte.php';
 
 // Vérifier la connexion
 if (!verifieConnection()) {
