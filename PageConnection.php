@@ -1,31 +1,28 @@
-﻿<!DOCTYPE html>
+<?php
+/**
+ * Page de connexion (affichage des identifiants - debug)
+ * Note: Cette page semble être une page de test/debug
+ */
+require_once __DIR__ . '/includes/init.php';
+
+$titrePage = "Association - Connection (Membres)";
+?>
+<!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <title>Association - Connection (Membres)</title>
-<?php
-	include 'Utilitaires/Affichage/includeStylesheet.php';
-?>
-  </head>
+<head>
+  <meta charset="utf-8">
+  <title><?= $titrePage ?></title>
+  <?= includeStylesheet() ?>
+</head>
+<body>
 
-  <body>
-<?php
+<?php include __DIR__ . '/templates/nav.php'; ?>
 
-	include 'Utilitaires/Navigation/AdresseServeur.php';
+<?php if (isset($_POST['id'])): ?>
+<p>
+  Identifiant : <?= htmlspecialchars($_POST['id']) ?><br>
+  Mot de passe : <?= htmlspecialchars($_POST['motdepasse']) ?>
+</p>
+<?php endif; ?>
 
-    if (isset($_POST['id'])){
-	echo "<p>Identifiant : ".$_POST['id']."<br>";
-    }
-    else {
-	if (isset($_POST['id'])){
-	    echo "<p>";
-	}
-    }
-
-    if (isset($_POST['id'])){
-	echo "Mot de passe : ".$_POST['motdepasse']."</p>";
-    }
-
-?>
-  </body>
-</html>
+<?php include __DIR__ . '/templates/footer.php'; ?>

@@ -1,0 +1,126 @@
+/* ==============================================================================
+   Variables CSS - Thème par défaut (Coucher de soleil)
+   ============================================================================== */
+
+:root {
+	--couleur-texte: white;
+	--couleur-fond: #E68A2E;
+	--gradient-debut: rgb(83, 116, 221);
+	--gradient-fin: rgb(177, 112, 43);
+	--couleur-titre: orange;
+	--ombre-titre: black;
+}
+
+/* ==============================================================================
+   Variables CSS - Thème 2 (Rosée du matin)
+   ============================================================================== */
+
+body.theme2 {
+	--couleur-texte: #000099;
+	--couleur-fond: #47B224;
+	--gradient-debut: rgb(255, 255, 0);
+	--gradient-fin: rgb(178, 233, 60);
+	--couleur-titre: black;
+	--ombre-titre: rgb(25, 150, 167);
+}
+
+/* ==============================================================================
+   Styles communs
+   ============================================================================== */
+
+body {
+	color: var(--couleur-texte);
+	margin-top: 0px;
+	background-image: -webkit-linear-gradient(bottom, var(--gradient-debut), var(--gradient-fin));
+	background-image: linear-gradient(to top, var(--gradient-debut), var(--gradient-fin));
+	background-color: var(--couleur-fond);
+	background-attachment: fixed;
+}
+
+h1.titre {
+	font-size: 31px;
+	color: var(--couleur-titre);
+	text-align: center;
+	text-shadow: 0.1em 0.1em 0.2em var(--ombre-titre);
+}
+
+h1 {
+	text-align: center;
+	text-shadow: 0.06em 0.06em 0.07em black;
+}
+
+h2 {
+	text-align: center;
+	text-shadow: 0.06em 0.06em 0.07em black;
+}
+
+img.principale {
+	display: block;
+	margin: 0 auto;
+}
+
+div.clear {
+	clear: both;
+}
+
+strong#imp {
+	text-decoration: underline;
+}
+
+/* ==============================================================================
+   Navigation
+   ============================================================================== */
+
+nav#menuAcceuil img {
+	height: 30px;
+	width: 30px;
+}
+
+nav#menuAcceuil {
+	margin: 0;
+}
+
+#menuAcceuil ul {
+	width: 1380px;
+	list-style: none;
+	margin: 0 auto;
+	height: 60px;
+}
+
+#menuAcceuil li {
+	float: left;
+	width: 145px;
+	height: 3px;
+	text-shadow: 0.06em 0.06em 0.07em black;
+}
+
+div.accesMembre {
+	width: 250px;
+	margin: 2em 0 2em 1%;
+	text-align: left;
+}
+
+div.lien {
+	text-shadow: 0.06em 0.06em 0.07em black;
+}
+
+nav.listeGauche {
+	text-shadow: 0.06em 0.06em 0.07em black;
+	list-style: none;
+}
+
+/* ==============================================================================
+   Contenu
+   ============================================================================== */
+
+table {
+	margin: 1em 20%;
+}
+
+.texte {
+	margin: 1em 20%;
+}
+
+.texte1 {
+	margin: 1em 25%;
+}

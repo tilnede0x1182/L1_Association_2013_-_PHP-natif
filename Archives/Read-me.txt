@@ -1,0 +1,15 @@
+﻿Pour modifier les ifentifiants de la base de donnée, modifiez le fichier "ConnectionBaseDonnees.php" dans le dossier "Fonctions".
+N'oubliez pas d'inscrire l'adresse du 'serveur/dossier parent/' dans le fichier "AdresseServeur.php" dans le dossier "Fonctions" (attention à bien garder le dernier slash).
+
+
+Description de notre projet : 
+
+Nous avons tenté de remplir un maximum de conditions demandées par l'énoncé (même si le temps nous a contraint à ne pas toutes les remplir). Le but était de faire un site globalement viable (sans bugs) et relativement sécurisé.
+Le css a été fait en dernier. Le fait est que le temps nous a contraint a restreindre les graphismes.
+
+Bonne visite !
+
+-------------------------------
+
+Descritpion poussée du projet :
+- Nous avons inclus le Gadget qui permet de changer une expression du type [pseudo="id"] en id avec un lien vers sa description (information sur ce membre, s'il existe) dans les projets et les articles publics.

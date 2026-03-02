@@ -1,0 +1,200 @@
+% tree
+.
+├── Accueil (1).php
+├── A_faire.md
+├── AfficheArticle.php
+├── Connection1.php
+├── Connection2.php
+├── Contact.php
+├── creation_db.sql
+├── CreationNouveauProjet.php
+├── Deconnection.php
+├── EcritureNouveauPost.php
+├── Fonctions
+│   ├── AdresseServeur.php
+│   ├── AffDate.php
+│   ├── AffHeure.php
+│   ├── AfficheListeAuteursPosts.php
+│   ├── CalcAnciennete2.php
+│   ├── CalcAnciennete3.php
+│   ├── CalcAnciennete4.php
+│   ├── CalcAnciennete.php
+│   ├── ConnectionBaseDonnees.php
+│   ├── ConversionDate.php
+│   ├── ConvertChiffre.php
+│   ├── detectlId.php
+│   ├── échaper les char en php pour html et mysql.txt
+│   ├── EnregistrerDate.php
+│   ├── Essai1.php
+│   ├── EssaiDate.php
+│   ├── EssaiTab.php
+│   ├── footer.php
+│   ├── GenereAleat.php
+│   ├── includeStylesheet2.php
+│   ├── includeStylesheet.php
+│   ├── index.php
+│   ├── Inscritpion.php
+│   ├── Premières fonctions de vérifiaction.txt
+│   ├── Test (2).php
+│   ├── Test.php
+│   ├── Teststrlen.php
+│   └── VerifieCompetence.php
+├── Images
+│   ├── 01-plante-720px.jpg
+│   ├── 1280_1024_200911110914491132114.jpg
+│   ├── fond-d-ecran-sympa-HL2.jpg
+│   ├── img-images-nuage-fractal-cebeul-8721.jpg
+│   ├── index.php
+│   ├── Orangebicolore4.jpg
+│   ├── Palmiers.jpg
+│   ├── untitl100.jpg
+│   ├── untitl10.jpg
+│   └── vertbicolore2.jpg
+├── index.php
+├── InformationMembre.php
+├── ListeAuteursPost.php
+├── ListeCompletePosts.php
+├── ListeDesMembres - mise en route.txt
+├── ListeDesMembres.php
+├── ListedesPosts.php
+├── ListedesProjet.php
+├── MenuAccueil.php
+├── ModifierArticle.php
+├── ModifierInfo.php
+├── ModifierInformationMembre.php
+├── ModifierProjet.php
+├── ModifierStyle.php
+├── NouveauMembre3.php
+├── NouveauProjet.php
+├── PageConnection.php
+├── PageRedirectionVerslInscription.php
+├── Presentation.php
+├── README.md
+├── Read-me.txt
+├── seed.php
+├── Styles
+│   ├── index.php
+│   ├── style1.css
+│   └── style2.css
+├── SupprimerArticle.php
+├── SupprimerMembre.php
+├── SupprimerProjet.php
+├── tests
+│   └── tests.js
+├── tmp
+│   └── tree_tmp.txt
+├── users.txt
+├── VerifieConnectionMembre.php
+└── VerifieConnection.php
+
+6 directories, 81 files
+
+
+~/code/tilnede0x1182/Personnel/2025/Entrainement/projet_fac/Web_et_Reseau/Sites_Gestion_Utilisateurs/Gestion_Membres_Association/L1_Association_2013_-_PHP-natif ^ master
+% tree
+.
+├── Accueil
+│   ├── Accueil (1).php
+│   ├── Contact.php
+│   ├── MenuAccueil.php
+│   └── Presentation.php
+├── A_faire.md
+├── Base_de_donnees
+│   ├── ConnectionBaseDonnees.php
+│   ├── creation_db.sql
+│   ├── seed.php
+│   └── users.txt
+├── Contenu
+│   ├── Posts
+│   │   ├── AfficheArticle.php
+│   │   ├── EcritureNouveauPost.php
+│   │   ├── ListeAuteursPost.php
+│   │   ├── ListeCompletePosts.php
+│   │   ├── ListedesPosts.php
+│   │   ├── ModifierArticle.php
+│   │   └── SupprimerArticle.php
+│   └── Projets
+│       ├── CreationNouveauProjet.php
+│       ├── ListedesProjet.php
+│       ├── ModifierProjet.php
+│       ├── NouveauProjet.php
+│       └── SupprimerProjet.php
+├── Fonctions
+│   ├── AffDate.php
+│   ├── AffHeure.php
+│   ├── CalcAnciennete2.php
+│   ├── CalcAnciennete3.php
+│   ├── CalcAnciennete4.php
+│   ├── ConvertChiffre.php
+│   ├── échaper les char en php pour html et mysql.txt
+│   ├── EnregistrerDate.php
+│   ├── Essai1.php
+│   ├── EssaiDate.php
+│   ├── EssaiTab.php
+│   ├── GenereAleat.php
+│   ├── includeStylesheet2.php
+│   ├── index.php
+│   ├── Inscritpion.php
+│   ├── Premières fonctions de vérifiaction.txt
+│   ├── Test (2).php
+│   ├── Test.php
+│   └── Teststrlen.php
+├── Images
+│   └── index.php
+├── index.php
+├── Inscription_Desinscription
+│   ├── Connection1.php
+│   ├── Connection2.php
+│   ├── Deconnection.php
+│   ├── NouveauMembre3.php
+│   ├── VerifieConnectionMembre.php
+│   └── VerifieConnection.php
+├── ListeDesMembres - mise en route.txt
+├── Membres
+│   ├── InformationMembre.php
+│   ├── ListeDesMembres.php
+│   ├── ModifierInfo.php
+│   ├── ModifierInformationMembre.php
+│   └── SupprimerMembre.php
+├── PageConnection.php
+├── README.md
+├── Read-me.txt
+├── Ressources
+│   ├── CSS
+│   │   ├── style1.css
+│   │   └── style2.css
+│   └── Images
+│       ├── Fonds
+│       │   ├── 01-plante-720px.jpg
+│       │   ├── 1280_1024_200911110914491132114.jpg
+│       │   ├── fond-d-ecran-sympa-HL2.jpg
+│       │   ├── img-images-nuage-fractal-cebeul-8721.jpg
+│       │   ├── Palmiers.jpg
+│       │   ├── untitl100.jpg
+│       │   └── untitl10.jpg
+│       └── Styles
+│           ├── Orangebicolore4.jpg
+│           └── vertbicolore2.jpg
+├── Styles
+│   └── index.php
+├── tests
+│   └── tests.js
+├── tmp
+│   └── tree_tmp.txt
+└── Utilitaires
+    ├── Affichage
+    │   ├── AfficheListeAuteursPosts.php
+    │   ├── footer.php
+    │   ├── includeStylesheet.php
+    │   └── ModifierStyle.php
+    ├── Dates
+    │   ├── CalcAnciennete.php
+    │   └── ConversionDate.php
+    ├── Navigation
+    │   ├── AdresseServeur.php
+    │   └── PageRedirectionVerslInscription.php
+    └── Verification
+        ├── detectlId.php
+        └── VerifieCompetence.php
+
+23 directories, 81 files

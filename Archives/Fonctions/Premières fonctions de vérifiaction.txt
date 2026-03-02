@@ -1,0 +1,26 @@
+﻿<?php
+// On vérifie que le formulaire n'a pas été soumis via une source externe
+if($_SERVER["HTTP_REFERER"] !== "http://www.site.com/index.php") {
+    echo "Le formulaire est soumis depuis une source externe !";
+}
+
+// On vérifie que tous les champs ont été complétés
+else if(empty($_POST["courriel"]) || empty($_POST["pseudo"])) {
+    echo "Vous devez compléter tous les champs du formulaire !";
+}
+
+// On vérifie que l'adresse de courriel soit valide
+else if(!filter_var($_POST["courriel"], FILTER_VALIDATE_EMAIL)) {
+    echo "Votre adresse de courriel est incorrecte !";
+}
+
+// On vérifie que le Pseudo ne contient pas de caractères spéciaux
+else if(!preg_match('/^[a-zA-Z0-9-_]+$/', $_POST["pseudo"])) {
+    echo "Votre pseudo contient des caractères spéciaux !";
+}
+
+// Sinon, on indique que tout est parfait
+else {
+    echo "Félicitations, tout est bon !";
+}
+?>
