@@ -63,9 +63,18 @@ CREATE TABLE participations (
     id INT AUTO_INCREMENT PRIMARY KEY,
     idprojet INT NOT NULL,
     idmembre VARCHAR(100) NOT NULL,
-    statut ENUM('en_attente', 'accepte', 'refuse') DEFAULT 'en_attente',
-    date_demande VARCHAR(20),
+    date_acceptation VARCHAR(20),
     FOREIGN KEY (idprojet) REFERENCES projets(idprojet) ON DELETE CASCADE,
     FOREIGN KEY (idmembre) REFERENCES asso(id) ON DELETE CASCADE,
     UNIQUE KEY unique_participation (idprojet, idmembre)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE demandes_participation (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    idprojet INT NOT NULL,
+    idmembre VARCHAR(100) NOT NULL,
+    date_demande VARCHAR(20),
+    FOREIGN KEY (idprojet) REFERENCES projets(idprojet) ON DELETE CASCADE,
+    FOREIGN KEY (idmembre) REFERENCES asso(id) ON DELETE CASCADE,
+    UNIQUE KEY unique_demande (idprojet, idmembre)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

@@ -71,19 +71,13 @@ if (isset($_POST['confirmer'])) {
 	<p><strong><?= htmlspecialchars($idmembre) ?></strong> a été retiré du projet <strong><?= htmlspecialchars($projet['Objet']) ?></strong>.</p>
 	<div class="lien"><a href="<?= $serveur ?>src/pages/Contenu/Projets/Liste.php">Retour à la liste des projets</a></div>
 <?php else: ?>
-	<div class="confirmation-importante">
-		<h2>Confirmation de retrait</h2>
+	<h2>Exclure <?= htmlspecialchars($idmembre) ?> de <?= htmlspecialchars($projet['Objet']) ?> ?</h2>
 
-		<p>Vous souhaitez retirer <strong><?= htmlspecialchars($idmembre) ?></strong> du projet <strong><?= htmlspecialchars($projet['Objet']) ?></strong>.</p>
+	<p>⚠️ Attention : <strong><?= htmlspecialchars($idmembre) ?></strong> ne pourra plus modifier le projet <strong><?= htmlspecialchars($projet['Objet']) ?></strong>.</p>
 
-		<p>Conséquences :</p>
-		<ul>
-			<li>Ce membre ne pourra plus modifier le projet</li>
-			<li>Il pourra soumettre une nouvelle demande de participation ultérieurement</li>
-		</ul>
-
-		<form method="POST">
-			<input type="submit" name="confirmer" value="Confirmer le retrait" class="btn-confirmer-retrait">
+	<div class="lien">
+		<form method="POST" style="display: inline;">
+			<input type="submit" name="confirmer" value="Confirmer">
 		</form>
 	</div>
 

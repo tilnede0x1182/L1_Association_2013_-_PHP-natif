@@ -325,7 +325,7 @@ h1:not(.titre),
 h2,
 h3,
 h4,
-form:not(.accesMembre form) {
+form:not(.accesMembre form):not(.lien form):not(.texte table form):not(.texte1 table form):not(.carte-texte table form) {
 	margin-left: 280px;
 }
 

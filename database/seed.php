@@ -387,7 +387,7 @@ function creerParticipations($connexion) {
 
 	$totalParticipations = 0;
 	$values = [];
-	$sqlBase = "INSERT INTO participations (idprojet, idmembre, statut, date_demande) VALUES ";
+	$sqlBase = "INSERT INTO participations (idprojet, idmembre, date_acceptation) VALUES ";
 	$participantsParProjet = [];
 
 	mysqli_begin_transaction($connexion);
@@ -404,7 +404,7 @@ function creerParticipations($connexion) {
 
 		// Ajouter le créateur comme participant (sauf si admin)
 		if (!in_array($createur, $admins)) {
-			$values[] = "($idprojet, \"$createur\", \"accepte\", \"$dateFormatee\")";
+			$values[] = "($idprojet, \"$createur\", \"$dateFormatee\")";
 			$participantsProjet[] = $createur;
 			$totalParticipations++;
 		}
@@ -418,7 +418,7 @@ function creerParticipations($connexion) {
 		foreach ($participantsAleatoires as $participant) {
 			$dateParticipation = genererDateApres($dateProjet);
 			$datePartFormatee = substr($dateParticipation, 0, 2) . "/" . substr($dateParticipation, 2, 2) . "/" . substr($dateParticipation, 4, 4);
-			$values[] = "($idprojet, \"$participant\", \"accepte\", \"$datePartFormatee\")";
+			$values[] = "($idprojet, \"$participant\", \"$datePartFormatee\")";
 			$participantsProjet[] = $participant;
 			$totalParticipations++;
 
@@ -509,6 +509,72 @@ function creerModificationsProjets($connexion, $participantsParProjet) {
 	echo "Modifications de projets creees: $totalModifs (" . count($projetsAdmin) . " projets avec modifs admin)\n";
 }
 
+/**
+	Crée 50 demandes de participation aléatoires.
+	Les admins ne peuvent pas faire de demande.
+	@param connexion Connexion mysqli
+	@param participantsParProjet Tableau idprojet => [participants] pour éviter les doublons
+*/
+function creerDemandesParticipation($connexion, $participantsParProjet) {
+	// Les admins ne peuvent pas demander
+	$admins = ["admin01", "admin02", "admin03"];
+
+	// Récupérer tous les membres non-admins
+	$result = mysqli_query($connexion, "SELECT id FROM asso WHERE competence != 'Administrateur'");
+	$membres = [];
+	while ($row = mysqli_fetch_assoc($result)) {
+		$membres[] = $row["id"];
+	}
+
+	// Récupérer tous les projets
+	$result = mysqli_query($connexion, "SELECT idprojet, date FROM projets");
+	$projets = [];
+	while ($row = mysqli_fetch_assoc($result)) {
+		$projets[] = $row;
+	}
+
+	$totalDemandes = 0;
+	$values = [];
+	$sqlBase = "INSERT INTO demandes_participation (idprojet, idmembre, date_demande) VALUES ";
+
+	mysqli_begin_transaction($connexion);
+
+	// Créer exactement 50 demandes
+	while ($totalDemandes < 50) {
+		$projet = choisirAleatoire($projets);
+		$idprojet = $projet['idprojet'];
+		$dateProjet = $projet['date'];
+
+		// Choisir un membre qui n'est pas déjà participant
+		$participantsActuels = isset($participantsParProjet[$idprojet]) ? $participantsParProjet[$idprojet] : [];
+		$membresDisponibles = array_diff($membres, $participantsActuels);
+
+		if (empty($membresDisponibles)) continue;
+
+		$demandeur = choisirAleatoire($membresDisponibles);
+
+		// Vérifier qu'on n'a pas déjà ajouté cette demande
+		$cleUnique = $idprojet . '-' . $demandeur;
+		static $demandesAjoutees = [];
+		if (in_array($cleUnique, $demandesAjoutees)) continue;
+		$demandesAjoutees[] = $cleUnique;
+
+		$dateDemande = genererDateApres($dateProjet);
+		$dateFormatee = substr($dateDemande, 0, 2) . "/" . substr($dateDemande, 2, 2) . "/" . substr($dateDemande, 4, 4);
+
+		$values[] = "($idprojet, \"$demandeur\", \"$dateFormatee\")";
+		$totalDemandes++;
+	}
+
+	if (!empty($values)) {
+		$sql = $sqlBase . implode(',', $values);
+		mysqli_query($connexion, $sql);
+	}
+
+	mysqli_commit($connexion);
+	echo "Demandes de participation creees: $totalDemandes\n";
+}
+
 // ==============================================================================
 // Main
 // ==============================================================================
@@ -527,6 +593,7 @@ function main() {
 	// Nettoyage
 	mysqli_query($connexion, "SET FOREIGN_KEY_CHECKS = 0");
 	mysqli_query($connexion, "TRUNCATE TABLE participations");
+	mysqli_query($connexion, "TRUNCATE TABLE demandes_participation");
 	mysqli_query($connexion, "TRUNCATE TABLE dataprojets");
 	mysqli_query($connexion, "TRUNCATE TABLE dataposts");
 	mysqli_query($connexion, "TRUNCATE TABLE projets");
@@ -545,6 +612,7 @@ function main() {
 	creerDataposts($connexion);
 	$participantsParProjet = creerParticipations($connexion);
 	creerModificationsProjets($connexion, $participantsParProjet);
+	creerDemandesParticipation($connexion, $participantsParProjet);
 
 	// Écriture du fichier users.txt
 	$cheminUsers = __DIR__ . '/users.txt';

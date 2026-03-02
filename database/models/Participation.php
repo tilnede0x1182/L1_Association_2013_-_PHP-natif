@@ -1,10 +1,12 @@
 <?php
 /**
  * Model Participation - Gestion des participations aux projets
+ * Table participations = participants acceptés
+ * Table demandes_participation = demandes en attente
  */
 
 /**
- * Récupère les participants acceptés d'un projet
+ * Récupère les participants d'un projet
  * @param int $idprojet ID du projet
  * @return array Liste des participants (idmembre)
  */
@@ -13,7 +15,7 @@ function getParticipants($idprojet) {
 	if (!$connexion) return array();
 
 	$requete = 'SELECT idmembre FROM participations WHERE idprojet="' .
-		mysqli_real_escape_string($connexion, $idprojet) . '" AND statut="accepte"';
+		mysqli_real_escape_string($connexion, $idprojet) . '"';
 	$resultat = mysqli_query($connexion, $requete);
 
 	$participants = array();
@@ -32,8 +34,8 @@ function getDemandesParticipation($idprojet) {
 	$connexion = getConnexion();
 	if (!$connexion) return array();
 
-	$requete = 'SELECT * FROM participations WHERE idprojet="' .
-		mysqli_real_escape_string($connexion, $idprojet) . '" AND statut="en_attente"';
+	$requete = 'SELECT * FROM demandes_participation WHERE idprojet="' .
+		mysqli_real_escape_string($connexion, $idprojet) . '"';
 	$resultat = mysqli_query($connexion, $requete);
 
 	$demandes = array();
@@ -52,12 +54,11 @@ function getDemandesParticipationPourCreateur($idmembre) {
 	$connexion = getConnexion();
 	if (!$connexion) return array();
 
-	$requete = 'SELECT p.*, pr.Objet as titre_projet, pr.id as createur_projet
-		FROM participations p
-		INNER JOIN projets pr ON p.idprojet = pr.idprojet
+	$requete = 'SELECT d.*, pr.Objet as titre_projet, pr.id as createur_projet
+		FROM demandes_participation d
+		INNER JOIN projets pr ON d.idprojet = pr.idprojet
 		WHERE pr.id="' . mysqli_real_escape_string($connexion, $idmembre) . '"
-		AND p.statut="en_attente"
-		ORDER BY p.date_demande DESC';
+		ORDER BY d.date_demande DESC';
 	$resultat = mysqli_query($connexion, $requete);
 
 	$demandes = array();
@@ -79,7 +80,7 @@ function estParticipant($idprojet, $idmembre) {
 
 	$requete = 'SELECT id FROM participations WHERE idprojet="' .
 		mysqli_real_escape_string($connexion, $idprojet) . '" AND idmembre="' .
-		mysqli_real_escape_string($connexion, $idmembre) . '" AND statut="accepte"';
+		mysqli_real_escape_string($connexion, $idmembre) . '"';
 	$resultat = mysqli_query($connexion, $requete);
 
 	return mysqli_num_rows($resultat) > 0;
@@ -95,9 +96,9 @@ function aDemandeEnAttente($idprojet, $idmembre) {
 	$connexion = getConnexion();
 	if (!$connexion) return false;
 
-	$requete = 'SELECT id FROM participations WHERE idprojet="' .
+	$requete = 'SELECT id FROM demandes_participation WHERE idprojet="' .
 		mysqli_real_escape_string($connexion, $idprojet) . '" AND idmembre="' .
-		mysqli_real_escape_string($connexion, $idmembre) . '" AND statut="en_attente"';
+		mysqli_real_escape_string($connexion, $idmembre) . '"';
 	$resultat = mysqli_query($connexion, $requete);
 
 	return mysqli_num_rows($resultat) > 0;
@@ -115,16 +116,17 @@ function demanderParticipation($idprojet, $idmembre) {
 
 	$date = date('d/m/Y');
 
-	$requete = 'INSERT INTO participations (idprojet, idmembre, statut, date_demande) VALUES ("' .
+	$requete = 'INSERT INTO demandes_participation (idprojet, idmembre, date_demande) VALUES ("' .
 		mysqli_real_escape_string($connexion, $idprojet) . '", "' .
-		mysqli_real_escape_string($connexion, $idmembre) . '", "en_attente", "' .
-		$date . '")';
+		mysqli_real_escape_string($connexion, $idmembre) . '", "' .
+		$date . '") ON DUPLICATE KEY UPDATE date_demande="' . $date . '"';
 
 	return mysqli_query($connexion, $requete);
 }
 
 /**
  * Accepte une demande de participation
+ * Ajoute dans participations et supprime de demandes_participation
  * @param int $idprojet ID du projet
  * @param string $idmembre ID du membre
  * @return bool
@@ -133,15 +135,29 @@ function accepterParticipation($idprojet, $idmembre) {
 	$connexion = getConnexion();
 	if (!$connexion) return false;
 
-	$requete = 'UPDATE participations SET statut="accepte" WHERE idprojet="' .
+	$date = date('d/m/Y');
+
+	// Ajouter dans participations
+	$requeteInsert = 'INSERT INTO participations (idprojet, idmembre, date_acceptation) VALUES ("' .
+		mysqli_real_escape_string($connexion, $idprojet) . '", "' .
+		mysqli_real_escape_string($connexion, $idmembre) . '", "' .
+		$date . '") ON DUPLICATE KEY UPDATE date_acceptation="' . $date . '"';
+
+	$resultatInsert = mysqli_query($connexion, $requeteInsert);
+
+	// Supprimer de demandes_participation
+	$requeteDelete = 'DELETE FROM demandes_participation WHERE idprojet="' .
 		mysqli_real_escape_string($connexion, $idprojet) . '" AND idmembre="' .
 		mysqli_real_escape_string($connexion, $idmembre) . '"';
 
-	return mysqli_query($connexion, $requete);
+	mysqli_query($connexion, $requeteDelete);
+
+	return $resultatInsert;
 }
 
 /**
  * Refuse une demande de participation
+ * Supprime de demandes_participation
  * @param int $idprojet ID du projet
  * @param string $idmembre ID du membre
  * @return bool
@@ -150,7 +166,7 @@ function refuserParticipation($idprojet, $idmembre) {
 	$connexion = getConnexion();
 	if (!$connexion) return false;
 
-	$requete = 'UPDATE participations SET statut="refuse" WHERE idprojet="' .
+	$requete = 'DELETE FROM demandes_participation WHERE idprojet="' .
 		mysqli_real_escape_string($connexion, $idprojet) . '" AND idmembre="' .
 		mysqli_real_escape_string($connexion, $idmembre) . '"';
 
@@ -158,7 +174,7 @@ function refuserParticipation($idprojet, $idmembre) {
 }
 
 /**
- * Retire un participant d'un projet (supprime sa participation)
+ * Retire un participant d'un projet
  * @param int $idprojet ID du projet
  * @param string $idmembre ID du membre à retirer
  * @return bool
@@ -187,10 +203,10 @@ function ajouterParticipant($idprojet, $idmembre) {
 
 	$date = date('d/m/Y');
 
-	$requete = 'INSERT INTO participations (idprojet, idmembre, statut, date_demande) VALUES ("' .
+	$requete = 'INSERT INTO participations (idprojet, idmembre, date_acceptation) VALUES ("' .
 		mysqli_real_escape_string($connexion, $idprojet) . '", "' .
-		mysqli_real_escape_string($connexion, $idmembre) . '", "accepte", "' .
-		$date . '") ON DUPLICATE KEY UPDATE statut="accepte"';
+		mysqli_real_escape_string($connexion, $idmembre) . '", "' .
+		$date . '") ON DUPLICATE KEY UPDATE date_acceptation="' . $date . '"';
 
 	return mysqli_query($connexion, $requete);
 }
@@ -204,10 +220,9 @@ function countDemandesEnAttente($idmembre) {
 	$connexion = getConnexion();
 	if (!$connexion) return 0;
 
-	$requete = 'SELECT COUNT(*) as nb FROM participations p
-		INNER JOIN projets pr ON p.idprojet = pr.idprojet
-		WHERE pr.id="' . mysqli_real_escape_string($connexion, $idmembre) . '"
-		AND p.statut="en_attente"';
+	$requete = 'SELECT COUNT(*) as nb FROM demandes_participation d
+		INNER JOIN projets pr ON d.idprojet = pr.idprojet
+		WHERE pr.id="' . mysqli_real_escape_string($connexion, $idmembre) . '"';
 	$resultat = mysqli_query($connexion, $requete);
 	$ligne = mysqli_fetch_array($resultat);
 

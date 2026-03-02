@@ -91,3 +91,36 @@ Modifier le seed pour la cohérence entre participants et modifications :
 - Ajouter des modifications par des admins sur ces projets sélectionnés
 ____
 
+Séparer les demandes de participation et les participations acceptées en 2 tables distinctes.
+
+---
+Fichiers à modifier :
+
+1. database/creation_db.sql
+- Ajouter table demandes_participation (idprojet, idmembre, date_demande)
+- Table participations : retirer la colonne statut (tous sont acceptés)
+2. database/seed.php
+- Adapter creerParticipations() : plus de statut à insérer
+- Ajouter fonction creerDemandesParticipation() : 50 demandes aléatoires sur des projets (admins exclus)
+3. database/models/Participation.php
+- demanderParticipation() : INSERT dans demandes_participation (pas participations)
+- accepterParticipation() : INSERT dans participations + DELETE de demandes_participation
+- refuserParticipation() : DELETE de demandes_participation uniquement
+- estParticipant() : SELECT dans participations (plus de WHERE statut)
+- aDemandeEnAttente() : SELECT dans demandes_participation
+- getDemandesEnAttente() : SELECT dans demandes_participation
+- getParticipants() : SELECT dans participations (plus de WHERE statut)
+4. src/pages/Contenu/Projets/Participations.php
+- Adapter les requêtes si nécessaire (normalement via les fonctions du model)
+____
+
+● Résumé de la modification demandée :
+
+Page RetirerParticipant.php :
+1. Fond du tableau : noir → blanc
+2. Message simplifié : même style que les autres confirmations du site (pas de style "alerte rouge")
+3. Texte : juste "⚠️ Attention : [pseudo] ne pourra plus modifier le projet [nom du projet]" + boutons Confirmer/Annuler standard
+
+Page Liste.php et ListeMembre.php (colonne Participants) :
+4. Icône à côté des noms : remplacer la croix (✕) par ⤴️
+
