@@ -1,6 +1,0 @@
-﻿htmlspecialchars("char");
-
-htmlentities("char");
-
-mysql_real_escape_string("char");
-
