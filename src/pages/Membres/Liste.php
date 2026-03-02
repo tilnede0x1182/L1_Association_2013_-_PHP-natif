@@ -13,6 +13,8 @@ if (!verifieConnection()) {
 	exit;
 }
 
+$estAdmin = verifieConnectionMembre();
+
 // Récupérer les paramètres de tri
 $classement = isset($_POST['classement']) ? $_POST['classement'] : 'id';
 $ordre = isset($_POST['ordre']) ? $_POST['ordre'] : 'ASC';
@@ -80,6 +82,7 @@ $membres = getAllMembres($classement, $ordre);
 		<th>Nombre de projets</th>
 		<th>Dernière connexion</th>
 		<th>Date d'inscription</th>
+		<?php if ($estAdmin): ?><th>Modifications</th><?php endif; ?>
 	</tr>
 <?php foreach ($membres as $membre): ?>
 	<tr>
@@ -107,6 +110,13 @@ $membres = getAllMembres($classement, $ordre);
 				<?= convertDate($membre['datedinscription']) ?> (<?= CalcAnciennete2($membre['datedinscription']) ?>)
 			<?php endif; ?>
 		</td>
+		<?php if ($estAdmin): ?>
+		<td>
+			<div class="lien"><a href="<?= $serveur ?>src/pages/Membres/MonCompte.php?idmembre=<?= $membre['id'] ?>">modifier</a></div>
+			<br><br><br>
+			<div class="lien"><a href="<?= $serveur ?>src/pages/Membres/Supprimer.php?idmembre=<?= $membre['id'] ?>">supprimer</a></div>
+		</td>
+		<?php endif; ?>
 	</tr>
 <?php endforeach; ?>
 </table>

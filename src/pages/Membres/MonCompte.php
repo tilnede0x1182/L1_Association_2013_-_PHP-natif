@@ -12,8 +12,13 @@ if (!verifieConnection()) {
   exit;
 }
 
-// Récupérer les informations du membre connecté
-$membre = getMembre($_SESSION['id']);
+// Vérifier si admin consulte un autre membre
+$estAdmin = verifieConnectionMembre();
+$idMembreCible = isset($_GET['idmembre']) && $estAdmin ? $_GET['idmembre'] : $_SESSION['id'];
+$estPropreSon = ($idMembreCible == $_SESSION['id']);
+
+// Récupérer les informations du membre
+$membre = getMembre($idMembreCible);
 if (!$membre) {
   header("Location: " . $serveur . "src/pages/Accueil/index.php");
   exit;
@@ -35,7 +40,11 @@ $titrePage = "Modifier les informations du membre " . $_SESSION['id'];
 
 <h1>Modifier les informations du membre <?= htmlspecialchars($_SESSION['id']) ?> :</h1>
 
+<?php if ($estPropreSon): ?>
 <p class="texte"><a href="<?= $serveur ?>src/pages/Membres/Supprimer.php">Supprimer mon compte</a></p>
+<?php else: ?>
+<p class="texte"><a href="<?= $serveur ?>src/pages/Membres/Supprimer.php?idmembre=<?= $idMembreCible ?>">Supprimer le compte de <?= htmlspecialchars($idMembreCible) ?></a></p>
+<?php endif; ?>
 
 <table border="1">
   <tr>
@@ -75,6 +84,8 @@ $titrePage = "Modifier les informations du membre " . $_SESSION['id'];
   </tr>
 </table>
 
+<?php if ($estPropreSon): ?>
 <p class="texte"><a href="<?= $serveur ?>src/pages/Membres/EditerChamp.php?info=motdepasse">Modifier mon mot de passe</a></p>
+<?php endif; ?>
 
 <?php include __DIR__ . '/../../../utils/templates/footer.php'; ?>
