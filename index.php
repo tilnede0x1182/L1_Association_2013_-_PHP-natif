@@ -2,6 +2,6 @@
 /**
  * Redirection vers la page d'accueil
  */
-header('Location: Accueil/index.php');
+header('Location: src/pages/Accueil/index.php');
 exit;
 ?>

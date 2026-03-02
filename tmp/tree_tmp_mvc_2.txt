@@ -1,0 +1,149 @@
+Tree MVC refactoré (phase 2) - 2026-03-02
+=========================================
+
+AVANT (anciens chemins) -> APRES (nouveaux chemins)
+===================================================
+
+Ressources/CSS/style.css                -> assets/css/style.css
+Ressources/Images/Fonds/                -> assets/images/fonds/
+Ressources/Images/Styles/               -> assets/images/styles/
+
+includes/                               -> utils/includes/
+  init.php                              -> utils/includes/init.php
+  config.php                            -> utils/includes/config.php
+  fonctions.php                         -> utils/includes/fonctions.php
+
+templates/                              -> utils/templates/
+  nav.php                               -> utils/templates/nav.php
+  footer.php                            -> utils/templates/footer.php
+  header.php                            -> utils/templates/header.php
+
+models/                                 -> database/models/
+  Article.php                           -> database/models/Article.php
+  Membre.php                            -> database/models/Membre.php
+  Projet.php                            -> database/models/Projet.php
+
+Base_de_donnees/                        -> database/
+  creation_db.sql                       -> database/creation_db.sql
+  seed.php                              -> database/seed.php
+  users.txt                             -> database/users.txt
+
+Accueil/                                -> src/pages/Accueil/
+Auth/                                   -> src/pages/Auth/
+Membres/                                -> src/pages/Membres/
+Contenu/                                -> src/pages/Contenu/
+
+Utilitaires/Affichage/ModifierStyle.php                    -> utils/ModifierStyle.php
+Utilitaires/Navigation/PageRedirectionVerslInscription.php -> utils/PageRedirectionVerslInscription.php
+Utilitaires/Verification/VerifieCompetence.php             -> utils/VerifieCompetence.php
+
+Reflexions/                             -> reflexion/
+
+TREE ACTUEL (après refactoring phase 2)
+=======================================
+
+L1_Association_2013_-_PHP-natif/
+├── index.php
+├── README.md
+├── A_faire.md
+│
+├── assets/
+│   ├── css/
+│   │   └── style.css
+│   └── images/
+│       ├── fonds/
+│       │   └── *.jpg
+│       └── styles/
+│           ├── Orangebicolore4.jpg
+│           └── vertbicolore2.jpg
+│
+├── src/
+│   └── pages/
+│       ├── Accueil/
+│       │   ├── index.php
+│       │   ├── Contact.php
+│       │   └── Presentation.php
+│       ├── Auth/
+│       │   ├── Connexion.php
+│       │   ├── Deconnexion.php
+│       │   ├── FormulaireConnexion.php
+│       │   └── Inscription.php
+│       ├── Membres/
+│       │   ├── Liste.php
+│       │   ├── Voir.php
+│       │   ├── MonCompte.php
+│       │   ├── EditerChamp.php
+│       │   └── Supprimer.php
+│       └── Contenu/
+│           ├── Articles/
+│           │   ├── Liste.php
+│           │   ├── ListeMembre.php
+│           │   ├── Voir.php
+│           │   ├── Creer.php
+│           │   ├── Editer.php
+│           │   ├── Supprimer.php
+│           │   └── Historique.php
+│           └── Projets/
+│               ├── Liste.php
+│               ├── ListeMembre.php
+│               ├── Creer.php
+│               ├── Editer.php
+│               ├── Supprimer.php
+│               └── Historique.php
+│
+├── utils/
+│   ├── includes/
+│   │   ├── init.php
+│   │   ├── config.php
+│   │   └── fonctions.php
+│   ├── templates/
+│   │   ├── nav.php
+│   │   ├── header.php
+│   │   └── footer.php
+│   ├── ModifierStyle.php
+│   ├── PageRedirectionVerslInscription.php
+│   └── VerifieCompetence.php
+│
+├── database/
+│   ├── models/
+│   │   ├── Article.php
+│   │   ├── Membre.php
+│   │   └── Projet.php
+│   ├── creation_db.sql
+│   ├── seed.php
+│   └── users.txt
+│
+├── reflexion/
+│   └── reflexion_refactor_mvc.txt
+│
+└── tmp/
+    ├── tree_tmp_archives.txt
+    ├── tree_tmp_mvc_1.txt
+    └── tree_tmp_mvc_2.txt
+
+MAPPING DES CHEMINS (pour mise à jour des includes/liens)
+=========================================================
+
+ANCIEN                                              NOUVEAU
+------                                              -------
+Ressources/CSS/style.css                            assets/css/style.css
+Ressources/Images/Fonds/                            assets/images/fonds/
+Ressources/Images/Styles/                           assets/images/styles/
+includes/init.php                                   utils/includes/init.php
+includes/config.php                                 utils/includes/config.php
+includes/fonctions.php                              utils/includes/fonctions.php
+templates/nav.php                                   utils/templates/nav.php
+templates/footer.php                                utils/templates/footer.php
+templates/header.php                                utils/templates/header.php
+models/Article.php                                  database/models/Article.php
+models/Membre.php                                   database/models/Membre.php
+models/Projet.php                                   database/models/Projet.php
+Accueil/                                            src/pages/Accueil/
+Auth/                                               src/pages/Auth/
+Membres/                                            src/pages/Membres/
+Contenu/                                            src/pages/Contenu/
+Utilitaires/Affichage/ModifierStyle.php             utils/ModifierStyle.php
+Utilitaires/Navigation/PageRedirectionVerslInscription.php  utils/PageRedirectionVerslInscription.php
+Utilitaires/Verification/VerifieCompetence.php      utils/VerifieCompetence.php
+Reflexions/                                         reflexion/
+Base_de_donnees/                                    database/
