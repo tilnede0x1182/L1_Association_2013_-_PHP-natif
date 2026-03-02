@@ -88,11 +88,7 @@ $titrePage = "Nouveau Projet";
 				Aucun participant
 			<?php else: ?>
 				<?php foreach ($participants as $participant): ?>
-					<a href="<?= $serveur ?>src/pages/Membres/Voir.php?idmembre=<?= htmlspecialchars($participant) ?>"><?= htmlspecialchars($participant) ?></a>
-					<?php if ($estProprietaire && $participant != $projet['id']): ?>
-						<a href="<?= $serveur ?>src/pages/Contenu/Projets/RetirerParticipant.php?idprojet=<?= $projet['idprojet'] ?>&idmembre=<?= urlencode($participant) ?>" class="btn-retirer" title="Retirer ce participant">⤴️</a>
-					<?php endif; ?>
-					<br>
+					<span style="white-space: nowrap;"><a href="<?= $serveur ?>src/pages/Membres/Voir.php?idmembre=<?= htmlspecialchars($participant) ?>"><?= htmlspecialchars($participant) ?></a><?php if ($estProprietaire && $participant != $projet['id']): ?> <a href="<?= $serveur ?>src/pages/Contenu/Projets/RetirerParticipant.php?idprojet=<?= $projet['idprojet'] ?>&idmembre=<?= urlencode($participant) ?>" class="btn-retirer" title="Retirer ce participant">⤴️</a><?php endif; ?></span><br>
 				<?php endforeach; ?>
 			<?php endif; ?>
 			<br>
