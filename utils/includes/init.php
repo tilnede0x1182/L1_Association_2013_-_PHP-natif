@@ -26,4 +26,5 @@ require_once __DIR__ . '/fonctions.php';
 require_once __DIR__ . '/../../database/models/Membre.php';
 require_once __DIR__ . '/../../database/models/Article.php';
 require_once __DIR__ . '/../../database/models/Projet.php';
+require_once __DIR__ . '/../../database/models/Participation.php';
 ?>

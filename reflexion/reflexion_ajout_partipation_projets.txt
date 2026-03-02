@@ -19,3 +19,65 @@ Structure technique :
 - CSS : style .alerte-danger (fond rouge, bordure rouge foncé, texte blanc)
 ____
 
+● Résumé mis à jour de la demande :
+
+1. Style visuel et ton du message de retrait :
+- Fond blanc avec bordure rouge subtile (pas fond rouge agressif)
+- Ton neutre et professionnel
+- Remplacer "exclure/exclusion" par "retirer/retrait"
+
+2. Renommages :
+- Exclure.php → RetirerParticipant.php
+- exclureParticipant() → retirerParticipant()
+- .alerte-danger → .confirmation-importante
+- .btn-exclure → .btn-retirer
+- .btn-danger → .btn-confirmer-retrait
+
+3. Message reformulé :
+Confirmation de retrait
+
+Vous souhaitez retirer [pseudo] du projet [nom].
+
+Conséquences :
+- Ce membre ne pourra plus modifier le projet
+- Il pourra soumettre une nouvelle demande de participation ultérieurement
+
+[Confirmer le retrait] [Annuler]
+
+4. Admins exclus du système de participation :
+- Ne pas inclure les admins dans le seed comme participants
+- Bouton "Participer" invisible pour les admins
+- Vérification côté serveur : un admin ne peut pas s'inscrire à un projet via Participer.php
+- Les admins modifient les projets via leurs droits admin, pas via le système de participation
+
+5. Bug affichage tableau :
+- Colonnes décalées à partir de la ligne 2
+- Chercher problème de fermeture <td> ou <tr> dans Liste.php
+____
+
+● Fichiers à modifier :
+
+1. database/models/Participation.php
+- Renommer exclureParticipant() → retirerParticipant()
+2. database/seed.php
+- Ne plus ajouter les admins comme participants (retirer admin01, admin02, admin03 des participations)
+3. src/pages/Contenu/Projets/Exclure.php
+- Renommer le fichier → RetirerParticipant.php
+- Reformuler le message de confirmation (ton neutre)
+- Changer les classes CSS utilisées
+- Appeler retirerParticipant() au lieu de exclureParticipant()
+4. src/pages/Contenu/Projets/Liste.php
+- Bouton "Participer" : ajouter condition !$estAdmin
+- Chercher/corriger bug fermeture balise <td> ou <tr>
+5. src/pages/Contenu/Projets/ListeMembre.php
+- Bouton "Participer" : ajouter condition !$estAdmin
+- Lien vers RetirerParticipant.php au lieu de Exclure.php
+6. src/pages/Contenu/Projets/Participer.php
+- Ajouter vérification serveur : si admin → redirection (pas d'inscription possible)
+7. assets/css/style.css
+- Renommer .alerte-danger → .confirmation-importante
+- Renommer .btn-exclure → .btn-retirer
+- Renommer .btn-danger → .btn-confirmer-retrait
+- Modifier le style : fond blanc, bordure rouge subtile, bouton rouge modéré (#c0392b)
+____
+

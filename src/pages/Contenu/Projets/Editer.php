@@ -28,10 +28,11 @@ if (!$projet) {
 	die("Projet non trouvé");
 }
 
-// Vérifier les droits (admin OU créateur du projet)
+// Vérifier les droits (admin OU créateur OU participant)
 $estAdmin = verifieConnectionAdmin();
 $estProprietaire = ($projet['id'] == $_SESSION['id']);
-if (!$estAdmin && !$estProprietaire) {
+$estParticipantProjet = estParticipant($idprojet, $_SESSION['id']);
+if (!$estAdmin && !$estProprietaire && !$estParticipantProjet) {
 	header("Location: " . $serveur . "src/pages/Accueil/index.php");
 	exit;
 }

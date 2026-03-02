@@ -44,13 +44,18 @@ $titrePage = "Liste des projets du membre " . $membre;
 		<th>Contenu du projet</th>
 		<th>Date de publication</th>
 		<?php if ($estAdmin || $estProprietaire): ?><th>Modifications</th><?php endif; ?>
+		<th>Participants</th>
 	</tr>
 <?php if (empty($projets)): ?>
 	<tr>
 		<td colspan="3">Aucun projet à ce jour.</td>
 	</tr>
 <?php else: ?>
-	<?php foreach ($projets as $projet): ?>
+	<?php foreach ($projets as $projet):
+		$participants = getParticipants($projet['idprojet']);
+		$dejaParticipant = in_array($_SESSION['id'], $participants);
+		$demandeEnAttente = aDemandeEnAttente($projet['idprojet'], $_SESSION['id']);
+	?>
 	<tr>
 		<?php if ($estProprietaire || $estAdmin): ?>
 		<td>
@@ -87,6 +92,25 @@ $titrePage = "Liste des projets du membre " . $membre;
 			<div class="lien"><a href="<?= $serveur ?>src/pages/Contenu/Projets/Supprimer.php?idprojet=<?= $projet['idprojet'] ?>">supprimer</a></div>
 		</td>
 		<?php endif; ?>
+		<td>
+			<?php if (empty($participants)): ?>
+				Aucun participant
+			<?php else: ?>
+				<?php foreach ($participants as $participant): ?>
+					<a href="<?= $serveur ?>src/pages/Membres/Voir.php?idmembre=<?= htmlspecialchars($participant) ?>"><?= htmlspecialchars($participant) ?></a>
+					<?php if ($estProprietaire && $participant != $projet['id']): ?>
+						<a href="<?= $serveur ?>src/pages/Contenu/Projets/RetirerParticipant.php?idprojet=<?= $projet['idprojet'] ?>&idmembre=<?= urlencode($participant) ?>" class="btn-retirer" title="Retirer ce participant">✕</a>
+					<?php endif; ?>
+					<br>
+				<?php endforeach; ?>
+			<?php endif; ?>
+			<br>
+			<?php if (!$estAdmin && !$estProprietaire && !$dejaParticipant && !$demandeEnAttente): ?>
+				<div class="lien"><a href="<?= $serveur ?>src/pages/Contenu/Projets/Participer.php?idprojet=<?= $projet['idprojet'] ?>">Participer</a></div>
+			<?php elseif ($demandeEnAttente): ?>
+				<em>Demande en attente</em>
+			<?php endif; ?>
+		</td>
 	</tr>
 	<?php endforeach; ?>
 <?php endif; ?>

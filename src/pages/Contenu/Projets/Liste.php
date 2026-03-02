@@ -36,10 +36,15 @@ $titrePage = "Nouveau Projet";
 		<th>Auteurs et dates de modification</th>
 		<th>Derniers projets</th>
 		<th>Date de publication</th>
-		<?php if ($estAdmin): ?><th>Modifications</th><?php endif; ?>
+		<th>Modifications</th>
+		<th>Participants</th>
 	</tr>
-<?php foreach ($projets as $projet): ?>
-	<?php $estProprietaire = ($projet['id'] == $_SESSION['id']); ?>
+<?php foreach ($projets as $projet):
+	$estProprietaire = ($projet['id'] == $_SESSION['id']);
+	$participants = getParticipants($projet['idprojet']);
+	$dejaParticipant = in_array($_SESSION['id'], $participants);
+	$demandeEnAttente = aDemandeEnAttente($projet['idprojet'], $_SESSION['id']);
+?>
 	<tr>
 		<td>
 			<a href="<?= $serveur ?>src/pages/Membres/Voir.php?idmembre=<?= $projet['id'] ?>"><?= htmlspecialchars($projet['id']) ?></a>
@@ -71,13 +76,32 @@ $titrePage = "Nouveau Projet";
 			<?= nl2br(detectlId($projet['Texte'])) ?>
 		</td>
 		<td><?= convertDate($projet['date']) ?></td>
-		<?php if ($estAdmin || $estProprietaire): ?>
 		<td>
+		<?php if ($estAdmin || $estProprietaire): ?>
 			<div class="lien"><a href="<?= $serveur ?>src/pages/Contenu/Projets/Editer.php?idprojet=<?= $projet['idprojet'] ?>">modifier</a></div>
 			<br><br><br>
 			<div class="lien"><a href="<?= $serveur ?>src/pages/Contenu/Projets/Supprimer.php?idprojet=<?= $projet['idprojet'] ?>">supprimer</a></div>
-		</td>
 		<?php endif; ?>
+		</td>
+		<td>
+			<?php if (empty($participants)): ?>
+				Aucun participant
+			<?php else: ?>
+				<?php foreach ($participants as $participant): ?>
+					<a href="<?= $serveur ?>src/pages/Membres/Voir.php?idmembre=<?= htmlspecialchars($participant) ?>"><?= htmlspecialchars($participant) ?></a>
+					<?php if ($estProprietaire && $participant != $projet['id']): ?>
+						<a href="<?= $serveur ?>src/pages/Contenu/Projets/RetirerParticipant.php?idprojet=<?= $projet['idprojet'] ?>&idmembre=<?= urlencode($participant) ?>" class="btn-retirer" title="Retirer ce participant">✕</a>
+					<?php endif; ?>
+					<br>
+				<?php endforeach; ?>
+			<?php endif; ?>
+			<br>
+			<?php if (!$estAdmin && !$estProprietaire && !$dejaParticipant && !$demandeEnAttente): ?>
+				<div class="lien"><a href="<?= $serveur ?>src/pages/Contenu/Projets/Participer.php?idprojet=<?= $projet['idprojet'] ?>">Participer</a></div>
+			<?php elseif ($demandeEnAttente): ?>
+				<em>Demande en attente</em>
+			<?php endif; ?>
+		</td>
 	</tr>
 <?php endforeach; ?>
 </table>

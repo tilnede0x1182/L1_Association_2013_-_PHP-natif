@@ -114,7 +114,7 @@ nav#menuAcceuil li a {
 
 nav#menuAcceuil li a:hover {
 	background: linear-gradient(135deg, var(--couleur-fond), var(--gradient-fin));
-	color: white;
+	color: #333;
 	transform: translateY(-2px);
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
@@ -152,7 +152,7 @@ div.accesMembre {
 div.accesMembre p {
 	color: var(--couleur-fond);
 	font-weight: 700;
-	font-size: 1.1em;
+	font-size: 1em;
 	margin: 0 0 15px 0;
 	text-align: center;
 	text-shadow: none;
@@ -282,7 +282,7 @@ table th:last-child {
 
 table td {
 	padding: 12px 18px;
-	color: #333;
+	color: #444;
 	border-bottom: 1px solid #e8e8e8;
 	background-color: white;
 	text-align: center;
@@ -414,7 +414,7 @@ table p {
 .lien a {
 	display: inline-block;
 	background: linear-gradient(135deg, var(--couleur-fond), var(--gradient-fin));
-	color: white;
+	color: #333;
 	padding: 8px 16px;
 	border-radius: 20px;
 	text-decoration: none;
@@ -431,7 +431,7 @@ table p {
 
 input[type="submit"] {
 	background: linear-gradient(135deg, var(--couleur-fond), var(--gradient-fin));
-	color: white;
+	color: #333;
 	border: none;
 	padding: 10px 24px;
 	border-radius: 25px;
@@ -468,4 +468,78 @@ select:focus,
 textarea:focus {
 	border-color: var(--couleur-fond);
 	outline: none;
+}
+
+/* ==============================================================================
+   Styles confirmation importante (retrait participant)
+   ============================================================================== */
+
+.confirmation-importante {
+	background-color: #333;
+	border: 2px solid #c0392b;
+	border-radius: 15px;
+	padding: 25px 30px;
+	margin: 20px auto;
+	max-width: 600px;
+	color: #333;
+	box-shadow: 0 4px 15px rgba(192, 57, 43, 0.2);
+}
+
+.confirmation-importante h2 {
+	color: #c0392b;
+	text-align: center;
+	margin-top: 0;
+	
+}
+
+.confirmation-importante p {
+	margin: 15px 0;
+	line-height: 1.6;
+}
+
+.confirmation-importante ul {
+	margin: 15px 0;
+	padding-left: 25px;
+}
+
+.confirmation-importante li {
+	margin: 8px 0;
+}
+
+.btn-confirmer-retrait {
+	background: #c0392b !important;
+	color: white !important;
+	border: none !important;
+	padding: 12px 25px !important;
+	font-weight: 600 !important;
+	font-size: 1em !important;
+}
+
+.btn-confirmer-retrait:hover {
+	background: #a93226 !important;
+	transform: translateY(-2px);
+}
+
+/* Bouton retirer (croix) */
+.btn-retirer {
+	color: #c0392b;
+	font-weight: 600;
+	text-decoration: none;
+	margin-left: 5px;
+	font-size: 0.9em;
+}
+
+.btn-retirer:hover {
+	color: #a93226;
+}
+
+/* Boutons accepter/refuser dans la liste des demandes */
+.btn-accepter {
+	background: linear-gradient(135deg, #28a745, #218838) !important;
+	color: white !important;
+}
+
+.btn-refuser {
+	background: linear-gradient(135deg, #dc3545, #c82333) !important;
+	color: white !important;
 }

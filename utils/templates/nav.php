@@ -46,6 +46,7 @@ $estAdmin = $estConnecte ? verifieConnectionAdmin() : false;
 <nav class="listeGauche">
 	<ul>
 		<li><a href="<?= $serveur ?>src/pages/Contenu/Projets/Liste.php">Projets</a></li>
+		<li><a href="<?= $serveur ?>src/pages/Contenu/Projets/Participations.php">Demandes de participation</a></li>
 <?php if ($estAdmin): ?>
 		<li><a href="<?= $serveur ?>src/pages/Contenu/Articles/Creer.php">Ecrire un nouvel article</a></li>
 <?php endif; ?>

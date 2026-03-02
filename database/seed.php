@@ -378,9 +378,76 @@ function creerDataposts($connexion) {
 		}
 	}
 
-	executerBatch($connexion, $sqlBase, $values);
 	mysqli_commit($connexion);
 	echo "Modifications de posts creees: $totalModifs\n";
+}
+
+/**
+	Crée les participations aux projets.
+	Chaque personne ayant modifié un projet est automatiquement participant.
+	Le créateur du projet est aussi participant.
+	@param connexion Connexion mysqli
+*/
+function creerParticipations($connexion) {
+	global $BATCH_SIZE;
+
+	// Les admins ne participent pas aux projets (ils ont accès via leurs droits admin)
+	$admins = ["admin01", "admin02", "admin03"];
+
+	$totalParticipations = 0;
+	$values = [];
+	$sqlBase = "INSERT INTO participations (idprojet, idmembre, statut, date_demande) VALUES ";
+
+	mysqli_begin_transaction($connexion);
+
+	// Récupérer tous les projets avec leur créateur (sauf admins)
+	$result = mysqli_query($connexion, "SELECT idprojet, id, date FROM projets");
+	while ($row = mysqli_fetch_assoc($result)) {
+		$idprojet = $row["idprojet"];
+		$createur = $row["id"];
+		$dateProjet = $row["date"];
+
+		// Ignorer les admins
+		if (in_array($createur, $admins)) continue;
+
+		// Convertir date ddmmyyyy en dd/mm/yyyy
+		$dateFormatee = substr($dateProjet, 0, 2) . "/" . substr($dateProjet, 2, 2) . "/" . substr($dateProjet, 4, 4);
+
+		// Ajouter le créateur comme participant
+		$values[] = "($idprojet, \"$createur\", \"accepte\", \"$dateFormatee\")";
+		$totalParticipations++;
+
+		if (count($values) >= $BATCH_SIZE) {
+			executerBatch($connexion, $sqlBase, $values);
+		}
+	}
+
+	// Vider le batch des créateurs avant les modificateurs
+	executerBatch($connexion, $sqlBase, $values);
+
+	// Récupérer tous les modificateurs uniques par projet (sauf admins)
+	$result2 = mysqli_query($connexion, "SELECT DISTINCT idprojet, idmembre, date FROM dataprojets");
+	while ($row = mysqli_fetch_assoc($result2)) {
+		$idprojet = $row["idprojet"];
+		$idmembre = $row["idmembre"];
+		$dateModif = $row["date"];
+
+		// Ignorer les admins
+		if (in_array($idmembre, $admins)) continue;
+
+		// Convertir date ddmmyyyy en dd/mm/yyyy
+		$dateFormatee = substr($dateModif, 0, 2) . "/" . substr($dateModif, 2, 2) . "/" . substr($dateModif, 4, 4);
+
+		// ON DUPLICATE KEY UPDATE pour ignorer si déjà présent (créateur)
+		$sql = "INSERT INTO participations (idprojet, idmembre, statut, date_demande)
+				VALUES ($idprojet, \"$idmembre\", \"accepte\", \"$dateFormatee\")
+				ON DUPLICATE KEY UPDATE statut=\"accepte\"";
+		mysqli_query($connexion, $sql);
+		$totalParticipations++;
+	}
+
+	mysqli_commit($connexion);
+	echo "Participations creees: $totalParticipations\n";
 }
 
 // ==============================================================================
@@ -400,6 +467,7 @@ function main() {
 
 	// Nettoyage
 	mysqli_query($connexion, "SET FOREIGN_KEY_CHECKS = 0");
+	mysqli_query($connexion, "TRUNCATE TABLE participations");
 	mysqli_query($connexion, "TRUNCATE TABLE dataprojets");
 	mysqli_query($connexion, "TRUNCATE TABLE dataposts");
 	mysqli_query($connexion, "TRUNCATE TABLE projets");
@@ -416,6 +484,7 @@ function main() {
 	creerPosts($connexion);
 	creerProjets($connexion);
 	creerDataposts($connexion);
+	creerParticipations($connexion);
 
 	// Écriture du fichier users.txt
 	$cheminUsers = __DIR__ . '/users.txt';
