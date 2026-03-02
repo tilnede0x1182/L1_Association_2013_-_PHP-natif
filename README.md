@@ -1,59 +1,65 @@
-# L1 - Association
+# Association des Anciens de Paris 7
 
-## Description
-Le site web est une plateforme PHP/MySQL développée « from scratch » pour une association (fictive) d’anciens étudiants.
-Les membres peuvent s’inscrire, se connecter et gérer leurs informations personnelles en toute sécurité.
-Ils ont la possibilité de publier, modifier et supprimer des articles ainsi que des projets, avec historique des modifications.
-Une interface simple permet de naviguer entre les listes de membres, d’articles et de projets, et d’afficher des détails sur chaque élément.
-Deux thèmes CSS offrent un choix de style, et le code intègre des fonctions utilitaires pour la gestion des dates et de l’affichage.
+Ce projet est une application web destinée à être utilisée par une association (fictive) d'anciens élèves de l'univeristé Paris 7. Le projet a été fait dans le cadre d'un projet de groupe (initialemnt à 2) lors de mon curcus à l'université et constitue un simple exercice de code. Ce n'est pas un réel site web destiné à une association existante. Je l'ai refactoré afin qu'il soit terminé et modernisé un peu au niveau visuel. En effet, initialemnt, le css était presque inexistant (html presque pur). Ce site web permet aux membres de créer un compte, de consulter les profils des autres membres et de rester en contact avec leur communauté. Les utilisateurs peuvent publier des articles et proposer des projets collaboratifs. Un système de participation permet de rejoindre les projets des autres membres après validation du créateur. Les administrateurs disposent de droits de modération pour gérer le contenu et les utilisateurs.
 
-## Technologies et versions
-- **PHP** 5.5.x (extensions `mysql_*`, sessions, SNMP non utilisée ici)
-- **MySQL** 5.6 (base `association1`, tables `asso`, `posts`, `projets`, `dataposts`, `dataprojets`)
-- **HTML5**
-- **CSS3** (deux thèmes : `style1.css`, `style2.css`)
-- **JavaScript** minimal — shiv HTML5 pour anciennes versions d’IE
-- **MD5** pour hachage de mot de passe
+## Fonctionnalités
 
-## Fonctionnalités implémentées
-1. **Inscription**
-   - Formulaire de création de compte (nom, prénom, mail, pays, code postal, date de naissance)
-   - Génération d’un mot de passe aléatoire
-   - Vérification de validité des champs (regex, date, e-mail)
-2. **Connexion / Déconnexion**
-   - Authentification via `$_SESSION['id']` + `$_SESSION['motdepasse']` MD5
-   - Mise à jour de la date de dernière connexion
-3. **Gestion des membres**
-   - Liste triable des membres (compétence, identifiant, date d’inscription, etc.)
-   - Page de profil détaillée : compétence, projets, posts, ancienneté, statut “connecté”
-   - Modification des informations personnelles : nom, prénom, identifiant, e-mail, code postal, pays, date de naissance, mot de passe
-   - Suppression de compte (cascade : supprime projets et posts associés)
-4. **Articles (“Posts”)**
-   - Création, édition, suppression de posts
-   - Stockage des modifications dans `dataposts` (auteurs, dates)
-   - Affichage des 5 derniers posts sur la page d’accueil
-   - Liste complète paginée jusqu’à 199 articles
-   - Vue détaillée d’un article unique
-   - Liste des auteurs ayant modifié un article
-5. **Projets**
-   - Création, édition, suppression de projets
-   - Stockage des modifications dans `dataprojets`
-   - Affichage des 15 derniers projets sur la page “Nouveau Projet”
-   - Liste complète des projets pour chaque membre
-6. **Navigation & présentation**
-   - Menu principal adaptatif selon connexion et rôle
-   - Choix de deux thèmes CSS (“Coucher de soleil” / “Rosée du matin”)
-   - Pages “À propos” et “Contact” statiques
-   - Favicon, logo et images de header
-7. **Utilitaires**
-   - Fonctions partagées (`ConversionDate`, `detectlId`, `CalcAnciennete`)
-   - Générateur de mot de passe aléatoire
-   - Inclusions dynamiques de CSS et scripts de compatibilité HTML5
+- **Inscription et connexion** : Création d un compte membre avec validation des informations et authentification sécurisée.
+- **Gestion du profil** : Modification des informations personnelles (nom, prénom, courriel, mot de passe).
+- **Publication d articles** : Rédaction, modification et consultation d articles visibles par tous les membres.
+- **Création de projets** : Proposition de projets collaboratifs avec description, dates et participants.
+- **Demande de participation** : Les membres peuvent demander à rejoindre un projet existant.
+- **Gestion des participants** : Le créateur d un projet peut accepter ou refuser les demandes de participation.
+- **Retrait de participants** : Exclusion d un membre d un projet par son créateur.
+- **Liste des membres** : Consultation de l annuaire des anciens élèves inscrits.
+- **Modération** : Les administrateurs peuvent gérer le contenu et les utilisateurs du site.
+- **Thèmes visuels** : Choix entre deux thèmes de couleur (orange et vert).
+- **Page de contact** : Formulaire permettant de contacter l équipe du site.
 
-## Fonctionnalités administrateur
-Les administrateurs (membres avec compétence = 1) disposent de droits étendus :
-- **Gestion des articles** : visualisation de l'historique des modifications de tous les articles, accès à la liste complète des auteurs ayant modifié un article
-- **Gestion des projets** : visualisation des modifications de tous les projets (pas uniquement les siens), accès à la liste complète des auteurs via "Afficher la liste"
-- **Gestion des membres** : accès à la liste complète des membres avec informations détaillées
-- **Modération** : possibilité de voir les dates de dernière modification sur tous les contenus
+## Technologies
 
+- PHP 8.1
+- MySQL 8.0
+- HTML5 / CSS3
+- Apache
+
+## Installation
+
+### WAMP (Windows)
+
+1. Placer le projet dans `C:\wamp64\www\association\`
+2. Démarrer WAMP et accéder à phpMyAdmin
+3. Exécuter le fichier `database/creation_db.sql`
+4. Lancer le seed :
+   ```
+   php database/seed.php
+   ```
+5. Accéder au site : http://localhost/association/
+
+### XAMPP (Windows / macOS)
+
+1. Placer le projet dans `C:\xampp\htdocs\association\` (Windows) ou `/Applications/XAMPP/htdocs/association/` (macOS)
+2. Démarrer Apache et MySQL depuis le panneau XAMPP
+3. Exécuter le fichier `database/creation_db.sql` via phpMyAdmin
+4. Lancer le seed :
+   ```
+   php database/seed.php
+   ```
+5. Accéder au site : http://localhost/association/
+
+### LAMP (Linux)
+
+1. Placer le projet dans `/var/www/html/association/`
+2. Créer la base de données :
+   ```
+   sudo mysql < database/creation_db.sql
+   ```
+3. Lancer le seed :
+   ```
+   php database/seed.php
+   ```
+4. Accéder au site : http://localhost/association/
+
+## Identifiants de test
+
+Les identifiants générés par le seed sont disponibles dans `database/users.txt`.
