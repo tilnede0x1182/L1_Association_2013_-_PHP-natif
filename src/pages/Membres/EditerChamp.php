@@ -6,7 +6,7 @@ require_once __DIR__ . '/../../../utils/includes/init.php';
 
 // Vérifier la connexion
 if (!verifieConnection()) {
-  header("Location: " . $serveur . "src/pages/src/pages/Accueil/index.php");
+  header("Location: " . $serveur . "src/pages/Accueil/index.php");
   exit;
 }
 
