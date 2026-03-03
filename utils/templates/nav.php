@@ -41,6 +41,7 @@ $estAdmin = $estConnecte ? verifieConnectionAdmin() : false;
 		<li><a href="<?= $serveur ?>src/pages/Auth/Deconnexion.php">Se déconnecter</a></li>
 		<li><a href="<?= $serveur ?>utils/ModifierStyle.php?couleur=1"><img src="<?= $serveur ?>assets/images/styles/Orangebicolore4.jpg" title="Style : Coucher de soleil" alt="Style orangé"></a></li>
 		<li><a href="<?= $serveur ?>utils/ModifierStyle.php?couleur=2"><img src="<?= $serveur ?>assets/images/styles/vertbicolore2.jpg" title="Style : Rosée du matin" alt="Style vert clair"></a></li>
+		<li style="margin-left: auto; padding: 8px 15px; background: linear-gradient(135deg, rgba(0,0,0,0.1), rgba(0,0,0,0.05)); border-radius: 20px; font-weight: 600; color: #555; font-size: 0.9em;">Connecté en tant que : <strong style="color: var(--couleur-fond); text-shadow: 1px 1px 2px rgba(0,0,0,0.3);"><?= htmlspecialchars($_SESSION['id']) ?></strong></li>
 	</ul>
 </nav>
 
