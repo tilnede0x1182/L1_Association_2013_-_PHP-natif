@@ -17,9 +17,9 @@ $estAdmin = $estConnecte ? verifieConnectionAdmin() : false;
 		<li><a href="<?= $serveur ?>src/pages/Accueil/Presentation.php">A propos</a></li>
 		<li><a href="<?= $serveur ?>src/pages/Accueil/Contact.php">Nous contacter</a></li>
 <?php if (!$estConnecte): ?>
+		<li><a href="<?= $serveur ?>utils/PageRedirectionVerslInscription.php">Projets</a></li>
 		<li><a href="<?= $serveur ?>utils/ModifierStyle.php?couleur=1"><img src="<?= $serveur ?>assets/images/styles/Orangebicolore4.jpg" title="Style : Coucher de soleil" alt="Style orangé"></a></li>
 		<li><a href="<?= $serveur ?>utils/ModifierStyle.php?couleur=2"><img src="<?= $serveur ?>assets/images/styles/vertbicolore2.jpg" title="Style : Rosée du matin" alt="Style vert clair"></a></li>
-		<li><a href="<?= $serveur ?>utils/PageRedirectionVerslInscription.php">Projets</a></li>
 	</ul>
 </nav>
 
