@@ -19,7 +19,7 @@ $titrePage = "À propos";
 <?php include __DIR__ . '/../../../utils/templates/nav.php'; ?>
 
 <div class="texte">
-	<h1>Présentation du site :</h1>
+	<h1 style="text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">Présentation du site :</h1>
 	<p>
 		Le site des anciens de Paris 7 a pour but de rassembler les étudiants de Paris 7, de promouvoir associations et amitiés parmi ses membres.<br><br>
 		Vous pourrez ainsi communiquer par l'intermédiaire d'échange de messages publics (les projets).<br><br>

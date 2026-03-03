@@ -220,7 +220,7 @@ function genererMotDePasseAleatoire($longueur = 3) {
 /**
  * Inscrit un nouveau membre
  * @param array $donnees Données du formulaire
- * @return string|false Mot de passe généré ou false si erreur
+ * @return bool true si succès, false si erreur
  */
 function inscrireMembre($donnees) {
 	$connexion = getConnexion();
@@ -231,7 +231,7 @@ function inscrireMembre($donnees) {
 		return false;
 	}
 
-	$motdepasseAleat = genererMotDePasseAleatoire(3);
+	$motdepasse = $donnees['motdepasse'];
 	$datedinscription = date('dmY');
 
 	// Formater la date de naissance
@@ -250,11 +250,11 @@ function inscrireMembre($donnees) {
 		$dateNaissance . '", "' .
 		mysqli_real_escape_string($connexion, $donnees['mail']) . '", "' .
 		mysqli_real_escape_string($connexion, $donnees['id']) . '", "' .
-		md5($motdepasseAleat) . '", "' .
+		md5($motdepasse) . '", "' .
 		$datedinscription . '", "-11", "-11")';
 
 	if (mysqli_query($connexion, $sql)) {
-		return $motdepasseAleat;
+		return true;
 	}
 	return false;
 }

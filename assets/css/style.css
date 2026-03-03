@@ -104,12 +104,13 @@ nav#menuAcceuil li {
 nav#menuAcceuil li a {
 	display: block;
 	padding: 10px 18px;
-	color: #444;
+	color: var(--couleur-fond);
 	text-decoration: none;
 	font-weight: 600;
 	font-size: 0.95em;
 	border-radius: 20px;
 	transition: all 0.25s ease;
+	text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 }
 
 nav#menuAcceuil li a:hover {
@@ -468,6 +469,7 @@ input[type="submit"]:hover {
 
 input[type="text"],
 input[type="password"],
+input[type="email"],
 select,
 textarea {
 	padding: 10px 14px;
@@ -481,6 +483,7 @@ textarea {
 
 input[type="text"]:focus,
 input[type="password"]:focus,
+input[type="email"]:focus,
 select:focus,
 textarea:focus {
 	border-color: var(--couleur-fond);
