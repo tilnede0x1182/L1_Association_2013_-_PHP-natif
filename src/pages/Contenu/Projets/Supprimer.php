@@ -58,12 +58,12 @@ if (!empty($_POST) && isset($_POST['choix'])) {
 
 <h3 class="texte">Voulez-vous réellement supprimer ce projet ?</h3>
 
-<form action="" method="POST" style="display: inline;">
+<form action="" method="POST" class="form-inline">
 	<input name="choix" value="1" type="hidden">
 	<input type="submit" value="Oui">
 </form>
 
-<form action="" method="POST" style="display: inline;">
+<form action="" method="POST" class="form-inline">
 	<input name="choix" value="0" type="hidden">
 	<input type="submit" value="Annuler">
 </form>

@@ -76,7 +76,7 @@ if (isset($_POST['confirmer'])) {
 	<p>⚠️ Attention : <strong><?= htmlspecialchars($idmembre) ?></strong> ne pourra plus modifier le projet <strong><?= htmlspecialchars($projet['Objet']) ?></strong>.</p>
 
 	<div class="lien">
-		<form method="POST" style="display: inline;">
+		<form method="POST" class="form-inline">
 			<input type="submit" name="confirmer" value="Confirmer">
 		</form>
 	</div>

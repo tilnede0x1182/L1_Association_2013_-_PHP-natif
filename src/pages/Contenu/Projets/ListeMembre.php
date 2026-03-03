@@ -34,7 +34,7 @@ $titrePage = "Liste des projets du membre " . $membre;
 
 <?php include __DIR__ . '/../../../../utils/templates/nav.php'; ?>
 
-<h1>Liste des projets du membre <a href="<?= $serveur ?>src/pages/Membres/Voir.php?idmembre=<?= $membre ?>"><?= htmlspecialchars($membre) ?></a> :</h1>
+<h1 class="titre-ombre">Liste des projets du membre <a href="<?= $serveur ?>src/pages/Membres/Voir.php?idmembre=<?= $membre ?>" class="lien-titre"><?= htmlspecialchars($membre) ?></a> :</h1>
 
 <table border="1">
 	<tr>
@@ -97,7 +97,7 @@ $titrePage = "Liste des projets du membre " . $membre;
 				Aucun participant
 			<?php else: ?>
 				<?php foreach ($participants as $participant): ?>
-					<span style="white-space: nowrap;"><a href="<?= $serveur ?>src/pages/Membres/Voir.php?idmembre=<?= htmlspecialchars($participant) ?>"><?= htmlspecialchars($participant) ?></a><?php if ($estProprietaire && $participant != $projet['id']): ?> <a href="<?= $serveur ?>src/pages/Contenu/Projets/RetirerParticipant.php?idprojet=<?= $projet['idprojet'] ?>&idmembre=<?= urlencode($participant) ?>" class="btn-retirer" title="Retirer ce participant">⤴️</a><?php endif; ?></span><br>
+					<span class="nowrap"><a href="<?= $serveur ?>src/pages/Membres/Voir.php?idmembre=<?= htmlspecialchars($participant) ?>"><?= htmlspecialchars($participant) ?></a><?php if ($estProprietaire && $participant != $projet['id']): ?> <a href="<?= $serveur ?>src/pages/Contenu/Projets/RetirerParticipant.php?idprojet=<?= $projet['idprojet'] ?>&idmembre=<?= urlencode($participant) ?>" class="btn-retirer" title="Retirer ce participant">⤴️</a><?php endif; ?></span><br>
 				<?php endforeach; ?>
 			<?php endif; ?>
 			<br>

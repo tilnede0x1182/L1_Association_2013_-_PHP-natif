@@ -78,7 +78,7 @@ if (isset($_POST['confirmer'])) {
 	<p>Votre demande sera envoyée au créateur du projet qui devra l'accepter.</p>
 
 	<div class="lien">
-		<form method="POST" style="display: inline;">
+		<form method="POST" class="form-inline">
 			<input type="submit" name="confirmer" value="Confirmer ma demande de participation">
 		</form>
 	</div>

@@ -91,7 +91,7 @@ if (!empty($_POST)) {
 <div class="texte">
 	<p>Inscription réussie !</p>
 	<p>Vous pouvez maintenant vous connecter avec votre identifiant et votre mot de passe.</p>
-	<div class="lien" style="margin-bottom: 7px;"><a href="<?= $serveur ?>src/pages/Auth/Connexion.php">Se connecter</a></div>
+	<div class="lien lien-mb"><a href="<?= $serveur ?>src/pages/Auth/Connexion.php">Se connecter</a></div>
 	<div class="lien"><a href="<?= $serveur ?>src/pages/Accueil/index.php">Revenir à la page d'accueil</a></div>
 </div>
 
@@ -107,50 +107,50 @@ if (!empty($_POST)) {
 
 <p class="texte">Veuillez compléter le formulaire ci-dessous et remplir tous les champs obligatoires (*) :</p>
 <form class="texte" action="<?= $serveur ?>src/pages/Auth/Inscription.php" method="POST">
-	<table style="border: none; box-shadow: none; background: transparent; margin: 0; table-layout: fixed; width: 100%;">
+	<table class="table-formulaire">
 		<colgroup>
-			<col style="width: 180px;">
+			<col class="col-label">
 			<col>
 		</colgroup>
 		<tr>
-			<td style="text-align: left; padding: 5px; border: none;"><span style="display: inline-block; padding: 6px 12px; background: white; border: 4px solid #eee; border-radius: 8px; font-weight: 600; color: var(--couleur-fond); text-shadow: 1px 1px 2px rgba(0,0,0,0.2); ">Nom</span></td>
-			<td style="border: none; padding-left: 0; text-align: left;"><input type="text" name="nom" value="<?= isset($_POST['nom']) ? htmlspecialchars($_POST['nom']) : '' ?>"> <span style="color: #c0392b; font-size: 0.85em; font-style: italic;">(*)</span></td>
+			<td class="td-label"><span class="form-label">Nom</span></td>
+			<td class="td-input"><input type="text" name="nom" value="<?= isset($_POST['nom']) ? htmlspecialchars($_POST['nom']) : '' ?>"> <span class="champ-obligatoire">(*)</span></td>
 		</tr>
 		<tr>
-			<td style="text-align: left; padding: 5px; border: none;"><span style="display: inline-block; padding: 6px 12px; background: white; border: 4px solid #eee; border-radius: 8px; font-weight: 600; color: var(--couleur-fond); text-shadow: 1px 1px 2px rgba(0,0,0,0.2); ">Prénom</span></td>
-			<td style="border: none; padding-left: 0; text-align: left;"><input type="text" name="prenom" value="<?= isset($_POST['prenom']) ? htmlspecialchars($_POST['prenom']) : '' ?>"> <span style="color: #c0392b; font-size: 0.85em; font-style: italic;">(*)</span></td>
+			<td class="td-label"><span class="form-label">Prénom</span></td>
+			<td class="td-input"><input type="text" name="prenom" value="<?= isset($_POST['prenom']) ? htmlspecialchars($_POST['prenom']) : '' ?>"> <span class="champ-obligatoire">(*)</span></td>
 		</tr>
 		<tr>
-			<td style="text-align: left; padding: 5px; border: none;"><span style="display: inline-block; padding: 6px 12px; background: white; border: 4px solid #eee; border-radius: 8px; font-weight: 600; color: var(--couleur-fond); text-shadow: 1px 1px 2px rgba(0,0,0,0.2); ">E-mail</span></td>
-			<td style="border: none; padding-left: 0; text-align: left;"><input type="email" name="mail" value="<?= isset($_POST['mail']) ? htmlspecialchars($_POST['mail']) : '' ?>"> <span style="color: #c0392b; font-size: 0.85em; font-style: italic;">(*)</span></td>
+			<td class="td-label"><span class="form-label">E-mail</span></td>
+			<td class="td-input"><input type="email" name="mail" value="<?= isset($_POST['mail']) ? htmlspecialchars($_POST['mail']) : '' ?>"> <span class="champ-obligatoire">(*)</span></td>
 		</tr>
 		<tr>
-			<td style="text-align: left; padding: 5px; border: none;"><span style="display: inline-block; padding: 6px 12px; background: white; border: 4px solid #eee; border-radius: 8px; font-weight: 600; color: var(--couleur-fond); text-shadow: 1px 1px 2px rgba(0,0,0,0.2); ">Pays</span></td>
-			<td style="border: none; padding-left: 0; text-align: left;"><input type="text" name="pays" value="<?= isset($_POST['pays']) ? htmlspecialchars($_POST['pays']) : '' ?>"></td>
+			<td class="td-label"><span class="form-label">Pays</span></td>
+			<td class="td-input"><input type="text" name="pays" value="<?= isset($_POST['pays']) ? htmlspecialchars($_POST['pays']) : '' ?>"></td>
 		</tr>
 		<tr>
-			<td style="text-align: left; padding: 5px; border: none;"><span style="display: inline-block; padding: 6px 12px; background: white; border: 4px solid #eee; border-radius: 8px; font-weight: 600; color: var(--couleur-fond); text-shadow: 1px 1px 2px rgba(0,0,0,0.2); ">Code postal</span></td>
-			<td style="border: none; padding-left: 0; text-align: left;"><input type="text" name="adresse" value="<?= isset($_POST['adresse']) ? htmlspecialchars($_POST['adresse']) : '' ?>"> <span style="color: #c0392b; font-size: 0.85em; font-style: italic;">(*)</span></td>
+			<td class="td-label"><span class="form-label">Code postal</span></td>
+			<td class="td-input"><input type="text" name="adresse" value="<?= isset($_POST['adresse']) ? htmlspecialchars($_POST['adresse']) : '' ?>"> <span class="champ-obligatoire">(*)</span></td>
 		</tr>
 		<tr>
-			<td style="text-align: left; padding: 5px; border: none;"><span style="display: inline-block; padding: 6px 12px; background: white; border: 4px solid #eee; border-radius: 8px; font-weight: 600; color: var(--couleur-fond); text-shadow: 1px 1px 2px rgba(0,0,0,0.2); ">Date de naissance</span></td>
-			<td style="border: none; padding-left: 0; text-align: left;"><span style="display: inline-block; padding: 8px 12px; background: #fafafa; border: 2px solid #ddd; border-radius: 8px;"><input type="text" name="d1" id="d1" size="2" maxlength="2" style="width: 30px; text-align: center; margin: 0 2px;" value="<?= isset($_POST['d1']) ? htmlspecialchars($_POST['d1']) : '' ?>" onkeyup="if(this.value.length==2)document.getElementById('d2').focus();">&nbsp;/&nbsp;<input type="text" name="d2" id="d2" size="2" maxlength="2" style="width: 30px; text-align: center; margin: 0 2px;" value="<?= isset($_POST['d2']) ? htmlspecialchars($_POST['d2']) : '' ?>" onkeyup="if(this.value.length==2)document.getElementById('d3').focus();">&nbsp;/&nbsp;<input type="text" name="d3" id="d3" size="4" maxlength="4" style="width: 50px; text-align: center; margin: 0 2px;" value="<?= isset($_POST['d3']) ? htmlspecialchars($_POST['d3']) : '' ?>"></span> <span style="color: #888; font-size: 0.85em; font-style: italic;">(JJ/MM/AAAA)</span></td>
+			<td class="td-label"><span class="form-label">Date de naissance</span></td>
+			<td class="td-input"><span class="cadre-date"><input type="text" name="d1" id="d1" size="2" maxlength="2" class="input-date-court" value="<?= isset($_POST['d1']) ? htmlspecialchars($_POST['d1']) : '' ?>" onkeyup="if(this.value.length==2)document.getElementById('d2').focus();">&nbsp;/&nbsp;<input type="text" name="d2" id="d2" size="2" maxlength="2" class="input-date-court" value="<?= isset($_POST['d2']) ? htmlspecialchars($_POST['d2']) : '' ?>" onkeyup="if(this.value.length==2)document.getElementById('d3').focus();">&nbsp;/&nbsp;<input type="text" name="d3" id="d3" size="4" maxlength="4" class="input-date-annee" value="<?= isset($_POST['d3']) ? htmlspecialchars($_POST['d3']) : '' ?>"></span> <span class="format-indication">(JJ/MM/AAAA)</span></td>
 		</tr>
 		<tr>
-			<td style="text-align: left; padding: 5px; border: none;"><span style="display: inline-block; padding: 6px 12px; background: white; border: 4px solid #eee; border-radius: 8px; font-weight: 600; color: var(--couleur-fond); text-shadow: 1px 1px 2px rgba(0,0,0,0.2); ">Identifiant</span></td>
-			<td style="border: none; padding-left: 0; text-align: left;"><input type="text" name="id" value="<?= isset($_POST['id']) ? htmlspecialchars($_POST['id']) : '' ?>"> <span style="color: #c0392b; font-size: 0.85em; font-style: italic;">(*)</span></td>
+			<td class="td-label"><span class="form-label">Identifiant</span></td>
+			<td class="td-input"><input type="text" name="id" value="<?= isset($_POST['id']) ? htmlspecialchars($_POST['id']) : '' ?>"> <span class="champ-obligatoire">(*)</span></td>
 		</tr>
 		<tr>
-			<td style="text-align: left; padding: 5px; border: none;"><span style="display: inline-block; padding: 6px 12px; background: white; border: 4px solid #eee; border-radius: 8px; font-weight: 600; color: var(--couleur-fond); text-shadow: 1px 1px 2px rgba(0,0,0,0.2); ">Mot de passe</span></td>
-			<td style="border: none; padding-left: 0; text-align: left;"><input type="password" name="motdepasse"> <span style="color: #c0392b; font-size: 0.85em; font-style: italic;">(*)</span></td>
+			<td class="td-label"><span class="form-label">Mot de passe</span></td>
+			<td class="td-input"><input type="password" name="motdepasse"> <span class="champ-obligatoire">(*)</span></td>
 		</tr>
 		<tr>
-			<td style="text-align: left; padding: 5px; border: none;"><span style="display: inline-block; padding: 6px 12px; background: white; border: 4px solid #eee; border-radius: 8px; font-weight: 600; color: var(--couleur-fond); text-shadow: 1px 1px 2px rgba(0,0,0,0.2); ">Confirmer le mot de passe</span></td>
-			<td style="border: none; padding-left: 0; text-align: left;"><input type="password" name="motdepasse_confirm"> <span style="color: #c0392b; font-size: 0.85em; font-style: italic;">(*)</span></td>
+			<td class="td-label"><span class="form-label">Confirmer le mot de passe</span></td>
+			<td class="td-input"><input type="password" name="motdepasse_confirm"> <span class="champ-obligatoire">(*)</span></td>
 		</tr>
 		<tr>
-			<td style="border: none;"></td>
-			<td style="border: none; padding-top: 10px; padding-left: 0; text-align: left;"><input type="submit" value="S'inscrire"></td>
+			<td class="td-vide"></td>
+			<td class="td-submit"><input type="submit" value="S'inscrire"></td>
 		</tr>
 	</table>
 </form>

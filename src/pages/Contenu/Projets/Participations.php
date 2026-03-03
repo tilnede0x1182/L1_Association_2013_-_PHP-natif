@@ -105,14 +105,14 @@ $nbDemandes = count($demandes);
 			</td>
 			<?php endif; ?>
 			<td><?= htmlspecialchars($demande['date_demande']) ?></td>
-			<td style="white-space: nowrap;">
-				<form method="POST" style="display: inline-block;">
+			<td class="nowrap">
+				<form method="POST" class="form-inline">
 					<input type="hidden" name="idprojet" value="<?= $demande['idprojet'] ?>">
 					<input type="hidden" name="idmembre" value="<?= htmlspecialchars($demande['idmembre']) ?>">
 					<input type="hidden" name="action" value="accepter">
 					<input type="submit" value="Oui" class="btn-accepter">
 				</form>
-				<form method="POST" style="display: inline-block;">
+				<form method="POST" class="form-inline">
 					<input type="hidden" name="idprojet" value="<?= $demande['idprojet'] ?>">
 					<input type="hidden" name="idmembre" value="<?= htmlspecialchars($demande['idmembre']) ?>">
 					<input type="hidden" name="action" value="refuser">

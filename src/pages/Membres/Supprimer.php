@@ -78,12 +78,12 @@ La suppression de ce compte entraînera la perte de tous ses projets.<br><br>
 Souhaitez-vous réellement supprimer ce compte ?</h4>
 <?php endif; ?>
 
-<form action="" method="POST" style="display: inline;">
+<form action="" method="POST" class="form-inline">
   <input name="choix" value="1" type="hidden">
   <input type="submit" value="Oui">
 </form>
 
-<form action="" method="POST" style="display: inline;">
+<form action="" method="POST" class="form-inline">
   <input name="choix" value="0" type="hidden">
   <input type="submit" value="Annuler">
 </form>
