@@ -64,7 +64,7 @@ $titrePage = "Connexion membre";
 		<div class="lien"><a href="<?= $serveur ?>src/pages/Auth/Inscription.php">S'inscrire</a></div>
 	</form>
 	<?php if (!empty($_SESSION['pageCourante'])): ?>
-	<div class="lien"><a href="<?= $_SESSION['pageCourante'] ?>">Retour</a></div>
+	<div class="lien" style="margin-bottom: 3px;"><a href="<?= $_SESSION['pageCourante'] ?>">Retour</a></div>
 	<?php endif; ?>
 	<div class="lien"><a href="<?= $serveur ?>src/pages/Accueil/index.php">Aller à la page d'accueil</a></div>
 </div>

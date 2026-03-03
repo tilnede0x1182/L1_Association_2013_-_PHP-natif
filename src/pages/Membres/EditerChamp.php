@@ -93,7 +93,7 @@ if (!empty($_POST)) {
     if ($valide) {
       updateMembre($_SESSION['id'], 'motdepasse', md5($_POST["motdepasse1"]));
       $_SESSION['motdepasse'] = md5($_POST["motdepasse1"]);
-      header('Location: ' . $serveur . 'Accueil/index.php');
+      header('Location: ' . $serveur . 'src/pages/Membres/MonCompte.php');
       exit;
     }
   } elseif ($infomembre == "DateNaissance") {
@@ -133,10 +133,9 @@ if (!empty($_POST)) {
       mysqli_query($connexion, 'UPDATE dataposts SET idmembre="' . mysqli_real_escape_string($connexion, $nouvelId) . '" WHERE idmembre="' . mysqli_real_escape_string($connexion, $ancienId) . '"');
       mysqli_query($connexion, 'UPDATE dataprojets SET idmembre="' . mysqli_real_escape_string($connexion, $nouvelId) . '" WHERE idmembre="' . mysqli_real_escape_string($connexion, $ancienId) . '"');
       mysqli_query($connexion, 'UPDATE dataposts SET idauteur="' . mysqli_real_escape_string($connexion, $nouvelId) . '" WHERE idauteur="' . mysqli_real_escape_string($connexion, $ancienId) . '"');
-      mysqli_query($connexion, 'UPDATE dataprojets SET idauteur="' . mysqli_real_escape_string($connexion, $nouvelId) . '" WHERE idauteur="' . mysqli_real_escape_string($connexion, $ancienId) . '"');
 
       $_SESSION['id'] = $nouvelId;
-      header('Location: ' . $serveur . 'Accueil/index.php');
+      header('Location: ' . $serveur . 'src/pages/Membres/MonCompte.php');
       exit;
     }
   } elseif ($infomembre == "CodePostal") {

@@ -84,12 +84,14 @@ if (!empty($_POST)) {
 <?php include __DIR__ . '/../../../utils/templates/nav.php'; ?>
 
 <?php if ($succes): ?>
-<p>Tout est correct.</p>
-<p>Voici votre mot de passe : <strong><?= $motdepasseGenere ?></strong>.</p>
-<p>Il servira à confirmer votre inscription.<br><br>
-Veuillez entrer ce mot de passe lors de vos prochaines connexions.<br><br>
-Cependant, vous pourrez changer ce mot de passe dès votre première connexion.</p>
-<p><br><a href="<?= $serveur ?>src/pages/Accueil/index.php">Revenir à la page d'accueil</a></p>
+<div class="texte">
+	<p>Tout est correct.</p>
+	<p>Voici votre mot de passe : <strong><?= $motdepasseGenere ?></strong>.</p>
+	<p>Il servira à confirmer votre inscription.</p>
+	<p>Veuillez entrer ce mot de passe lors de vos prochaines connexions.</p>
+	<p>Cependant, vous pourrez changer ce mot de passe dès votre première connexion.</p>
+	<div class="lien"><a href="<?= $serveur ?>src/pages/Accueil/index.php">Revenir à la page d'accueil</a></div>
+</div>
 
 <?php else: ?>
 

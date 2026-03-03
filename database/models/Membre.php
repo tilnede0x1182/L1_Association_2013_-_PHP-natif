@@ -47,7 +47,7 @@ function getAllMembres($classement = 'id', $ordre = 'ASC') {
  * @return bool
  */
 function membreExiste($id) {
-	return getMembre($id) !== false;
+	return (bool) getMembre($id);
 }
 
 /**
