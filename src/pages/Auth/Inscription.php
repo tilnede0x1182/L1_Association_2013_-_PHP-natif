@@ -13,10 +13,10 @@ $succes = false;
  * @return bool
  */
 function verifierDate() {
-	if (!empty($_POST['d1']) && !empty($_POST['d2']) && !empty($_POST['d3'])) {
-		$jour = $_POST['d1'];
-		$mois = $_POST['d2'];
-		$annee = $_POST['d3'];
+	if (!empty($_POST['jour']) && !empty($_POST['mois']) && !empty($_POST['annee'])) {
+		$jour = $_POST['jour'];
+		$mois = $_POST['mois'];
+		$annee = $_POST['annee'];
 
 		if (!is_numeric($jour) || !is_numeric($mois) || !is_numeric($annee)) {
 			return false;
@@ -35,7 +35,7 @@ function verifierDate() {
 		if ($mois == 2 && $jour > 29) {
 			return false;
 		}
-	} elseif (!empty($_POST['d1']) || !empty($_POST['d2']) || !empty($_POST['d3'])) {
+	} elseif (!empty($_POST['jour']) || !empty($_POST['mois']) || !empty($_POST['annee'])) {
 		// Date partiellement remplie
 		return false;
 	}
@@ -134,7 +134,7 @@ if (!empty($_POST)) {
 		</tr>
 		<tr>
 			<td class="td-label"><span class="form-label">Date de naissance</span></td>
-			<td class="td-input"><span class="cadre-date"><input type="text" name="d1" id="d1" size="2" maxlength="2" class="input-date-court" value="<?= isset($_POST['d1']) ? htmlspecialchars($_POST['d1']) : '' ?>" onkeyup="if(this.value.length==2)document.getElementById('d2').focus();">&nbsp;/&nbsp;<input type="text" name="d2" id="d2" size="2" maxlength="2" class="input-date-court" value="<?= isset($_POST['d2']) ? htmlspecialchars($_POST['d2']) : '' ?>" onkeyup="if(this.value.length==2)document.getElementById('d3').focus();">&nbsp;/&nbsp;<input type="text" name="d3" id="d3" size="4" maxlength="4" class="input-date-annee" value="<?= isset($_POST['d3']) ? htmlspecialchars($_POST['d3']) : '' ?>"></span> <span class="format-indication">(JJ/MM/AAAA)</span></td>
+			<td class="td-input"><span class="cadre-date"><input type="text" name="jour" id="jour" size="2" maxlength="2" class="input-date-court" value="<?= isset($_POST['jour']) ? htmlspecialchars($_POST['jour']) : '' ?>" onkeyup="if(this.value.length==2)document.getElementById('mois').focus();">&nbsp;/&nbsp;<input type="text" name="mois" id="mois" size="2" maxlength="2" class="input-date-court" value="<?= isset($_POST['mois']) ? htmlspecialchars($_POST['mois']) : '' ?>" onkeyup="if(this.value.length==2)document.getElementById('annee').focus();">&nbsp;/&nbsp;<input type="text" name="annee" id="annee" size="4" maxlength="4" class="input-date-annee" value="<?= isset($_POST['annee']) ? htmlspecialchars($_POST['annee']) : '' ?>"></span> <span class="format-indication">(JJ/MM/AAAA)</span></td>
 		</tr>
 		<tr>
 			<td class="td-label"><span class="form-label">Identifiant</span></td>

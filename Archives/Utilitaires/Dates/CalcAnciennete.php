@@ -5,11 +5,11 @@
 //echo "<p>compareDates($dd1) : ".compareDates($dd1)."</p>";
 
 function compareDates ($dd2){
-	$d1 = date("d");
-	$d2 = date("m");
-	$d3 = date("y");
+	$jour = date("d");
+	$mois = date("m");
+	$annee = date("y");
 
-	$dd1=$d1.$d2.$d3;
+	$dd1=$jour.$mois.$annee;
 
 	echo $dd1;
 
@@ -66,11 +66,11 @@ function convertChiffre ($dd1) {
 
 
 function CalcAnciennete ($dd2){
-	$d1 = date("d");
-	$d2 = date("m");
-	$d3 = date("y");
+	$jour = date("d");
+	$mois = date("m");
+	$annee = date("y");
 
-	$dd1="".$d1.$d2.$d3;
+	$dd1="".$jour.$mois.$annee;
 
 	echo "<p>".substr($dd1,0,2)."</p>";
 	echo "<p>".substr($dd1,2,2)."</p>";

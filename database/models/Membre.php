@@ -236,10 +236,10 @@ function inscrireMembre($donnees) {
 
 	// Formater la date de naissance
 	$dateNaissance = -11;
-	if (!empty($donnees['d1']) && !empty($donnees['d2']) && !empty($donnees['d3'])) {
-		$jour = str_pad($donnees['d1'], 2, '0', STR_PAD_LEFT);
-		$mois = str_pad($donnees['d2'], 2, '0', STR_PAD_LEFT);
-		$dateNaissance = $jour . $mois . $donnees['d3'];
+	if (!empty($donnees['jour']) && !empty($donnees['mois']) && !empty($donnees['annee'])) {
+		$jour = str_pad($donnees['jour'], 2, '0', STR_PAD_LEFT);
+		$mois = str_pad($donnees['mois'], 2, '0', STR_PAD_LEFT);
+		$dateNaissance = $jour . $mois . $donnees['annee'];
 	}
 
 	$sql = 'INSERT INTO asso (competence, Nom, Prenom, CodePostal, Pays, DateNaissance, mail, id, motdepasse, datedinscription, datedederniereconnection, datedudernierpost) VALUES ("Membre", "' .

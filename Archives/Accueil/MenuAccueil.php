@@ -14,7 +14,7 @@
 	$bb=0;
 	
 
-		echo '    <nav id="menuAcceuil"><ul><li><a href="'.$serveur.'Accueil/Accueil%20%281%29.php">Accueil</a></li>
+		echo '    <nav id="menuAccueil"><ul><li><a href="'.$serveur.'Accueil/Accueil%20%281%29.php">Accueil</a></li>
     <li><a href="'.$serveur.'Accueil/Presentation.php">A propos</a></li>
     <li><a href="'.$serveur.'Accueil/Contact.php">Nous contacter</a></li>'."\n";
 

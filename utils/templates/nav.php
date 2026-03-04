@@ -11,7 +11,7 @@ $estAdmin = $estConnecte ? verifieConnectionAdmin() : false;
 <div class="clear"></div>
 <h1 class="titre">Bienvenue sur le site des Anciens de Paris 7</h1>
 
-<nav id="menuAcceuil">
+<nav id="menuAccueil">
 	<ul>
 		<li><a href="<?= $serveur ?>src/pages/Accueil/index.php">Accueil</a></li>
 		<li><a href="<?= $serveur ?>src/pages/Accueil/Presentation.php">A propos</a></li>

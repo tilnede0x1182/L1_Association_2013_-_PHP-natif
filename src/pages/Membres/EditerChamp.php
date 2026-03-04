@@ -15,10 +15,10 @@ if (!verifieConnection()) {
  * @return bool
  */
 function verifierDateInfo() {
-  if (!empty($_POST['d1']) && !empty($_POST['d2']) && !empty($_POST['d3'])) {
-    $jour = $_POST['d1'];
-    $mois = $_POST['d2'];
-    $annee = $_POST['d3'];
+  if (!empty($_POST['jour']) && !empty($_POST['mois']) && !empty($_POST['annee'])) {
+    $jour = $_POST['jour'];
+    $mois = $_POST['mois'];
+    $annee = $_POST['annee'];
 
     if (!is_numeric($jour) || !is_numeric($mois) || !is_numeric($annee)) {
       return false;
@@ -37,7 +37,7 @@ function verifierDateInfo() {
     if ($mois == 2 && $jour > 29) {
       return false;
     }
-  } elseif (!empty($_POST['d1']) || !empty($_POST['d2']) || !empty($_POST['d3'])) {
+  } elseif (!empty($_POST['jour']) || !empty($_POST['mois']) || !empty($_POST['annee'])) {
     return false;
   }
 
@@ -103,7 +103,7 @@ if (!empty($_POST)) {
     }
 
     if ($valide) {
-      $date = $_POST['d1'] . $_POST['d2'] . $_POST['d3'];
+      $date = $_POST['jour'] . $_POST['mois'] . $_POST['annee'];
       if ($date == "") $date = "-11";
       updateMembre($_SESSION['id'], 'DateNaissance', $date);
       header('Location: ' . $serveur . 'src/pages/Membres/MonCompte.php');
@@ -226,9 +226,9 @@ $titrePage = "Modifier mes informations";
 
 <?php elseif ($infomembre == "DateNaissance"): ?>
   Entrez votre date de naissance :
-  <input type="text" name="d1" size="2" value="<?= substr($dateActuelle, 0, 2) ?>" autofocus>/
-  <input type="text" name="d2" size="2" value="<?= substr($dateActuelle, 2, 2) ?>">/
-  <input type="text" name="d3" size="4" value="<?= substr($dateActuelle, 4, 4) ?>"> (JJ/MM/AAAA)<br>
+  <input type="text" name="jour" size="2" value="<?= substr($dateActuelle, 0, 2) ?>" autofocus>/
+  <input type="text" name="mois" size="2" value="<?= substr($dateActuelle, 2, 2) ?>">/
+  <input type="text" name="annee" size="4" value="<?= substr($dateActuelle, 4, 4) ?>"> (JJ/MM/AAAA)<br>
 
 <?php else: ?>
   <label>Entrez <?= $linfo ?> : <input type="<?= $type ?>" name="<?= $infomembre ?>" value="<?= htmlspecialchars($valeurActuelle) ?>" autofocus></label><br>

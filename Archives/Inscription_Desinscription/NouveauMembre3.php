@@ -19,27 +19,27 @@
 	include '../Utilitaires/Navigation/AdresseServeur.php';
 
 	function verifiedate (){
-		if ((!empty($_POST['d1'])) && (!empty($_POST['d2'])) && (!empty($_POST['d3']))) {
-			$d1=$_POST['d1'];
-			$d2=$_POST['d2'];
-			$d3=$_POST['d3'];
-			$date=$d2.$d1.$d3;
+		if ((!empty($_POST['jour'])) && (!empty($_POST['mois'])) && (!empty($_POST['annee']))) {
+			$jour=$_POST['jour'];
+			$mois=$_POST['mois'];
+			$annee=$_POST['annee'];
+			$date=$mois.$jour.$annee;
 
-			if ((is_numeric($d1)) && (is_numeric($d2)) && (is_numeric($d3))){
-				if ($d1>31 || $d1<0 || $d2<0 || $d2>12)	{
+			if ((is_numeric($jour)) && (is_numeric($mois)) && (is_numeric($annee))){
+				if ($jour>31 || $jour<0 || $mois<0 || $mois>12)	{
 					echo "La date n'est pas valide";
 					return false;
 				}
 
-				if ($d2==4 || $d2==6 || $d2==9 || $d2==11){
-					if ($d1>30) {
+				if ($mois==4 || $mois==6 || $mois==9 || $mois==11){
+					if ($jour>30) {
 						echo "La date n'est pas valide";
 						return false;
 					}
 				}
 
-				if ($d2==2) {
-					if ($d1>29) {
+				if ($mois==2) {
+					if ($jour>29) {
 						echo "La date n'est pas valide";
 						return false;
 					}
@@ -51,7 +51,7 @@
 				
 			}
 		}
-		else if ((!empty($_POST['d1'])) || (!empty($_POST['d2'])) || (!empty($_POST['d3']))) {
+		else if ((!empty($_POST['jour'])) || (!empty($_POST['mois'])) || (!empty($_POST['annee']))) {
 			echo "La date n'est pas valide";
 			return false;
 		}
@@ -103,22 +103,22 @@
 				if (!$connexion) {
 					echo "Pas d'accès à la base" ;
 				}else {
-					if ((!empty($_POST['d1'])) && (!empty($_POST['d2'])) && (!empty($_POST['d3']))) {
-						$d1=$_POST['d1'];
-						$d2=$_POST['d2'];
-						$d3=$_POST['d3'];
+					if ((!empty($_POST['jour'])) && (!empty($_POST['mois'])) && (!empty($_POST['annee']))) {
+						$jour=$_POST['jour'];
+						$mois=$_POST['mois'];
+						$annee=$_POST['annee'];
 						$d0=0;
-						if ($d1<10 && $d2<10){
-							$date=$d0.$d1.$d0.$d2.$d3;
+						if ($jour<10 && $mois<10){
+							$date=$d0.$jour.$d0.$mois.$annee;
 						}
-						if ($d1<10 && $d2>9){
-							$date=$d0.$d1.$d2.$d3;
+						if ($jour<10 && $mois>9){
+							$date=$d0.$jour.$mois.$annee;
 						}
-						if ($d1>9 && $d2<10){
-							$date=$d1.$d0.$d2.$d3;
+						if ($jour>9 && $mois<10){
+							$date=$jour.$d0.$mois.$annee;
 						}
-						if ($d1>9 && $d2>9){
-							$date=$d1.$d2.$d3;
+						if ($jour>9 && $mois>9){
+							$date=$jour.$mois.$annee;
 						}
 					}
 					
@@ -139,7 +139,7 @@
 					else {
 						$g=1;
 						
-						$datenaissance = $_POST['d2'].$_POST['d1'].$_POST['d3'];
+						$datenaissance = $_POST['mois'].$_POST['jour'].$_POST['annee'];
 						$sql = 'INSERT INTO asso (competence, Nom, Prenom,CodePostal,Pays,DateNaissance,mail,id,motdepasse,datedinscription,datedederniereconnection,datedudernierpost) VALUES ("Membre","'.$_POST["nom"].'","'.$_POST["prenom"].'","'.$_POST["adresse"].'","'.$_POST["pays"].'","'.$date.'","'.$_POST["mail"].'","'.$_POST["id"].'","'.md5($motdepassealeat).'","'.$datedinscription.'","-11","-11")';
 						
 						mysqli_query($connexion, $sql) or die('Erreur SQL !'.$sql.'<br />'.mysqli_error($connexion));
@@ -165,7 +165,7 @@
 	    	  e-mail : <input type="adress" name="mail">(*)<br>
 	    	  Pays : <input type="text" name="pays"> 
 	    	  Adresse (Code postal) : <input type="text" name="adresse">(*)<br>
-	    	  Date de naissance : <input type="text" name="d1" size="2">/<input type="text" name="d2" size="2">/<input type="text" name="d3" size="4"> (JJ/MM/AAAA) <br>
+	    	  Date de naissance : <input type="text" name="jour" size="2">/<input type="text" name="mois" size="2">/<input type="text" name="annee" size="4"> (JJ/MM/AAAA) <br>
 	    	  Identifiant : <input type="text" name="id">(*)<br>      
 	    	  <input type="submit">
 	    	</form>

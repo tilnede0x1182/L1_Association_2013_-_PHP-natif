@@ -36,17 +36,17 @@ strong#imp{
 	text-decoration:underline;
 }
 
-nav#menuAcceuil img{
+nav#menuAccueil img{
 	height : 30px;
 	width : 30px;
 }
 
-nav#menuAcceuil{
+nav#menuAccueil{
 	margin: 0;
 	//opacity: 0.8;
 }
 
-#menuAcceuil ul{
+#menuAccueil ul{
 	width: 1380px;
 	list-style: none;
 	margin: 0 auto;
@@ -54,7 +54,7 @@ nav#menuAcceuil{
 	//opacity: 0.6;
 }
 
-#menuAcceuil li {
+#menuAccueil li {
 	float: left;
 	width: 145px;
 	height: 3px;

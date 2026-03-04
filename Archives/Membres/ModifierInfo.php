@@ -19,29 +19,29 @@ include '../Utilitaires/Navigation/AdresseServeur.php';
 include '../Accueil/MenuAccueil.php';
 
 function verifiedate (){
-	if ((!empty($_POST['d1'])) && (!empty($_POST['d2'])) && (!empty($_POST['d3']))) {
-		$d1=$_POST['d1'];
-		$d2=$_POST['d2'];
-		$d3=$_POST['d3'];
-		$date=$d1.$d2.$d3;
+	if ((!empty($_POST['jour'])) && (!empty($_POST['mois'])) && (!empty($_POST['annee']))) {
+		$jour=$_POST['jour'];
+		$mois=$_POST['mois'];
+		$annee=$_POST['annee'];
+		$date=$jour.$mois.$annee;
 
 		$dateInvalide = '<h4 class="texte">La date n'."'".'est pas valide</h4>';
 
-		if ((is_numeric($d1)) && (is_numeric($d2)) && (is_numeric($d3))){
-			if ($d1>31 || $d1<0 || $d2<0 || $d2>12)	{
+		if ((is_numeric($jour)) && (is_numeric($mois)) && (is_numeric($annee))){
+			if ($jour>31 || $jour<0 || $mois<0 || $mois>12)	{
 				echo $dateInvalide;
 				return false;
 			}
 
-			if ($d2==4 || $d2==6 || $d2==9 || $d2==11){
-				if ($d1>30) {
+			if ($mois==4 || $mois==6 || $mois==9 || $mois==11){
+				if ($jour>30) {
 					echo $dateInvalide;
 					return false;
 				}
 			}
 
-			if ($d2==2) {
-				if ($d1>29) {
+			if ($mois==2) {
+				if ($jour>29) {
 					echo $dateInvalide;
 					return false;
 				}
@@ -53,9 +53,9 @@ function verifiedate (){
 			
 		}
 	}
-	else if ((!empty($_POST['d1'])) 
-			|| (!empty($_POST['d2'])) 
-			|| (!empty($_POST['d3']))) {
+	else if ((!empty($_POST['jour'])) 
+			|| (!empty($_POST['mois'])) 
+			|| (!empty($_POST['annee']))) {
 		echo $dateInvalide;
 		return false;
 	}
@@ -221,10 +221,10 @@ if (verifieConnection()) {
 						.'la page d'."'".'acceuil</a></p>'."\n";
 					}
 					else if ($infomembre=="DateNaissance") {
-						$d1=$_POST['d1'];
-						$d2=$_POST['d2'];
-						$d3=$_POST['d3'];
-						$date=$d1.$d2.$d3;
+						$jour=$_POST['jour'];
+						$mois=$_POST['mois'];
+						$annee=$_POST['annee'];
+						$date=$jour.$mois.$annee;
 
 						if ($date=="") $date = "-11";
 
@@ -389,9 +389,9 @@ if (verifieConnection()) {
 		.' : <input type="'.$type.'" name="'.$infomembre.'" value="'.$valeur
 		.'"'.$autofocus2.'></label><br>'."\n";
 		else echo 'Entrez votre date de naissance : <input type="text" '
-		.'name="d1" size="2" value="'.substr($date,0,2).'" autocomplete="on" '
-		.'autofocus>/<input type="text" name="d2" size="2" value="'.substr($date,2,2)
-		.'" autocomplete="on">/<input type="text" name="d3" size="4" value="'
+		.'name="jour" size="2" value="'.substr($date,0,2).'" autocomplete="on" '
+		.'autofocus>/<input type="text" name="mois" size="2" value="'.substr($date,2,2)
+		.'" autocomplete="on">/<input type="text" name="annee" size="4" value="'
 		.substr($date,4,4).'" autocomplete="on"> (JJ/MM/AAAA) <br>'."\n";
 		if ($infomembre=="motdepasse") echo '	  <label>Confirmer votre '
 		.'mot de passe : <input type="password" name="'.$infomembre.'1"></label><br>'."\n";
